@@ -10,4 +10,8 @@ class Admin extends Model
     protected $table = "admin";
     public $timestamps = false;
     use HasFactory;
+
+    public function mobil() {
+        return $this->hasMany(Mobil::class);
+    }
 }

@@ -10,4 +10,12 @@ class Mobil extends Model
     protected $table = "mobil";
     public $timestamps = false;
     use HasFactory;
+
+    public function admin() {
+        return $this->belongsTo(Admin::class, "id_admin");
+    }
+
+    public function pesanan() {
+        return $this->belongsTo(Pesanan::class, "id");
+    }
 }
