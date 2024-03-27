@@ -10,6 +10,10 @@ use App\Models\Pembayaran;
 
 class Pesanan extends Model
 {
+    protected $fillable = [ 
+        "id_pemesan", "id_mobil", "id_pembayaran", "KTP_peminjam" ,
+        "SIM_peminjam", "nama_peminjam", "tanggal_peminjaman", "tanggal_pengembalian"
+    ];
     protected $table = "pesanan";
     public $timestamps = false;
     use HasFactory;

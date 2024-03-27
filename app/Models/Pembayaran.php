@@ -8,6 +8,7 @@ use App\Models\Pesanan;
 
 class Pembayaran extends Model
 {
+    protected $fillable = [ "status", "last_update"];
     protected $table = "pembayaran";
     public $timestamps = false;
     use HasFactory;

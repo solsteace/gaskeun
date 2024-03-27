@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mobil extends Model
 {
+    protected $fillable = [ 
+        "id_admin", "brand", "model", "kapasitas", "harga_sewa",
+        "deskripsi", "image", "status", "nomor_polisi", "transmisi"
+    ];
     protected $table = "mobil";
     public $timestamps = false;
     use HasFactory;
