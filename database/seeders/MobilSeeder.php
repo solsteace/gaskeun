@@ -54,6 +54,7 @@ class MobilSeeder extends Seeder
                 "status" => $samples["status"][$idx],
                 "nomor_polisi" => $samples["nomorPolisi"][$idx],
                 "transmisi" => $samples["transmisi"][$idx],
+                "id_admin" => 1,
             ]);
         }
     }

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create("mobil", function(Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("id_admin");
+
             $table->string("brand", 32);
             $table->string("model", 64);
             $table->unsignedTinyInteger("kapasitas");
@@ -24,6 +26,8 @@ return new class extends Migration
             $table->string("status", 16);
             $table->string("nomor_polisi", 16);
             $table->string("transmisi", 8);
+
+            $table->foreign("id_admin")->references("id")->on("admin");
         });
     }
 
