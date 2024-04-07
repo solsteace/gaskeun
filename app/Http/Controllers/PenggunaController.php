@@ -9,6 +9,8 @@ use App\Models\Pengguna;
 
 class PenggunaController extends Controller
 {
+    private $alwaysFillables = ["nama", "email", "password"];
+
     public function show() {
         try {
             return Pengguna::all();
@@ -38,27 +40,8 @@ class PenggunaController extends Controller
 
 
     public function create(Request $request) { 
-        $req = [
-            "nama" => "",
-            "email" => "",
-            "password" => "",
-            "image" => "default.png",
-            "role" => "user"
-        ];
-
-        foreach (explode("&", $request->getContent()) as $formEntry) {
-            $keyValue = explode("=", $formEntry);
-            $req[$keyValue[0]] = $keyValue[1];
-        }
-
-        $newPengguna = new Pengguna;
-        $newPengguna["nama"] = $req["nama"];
-        $newPengguna["email"] = $req["email"];
-        $newPengguna["password"] = $req["password"];
-        $newPengguna["image"] = $req["image"];
-        $newPengguna["role"] = "user";
         try {
-            $newPengguna->save();
+            $newPengguna = Pengguna::create($request->only($alwaysFillables));
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Pengguna`",
@@ -68,7 +51,7 @@ class PenggunaController extends Controller
             ], 500);
         }
 
-        return json_encode([
+        return response().json([
             "msg" => "Created `Pengguna`",
             "insertID" => $newPengguna->id
         ]);
@@ -78,30 +61,11 @@ class PenggunaController extends Controller
     public function edit($id, Request $request) { 
         try {
             $pengguna = Pengguna::findOrFail($id);
+            $pengguna->update($request->only($alwaysFillables + ["image"]));
         } catch(ModelNotFoundException $e) {
             return response()->json([
                 "msg" => "No record for `Pengguna` with id:{$id}",
             ], 404);
-        }
-
-        $req = [ // old values stored here
-            "nama" => $pengguna["nama"],
-            "email" => $pengguna["email"],
-            "password" => $pengguna["password"],
-            "image" => $pengguna["image"],
-        ];
-
-        foreach (explode("&", $request->getContent()) as $formEntry) {
-            $keyValue = explode("=", $formEntry);
-            $req[$keyValue[0]] = $keyValue[1];
-        }
-
-        $pengguna["nama"] = $req["nama"];
-        $pengguna["email"] = $req["email"];
-        $pengguna["password"] = $req["password"];
-        $pengguna["image"] = $req["image"];
-        try {
-            $pengguna->save();
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Pengguna`",
