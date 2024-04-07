@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Pengguna;
 
 class PenggunaController extends Controller
@@ -40,8 +41,11 @@ class PenggunaController extends Controller
 
 
     public function create(Request $request) { 
+        $userData = $request->only($this->alwaysFillables);
+        $userData["password"] = Hash::make($request["password"]);
+
         try {
-            $newPengguna = Pengguna::create($request->only($this->alwaysFillables));
+            $newPengguna = Pengguna::create($userData);
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Pengguna`",
@@ -51,7 +55,7 @@ class PenggunaController extends Controller
             ], 500);
         }
 
-        return response().json([
+        return response()->json([
             "msg" => "Created `Pengguna`",
             "insertID" => $newPengguna->id
         ]);
@@ -59,9 +63,14 @@ class PenggunaController extends Controller
 
 
     public function edit($id, Request $request) { 
+        $userData = $request->only( array_merge($this->alwaysFillables, ["image"]));
+        if($userData["password"] != null) {
+            $userData["password"] = Hash::make($request["password"]);
+        }
+
         try {
             $pengguna = Pengguna::findOrFail($id);
-            $pengguna->update($request->only(array_merge($this->alwaysFillables, ["image"])));
+            $pengguna->update($userData);
         } catch(ModelNotFoundException $e) {
             return response()->json([
                 "msg" => "No record for `Pengguna` with id:{$id}",
