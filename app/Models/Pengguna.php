@@ -8,6 +8,7 @@ use App\Models\Pesanan;
 
 class Pengguna extends Model
 {
+    protected $fillable = [ "nama", "email", "password", "image" ];
     protected $table = "pengguna";
     public $timestamps = false;
     use HasFactory;
@@ -15,4 +16,10 @@ class Pengguna extends Model
     public function pesanan() {
         return $this->hasMany(Pesanan::class, "id");
     }
+
+    public function create() {}
+    public function show() {}
+    public function showByID($id) {}
+    public function edit($id, $newData) {}
+    public function destroy($id) {}
 }

@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
-    protected $table = "admin";
     protected $fillable = [ "nama", "email", "password", "image" ];
-
+    protected $table = "admin";
     public $timestamps = false;
     use HasFactory;
 
@@ -19,6 +18,7 @@ class Admin extends Model
 
     public function create() {}
     public function show() {}
-    public function edit() {}
-    public function destroy() {}
+    public function showByID($id) {}
+    public function edit($id, $newData) {}
+    public function destroy($id) {}
 }

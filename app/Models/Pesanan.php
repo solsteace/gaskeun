@@ -29,4 +29,10 @@ class Pesanan extends Model
     public function pembayaran() {
         return $this->hasOne(Pembayaran::class);
     }
+
+    public function create() {}
+    public function show() {}
+    public function showByID($id) {}
+    public function edit($id, $newData) {}
+    public function destroy($id) {}
 }
