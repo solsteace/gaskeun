@@ -41,7 +41,7 @@ class PenggunaController extends Controller
 
     public function create(Request $request) { 
         try {
-            $newPengguna = Pengguna::create($request->only($alwaysFillables));
+            $newPengguna = Pengguna::create($request->only($this->alwaysFillables));
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Pengguna`",
@@ -61,7 +61,7 @@ class PenggunaController extends Controller
     public function edit($id, Request $request) { 
         try {
             $pengguna = Pengguna::findOrFail($id);
-            $pengguna->update($request->only($alwaysFillables + ["image"]));
+            $pengguna->update($request->only(array_merge($this->alwaysFillables, ["image"])));
         } catch(ModelNotFoundException $e) {
             return response()->json([
                 "msg" => "No record for `Pengguna` with id:{$id}",
