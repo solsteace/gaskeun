@@ -14,7 +14,7 @@ class Pesanan extends Model
         "id_pemesan", "id_mobil", "id_pembayaran", "KTP_peminjam" ,
         "SIM_peminjam", "nama_peminjam", "tanggal_peminjaman", "tanggal_pengembalian"
     ];
-    protected $table = "pesanan";
+    protected $table = "Pesanan";
     public $timestamps = false;
     use HasFactory;
 
@@ -29,10 +29,4 @@ class Pesanan extends Model
     public function pembayaran() {
         return $this->hasOne(Pembayaran::class);
     }
-
-    public function create() {}
-    public function show() {}
-    public function showByID($id) {}
-    public function edit($id, $newData) {}
-    public function destroy($id) {}
 }

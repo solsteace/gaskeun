@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("pesanan", function(Blueprint $table) {
+        Schema::create("Pesanan", function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("id_pemesan");
             $table->unsignedBigInteger("id_mobil");
@@ -25,9 +25,9 @@ return new class extends Migration
             $table->date("tanggal_peminjaman");
             $table->date("tanggal_pengembalian");
 
-            $table->foreign("id_pemesan")->references("id")->on("pengguna");
-            $table->foreign("id_pembayaran")->references("id")->on("pembayaran");
-            $table->foreign("id_mobil")->references("id")->on("mobil");
+            $table->foreign("id_pemesan")->references("id")->on("Pengguna");
+            $table->foreign("id_pembayaran")->references("id")->on("Pembayaran");
+            $table->foreign("id_mobil")->references("id")->on("Mobil");
         });
     }
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pesanan');
+        Schema::dropIfExists('Pesanan');
     }
 };

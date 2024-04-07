@@ -11,7 +11,7 @@ class Mobil extends Model
         "id_admin", "brand", "model", "kapasitas", "harga_sewa",
         "deskripsi", "image", "status", "nomor_polisi", "transmisi"
     ];
-    protected $table = "mobil";
+    protected $table = "Mobil";
     public $timestamps = false;
     use HasFactory;
 
@@ -22,10 +22,4 @@ class Mobil extends Model
     public function pesanan() {
         return $this->belongsTo(Pesanan::class, "id");
     }
-
-    public function create() {}
-    public function show() {}
-    public function showByID($id) {}
-    public function edit($id, $newData) {}
-    public function destroy($id) {}
 }

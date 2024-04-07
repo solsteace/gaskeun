@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("mobil", function(Blueprint $table) {
+        Schema::create("Mobil", function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("id_admin");
 
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string("nomor_polisi", 16);
             $table->string("transmisi", 8);
 
-            $table->foreign("id_admin")->references("id")->on("admin");
+            $table->foreign("id_admin")->references("id")->on("Admin");
         });
     }
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobil');
+        Schema::dropIfExists('Mobil');
     }
 };
