@@ -36,7 +36,8 @@ class PenggunaSeeder extends Seeder
                 "nama" => $samples["nama"][$idx],
                 "email" => $samples["email"][$idx],
                 "password" => $samples["nama"][$idx],
-                "image" => ""
+                "image" => "",
+                "role" => "user"
             ]);
         }
     }

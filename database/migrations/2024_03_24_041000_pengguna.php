@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("email", 64)->unique();
             $table->string("password");
             $table->string("image");
+            $table->string("role");
         });
     }
 
