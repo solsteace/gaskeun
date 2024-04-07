@@ -8,7 +8,7 @@ use App\Models\Pesanan;
 
 class Pengguna extends Model
 {
-    protected $fillable = [ "nama", "email", "password", "image", "role" ];
+    protected $fillable = [ "nama", "email", "password", "image" ];
     protected $table = "Pengguna";
     public $timestamps = false;
     use HasFactory;

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string("nama", 64);
             $table->string("email", 64)->unique();
             $table->string("password");
-            $table->string("image");
-            $table->string("role");
+            $table->string("image")->default("");
+            $table->string("role")->default("user");
         });
     }
 
