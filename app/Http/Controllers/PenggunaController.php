@@ -40,15 +40,7 @@ class PenggunaController extends Controller
 
 
     public function create(Request $request) { 
-        $validator = Validator::make($request->all(), [
-            "nama" => ["required"],
-            "email" => [
-                "required", 
-                "unique:App\Models\Pengguna,email",
-                "email:rfc" // Simply checks whether it's a valid email address
-            ],
-            "password" => ["required"],
-        ]);
+        $validator = Validator::make($request->all(), Pengguna::$createRules);
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Provided data is not valid",
@@ -78,17 +70,7 @@ class PenggunaController extends Controller
 
 
     public function edit($id, Request $request) { 
-        $validator = Validator::make($request->all(), [
-            "nama" => ["nullable"],
-            "email" => [
-                "nullable", 
-                "unique:App\Models\Pengguna,email",
-                "email:rfc" // Simply checks whether it's a valid email address
-            ],
-            "password" => ["nullable"],
-            "image" => ["nullable", "image"]
-        ]);
-
+        $validator = Validator::make($request->all(), Pengguna::$editRules);
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Provided data is not valid",
@@ -96,9 +78,8 @@ class PenggunaController extends Controller
             ], 400);
         }
 
-
         $userData = $validator->safe()->all();
-        if($userData["password"] != null) {
+        if(isset($userData["password"])) {
             $userData["password"] = Hash::make($request["password"]);
         }
 
