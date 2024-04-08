@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Pengguna;
 
 class PenggunaController extends Controller
 {
-    private $alwaysFillables = ["nama", "email", "password"];
-
     public function show() {
         try {
             return Pengguna::all();
@@ -41,9 +40,25 @@ class PenggunaController extends Controller
 
 
     public function create(Request $request) { 
-        $userData = $request->only($this->alwaysFillables);
-        $userData["password"] = Hash::make($request["password"]);
+        $validator = Validator::make($request->all(), [
+            "nama" => ["required"],
+            "email" => [
+                "required", 
+                "unique:App\Models\Pengguna,email",
+                "email:rfc" // Simply checks whether it's a valid email address
+            ],
+            "password" => ["required"],
+        ]);
+        if($validator->fails()) {
+            return response()->json([
+                "msg" => "Provided data is not valid",
+                "reason" => $validator->errors()
+            ], 400);
+        }
 
+
+        $userData = $validator->safe()->all();
+        $userData["password"] = Hash::make($request["password"]);
         try {
             $newPengguna = Pengguna::create($userData);
         } catch(QueryException $e) {
@@ -63,7 +78,26 @@ class PenggunaController extends Controller
 
 
     public function edit($id, Request $request) { 
-        $userData = $request->only( array_merge($this->alwaysFillables, ["image"]));
+        $validator = Validator::make($request->all(), [
+            "nama" => ["nullable"],
+            "email" => [
+                "nullable", 
+                "unique:App\Models\Pengguna,email",
+                "email:rfc" // Simply checks whether it's a valid email address
+            ],
+            "password" => ["nullable"],
+            "image" => ["nullable", "image"]
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                "msg" => "Provided data is not valid",
+                "reason" => $validator->errors()
+            ], 400);
+        }
+
+
+        $userData = $validator->safe()->all();
         if($userData["password"] != null) {
             $userData["password"] = Hash::make($request["password"]);
         }
@@ -72,9 +106,7 @@ class PenggunaController extends Controller
             $pengguna = Pengguna::findOrFail($id);
             $pengguna->update($userData);
         } catch(ModelNotFoundException $e) {
-            return response()->json([
-                "msg" => "No record for `Pengguna` with id:{$id}",
-            ], 404);
+            return response()->json([ "msg" => "No record for `Pengguna` with id:{$id}", ], 404);
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Pengguna`",
@@ -93,9 +125,7 @@ class PenggunaController extends Controller
             $pengguna = Pengguna::findOrFail($id);
             $result = $pengguna->delete();
         } catch(ModelNotFoundException $e) {
-            return response()->json([
-                "msg" => "No record for `Pengguna` with id:{$id}",
-            ], 404);
+            return response()->json([ "msg" => "No record for `Pengguna` with id:{$id}", ], 404);
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during deleting this `Pengguna`",
