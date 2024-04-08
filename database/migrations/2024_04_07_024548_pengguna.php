@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string("nama", 64);
             $table->string("email", 64)->unique();
-            $table->string("password");
-            $table->string("image")->default("");
-            $table->string("role")->default("user");
+            $table->string("password", 64);
+            $table->string("image")->default("default.jpg");
+            $table->enum("role", ["user", "admin"])->default("user");
         });
     }
 

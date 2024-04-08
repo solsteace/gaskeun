@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create("Pembayaran", function(Blueprint $table) {
             $table->id();
-            $table->string("status", 16);
+            $table->enum("status", ["belum_lunas", "lunas"])->default("belum_lunas");
             $table->date("last_update");
         });
     }

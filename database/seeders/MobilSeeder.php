@@ -30,7 +30,7 @@ class MobilSeeder extends Seeder
                 "Pickup tangguh dengan performa dan ketangguhan di segala medan."
             ],
             "image" => [ "", "", "", "", "", "", "", ""],
-            "status" => ["Tidak Tersedia", "Tersedia", "Tersedia", "Tidak Tersedia", "Tidak Tersedia", "Tersedia", "Tersedia"],
+            "status" => ["tidak_tersedia", "tersedia", "tersedia", "tidak_tersedia", "tidak_tersedia", "tersedia", "tersedia"],
             "nomorPolisi" => [
                 "B 1234 ABC",
                 "B 5678 DEF",
@@ -40,7 +40,7 @@ class MobilSeeder extends Seeder
                 "B 3579 PQR",
                 "B 8023 STU"
             ],
-            "transmisi" => ["Manual", "Matic", "Matic", "Manual", "Matic", "Manual", "Manual"],
+            "transmisi" => ["manual", "matic", "matic", "manual", "matic", "manual", "manual"],
         ];
 
         for($idx = 0; $idx < count($samples["brand"]); $idx++) {
@@ -54,7 +54,7 @@ class MobilSeeder extends Seeder
                 "status" => $samples["status"][$idx],
                 "nomor_polisi" => $samples["nomorPolisi"][$idx],
                 "transmisi" => $samples["transmisi"][$idx],
-                "id_admin" => 1,
+                "id_pengguna" => 1,
             ]);
         }
     }

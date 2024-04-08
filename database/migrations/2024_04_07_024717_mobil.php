@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create("Mobil", function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_admin");
+            $table->unsignedBigInteger("id_pengguna");
 
             $table->string("brand", 32);
             $table->string("model", 64);
@@ -23,11 +23,11 @@ return new class extends Migration
             $table->unsignedInteger("harga_sewa");
             $table->string("deskripsi", 1024);
             $table->string("image");
-            $table->string("status", 16);
+            $table->enum("status", ["tersedia", "dipinjam", "tidak_tersedia"])->default("tersedia");
             $table->string("nomor_polisi", 16);
-            $table->string("transmisi", 8);
+            $table->enum("transmisi", ["manual", "matic", "lainnya"])->default("manual");
 
-            $table->foreign("id_admin")->references("id")->on("Admin");
+            $table->foreign("id_pengguna")->references("id")->on("Pengguna");
         });
     }
 
