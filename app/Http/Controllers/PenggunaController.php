@@ -40,7 +40,7 @@ class PenggunaController extends Controller
 
 
     public function create(Request $request) { 
-        $validator = Validator::make($request->all(), Pengguna::$createRules);
+        $validator = Validator::make($request->all(), Pengguna::getCreateRules());
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Provided data is not valid",
@@ -70,7 +70,7 @@ class PenggunaController extends Controller
 
 
     public function edit($id, Request $request) { 
-        $validator = Validator::make($request->all(), Pengguna::$editRules);
+        $validator = Validator::make($request->all(), Pengguna::getEditRules());
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Provided data is not valid",

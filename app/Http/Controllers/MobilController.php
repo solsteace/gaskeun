@@ -39,7 +39,7 @@ class MobilController extends Controller
 
 
     public function create(Request $request) { 
-        $validator = Validator::make($request->all(), Mobil::$createRules);
+        $validator = Validator::make($request->all(), Mobil::getCreateRules());
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Provided data is not valid",
@@ -67,7 +67,7 @@ class MobilController extends Controller
 
 
     public function edit($id, Request $request) { 
-        $validator = Validator::make($request->all(), Mobil::$editRules);
+        $validator = Validator::make($request->all(), Mobil::getEditRules());
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Provided data is not valid",

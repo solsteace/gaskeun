@@ -15,24 +15,28 @@ class Pesanan extends Model
         "SIM_peminjam", "nama_peminjam", "tanggal_peminjaman", "tanggal_pengembalian"
     ];
 
-    static $createRule = [
-        "id_pemesan" => ["required"], 
-        "id_mobil" => ["required"], 
-        "id_pembayaran" => ["required"], 
-        "KTP_peminjam" => ["required"],
-        "SIM_peminjam" => ["required"], 
-        "nama_peminjam" => ["required"], 
-        "tanggal_peminjaman" => ["required"], 
-        "tanggal_pengembalian" => ["required"],
-    ];
+    static function getCreateRules() {
+        return [
+            "id_pemesan" => ["required"], 
+            "id_mobil" => ["required"], 
+            "id_pembayaran" => ["required"], 
+            "KTP_peminjam" => ["required"],
+            "SIM_peminjam" => ["required"], 
+            "nama_peminjam" => ["required"], 
+            "tanggal_peminjaman" => ["required", "date"], 
+            "tanggal_pengembalian" => ["required", "date"],
+        ];
+    }
 
-    static $editRule = [
-        "KTP_peminjam" => ["nullable"],
-        "SIM_peminjam" => ["nullable"], 
-        "nama_peminjam" => ["nullable"], 
-        "tanggal_peminjaman" => ["nullable"], 
-        "tanggal_pengembalian" => ["nullable"],
-    ];
+    static function getEditRules() {
+        return [
+            "KTP_peminjam" => ["nullable"],
+            "SIM_peminjam" => ["nullable"], 
+            "nama_peminjam" => ["nullable"], 
+            "tanggal_peminjaman" => ["nullable", "date"], 
+            "tanggal_pengembalian" => ["nullable", "date"],
+        ];
+    } 
 
     protected $table = "Pesanan";
     public $timestamps = false;
