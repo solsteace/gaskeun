@@ -11,6 +11,57 @@ class Mobil extends Model
         "id_admin", "brand", "model", "kapasitas", "harga_sewa",
         "deskripsi", "image", "status", "nomor_polisi", "transmisi"
     ];
+
+    static $createRules = [
+        "brand" => ["required"],
+        "model" => ["required"],
+        "kapasitas" => [
+            "required",
+            "integer",
+            "between:0,999"
+        ],
+        "harga_sewa" => [
+            "required", 
+            "integer",
+            "between:0,9999999999"
+        ],
+        "deskripsi" => [
+            "required",
+            "max:1024"
+        ],
+        "image" => ["nullable", "image"],
+        "nomor_polisi" => [
+            "required",
+            "max:16"
+        ],
+        "transmisi" => ["required"],
+    ];
+
+    static $editRules = [
+        "brand" => ["required"],
+        "model" => ["required"],
+        "kapasitas" => [
+            "required",
+            "integer",
+            "between:0,999"
+        ],
+        "harga_sewa" => [
+            "required", 
+            "integer",
+            "between:0,9999999999"
+        ],
+        "deskripsi" => [
+            "required",
+            "max:1024"
+        ],
+        "image" => ["nullable", "image"],
+        "nomor_polisi" => [
+            "required",
+            "max:16"
+        ],
+        "transmisi" => ["required"],
+    ];
+
     protected $table = "Mobil";
     public $timestamps = false;
     use HasFactory;
