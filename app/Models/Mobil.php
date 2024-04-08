@@ -13,6 +13,7 @@ class Mobil extends Model
     ];
 
     static $createRules = [
+        "id_admin" => ["required"],
         "brand" => ["required"],
         "model" => ["required"],
         "kapasitas" => [
@@ -29,6 +30,7 @@ class Mobil extends Model
             "required",
             "max:1024"
         ],
+        "status" => ["required"],
         "image" => ["nullable", "image"],
         "nomor_polisi" => [
             "required",
@@ -54,6 +56,7 @@ class Mobil extends Model
             "required",
             "max:1024"
         ],
+        "status" => ["required"],
         "image" => ["nullable", "image"],
         "nomor_polisi" => [
             "required",

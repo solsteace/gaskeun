@@ -59,7 +59,7 @@ class MobilController extends Controller
             ], 500);
         }
 
-        return response().json([
+        return response()->json([
             "msg" => "Created `Mobil`",
             "insertID" => $newMobil->id
         ]);
