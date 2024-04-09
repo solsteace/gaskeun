@@ -29,7 +29,6 @@ class MobilSeeder extends Seeder
                 "MPV ekonomis dengan fitur lengkap.",
                 "Pickup tangguh dengan performa dan ketangguhan di segala medan."
             ],
-            "image" => [ "", "", "", "", "", "", "", ""],
             "status" => ["tidak_tersedia", "tersedia", "tersedia", "tidak_tersedia", "tidak_tersedia", "tersedia", "tersedia"],
             "nomorPolisi" => [
                 "B 1234 ABC",
@@ -50,11 +49,11 @@ class MobilSeeder extends Seeder
                 "kapasitas" => $samples["kapasitas"][$idx],
                 "harga_sewa" => $samples["hargaSewa"][$idx],
                 "deskripsi" => $samples["deskripsi"][$idx],
-                "image" => $samples["image"][$idx],
                 "status" => $samples["status"][$idx],
                 "nomor_polisi" => $samples["nomorPolisi"][$idx],
                 "transmisi" => $samples["transmisi"][$idx],
                 "id_pengguna" => 1,
+                "id_image" => 1,
             ]);
         }
     }

@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create("Pengguna", function(Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("id_image");
+
             $table->string("nama", 64);
             $table->string("email", 64)->unique();
             $table->string("password", 64);
-            $table->string("image")->default("default.jpg");
             $table->enum("role", ["user", "admin"])->default("user");
+
+            $table->foreign("id_image")->references("id")->on("Images");
         });
     }
 

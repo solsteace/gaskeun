@@ -37,7 +37,7 @@ class PenggunaSeeder extends Seeder
                 "nama" => $samples["nama"][$idx],
                 "email" => $samples["email"][$idx],
                 "password" => Hash::make($samples["nama"][$idx]),
-                "image" => "",
+                "id_image" => 1,
             ]);
         }
     }

@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
+use App\Models\Pesanan;
+use App\Models\Pengguna;
+use App\Models\Images;
 
 class Mobil extends Model
 {
     protected $fillable = [ 
-        "id_admin", "brand", "model", "kapasitas", "harga_sewa",
-        "deskripsi", "image", "status", "nomor_polisi", "transmisi"
+        "id_pengguna", "id_image", "brand", "model", "kapasitas", "harga_sewa",
+        "deskripsi", "status", "nomor_polisi", "transmisi"
     ];
 
     protected $table = "Mobil";
@@ -19,7 +22,7 @@ class Mobil extends Model
 
     static function getCreateRules() {
         return [
-            "id_admin" => ["required"],
+            "id_pengguna" => ["required"],
             "brand" => ["required"],
             "model" => ["required"],
             "kapasitas" => [
@@ -40,7 +43,6 @@ class Mobil extends Model
                 "required",
                 Rule::in(["tersedia", "dipinjam", "tidak_tersedia"])
             ],
-            "image" => ["nullable", "image"],
             "nomor_polisi" => [
                 "required",
                 "max:16"
@@ -49,6 +51,7 @@ class Mobil extends Model
                 "required",
                 Rule::in(["manual", "matic"])
             ],
+            "image" => ["nullable", "image"]
         ];
     }
 
@@ -74,7 +77,6 @@ class Mobil extends Model
                 "nullable",
                 Rule::in(["tersedia", "dipinjam", "tidak_tersedia"])
             ],
-            "image" => ["nullable", "image"],
             "nomor_polisi" => [
                 "nullable",
                 "max:16"
@@ -83,14 +85,19 @@ class Mobil extends Model
                 "nullable",
                 Rule::in(["manual", "matic"])
             ],
+            "image" => ["nullable", "image"]
         ];
     }
 
-    public function admin() {
+    public function pengguna() {
         return $this->belongsTo(Pengguna::class, "id_pengguna");
     }
 
     public function pesanan() {
         return $this->belongsTo(Pesanan::class, "id");
+    }
+
+    public function image() {
+        return $this->hasOne(Image::class, "id");
     }
 }

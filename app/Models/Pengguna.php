@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pesanan;
+use App\Models\Images;
 
 class Pengguna extends Model
 {
-    protected $fillable = [ "nama", "email", "password", "image" ];
+    protected $fillable = [ "id_image", "nama", "email", "password"];
     protected $table = "Pengguna";
     public $timestamps = false;
     use HasFactory;
@@ -40,6 +41,10 @@ class Pengguna extends Model
 
     public function pesanan() {
         return $this->hasMany(Pesanan::class, "id");
+    }
+
+    public function image() {
+        return $this->hasOne(Pesanan::class, "id");
     }
 
 }
