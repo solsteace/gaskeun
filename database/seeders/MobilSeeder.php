@@ -53,7 +53,7 @@ class MobilSeeder extends Seeder
                 "nomor_polisi" => $samples["nomorPolisi"][$idx],
                 "transmisi" => $samples["transmisi"][$idx],
                 "id_pengguna" => 1,
-                "id_image" => 1,
+                "id_image" => $idx + 11,
             ]);
         }
     }
