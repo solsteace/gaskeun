@@ -44,7 +44,7 @@ class Pengguna extends Model
     }
 
     public function image() {
-        return $this->hasOne(Pesanan::class, "id");
+        return $this->hasOne(Images::class, "id");
     }
 
 }

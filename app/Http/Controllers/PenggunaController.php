@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\ImageController;
 use App\Models\Pengguna;
 
 class PenggunaController extends Controller
@@ -48,9 +49,10 @@ class PenggunaController extends Controller
             ], 400);
         }
 
-
         $userData = $validator->safe()->all();
         $userData["password"] = Hash::make($request["password"]);
+        $userData["id_image"] = Image::store()->id;
+
         try {
             $newPengguna = Pengguna::create($userData);
         } catch(QueryException $e) {
@@ -86,6 +88,10 @@ class PenggunaController extends Controller
         try {
             $pengguna = Pengguna::findOrFail($id);
             $pengguna->update($userData);
+
+            if($request->hasFile("image")) {
+                ImageController::edit($pengguna["id_image"], Pengguna::class, $request->file("image"));
+            }
         } catch(ModelNotFoundException $e) {
             return response()->json([ "msg" => "No record for `Pengguna` with id:{$id}", ], 404);
         } catch(QueryException $e) {
