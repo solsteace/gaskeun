@@ -21,25 +21,25 @@ use App\Http\Controllers\PesananController;
 Route::get('/pengguna', [PenggunaController::class, "show"]);
 Route::get('/pengguna/{id}', [PenggunaController::class, "showById"]);
 Route::post('/pengguna', [PenggunaController::class, "create"]);
-Route::put('/pengguna/{id}', [PenggunaController::class, "edit"]);
+Route::post('/pengguna/{id}', [PenggunaController::class, "edit"]);
 Route::delete('/pengguna/{id}', [PenggunaController::class, "destroy"]);
 
 Route::get('/pembayaran', [PembayaranController::class, "show"]);
 Route::get('/pembayaran/{id}', [PembayaranController::class, "showById"]);
 Route::post('/pembayaran', [PembayaranController::class, "create"]);
-Route::put('/pembayaran/{id}', [PembayaranController::class, "edit"]);
+Route::post('/pembayaran/{id}', [PembayaranController::class, "edit"]);
 Route::delete('/pembayaran/{id}', [PembayaranController::class, "destroy"]);
 
 Route::get('/mobil', [MobilController::class, "show"]);
 Route::get('/mobil/{id}', [MobilController::class, "showById"]);
 Route::post('/mobil', [MobilController::class, "create"]);
-Route::put('/mobil/{id}', [MobilController::class, "edit"]);
+Route::post('/mobil/{id}', [MobilController::class, "edit"]);
 Route::delete('/mobil/{id}', [MobilController::class, "destroy"]);
 
 Route::get('/pesanan', [PesananController::class, "show"]);
 Route::get('/pesanan/{id}', [PesananController::class, "showById"]);
 Route::post('/pesanan', [PesananController::class, "create"]);
-Route::put('/pesanan/{id}', [PesananController::class, "edit"]);
+Route::post('/pesanan/{id}', [PesananController::class, "edit"]);
 Route::delete('/pesanan/{id}', [PesananController::class, "destroy"]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
