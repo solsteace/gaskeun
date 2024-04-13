@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create("Pengguna", function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_image");
+            $table->unsignedBigInteger("id_image")->nullable();
 
             $table->string("nama", 64);
             $table->string("email", 64)->unique();

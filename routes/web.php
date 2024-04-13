@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::get('/login', [AuthManager::class, 'login'])->name("login");
 
 Route::get('/register', [AuthManager::class, 'register'])->name("register");
+Route::post('/register', [AuthManager::class, 'store']);
