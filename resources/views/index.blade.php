@@ -45,7 +45,7 @@
                 <a class="nav-link" href="#">Pemesanan</a>
               </li>
               <li class="nav-item ms-2 me-4">
-                <a class="nav-link" href="#">Sign In</a>
+                <a class="nav-link" href="{{ route('login') }}">Sign In</a>
               </li>
             </ul>
           </div>
