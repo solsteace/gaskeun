@@ -1,0 +1,208 @@
+body {
+    font-family: "Poppins", sans-serif;
+    padding-top: 35px;
+}
+
+h1 {
+    font-size: 4.3em;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2.3em;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+p {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.bg-navbar {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.h1-hero-resp {
+    /* Handled by JQuery */
+}
+
+.btn-hero-resp {
+    /* Handled by JQuery */
+}
+
+.txt-sundanese {
+    font-size: 1.55em;
+    font-weight: 500;
+    font-family: "Noto Sans Sundanese", sans-serif;
+}
+
+.nav-link {
+    color: rgba(0, 0, 0, 1);
+}
+
+.nav-link.active {
+    color: rgba(1, 23, 255, 1) !important;
+}
+
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#changing-word {
+    transition: opacity 1s ease-in-out;
+}
+
+.changing-word-width {
+    display: inline-block;
+    width: 325px;
+    text-align: left;
+}
+
+.button-36 {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 188, 255, 1) 0%,
+        rgba(1, 23, 255, 1) 100%
+    );
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 3.5rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all 0.5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-36:hover {
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+    transition-duration: 0.1s;
+}
+
+.background-bandung {
+    background-image: url("../img/bg-bandung.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.background-bandung-small {
+    background-image: url("../img/bg-bandung-small.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.carousel-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.slick-slide {
+    opacity: 0.9;
+    transform: scale(0.85);
+    margin: 0 15px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 1199px) {
+    .slick-slide {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 767px) {
+    .slick-slide {
+        opacity: 0.9;
+        transform: scale(0.85);
+        margin: 0 15px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+}
+
+.slick-center {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    opacity: 1;
+}
+
+.slick-prev {
+    left: -25px;
+    background-color: transparent;
+    border: 0;
+    font-size: 2em;
+}
+
+.slick-next {
+    right: -25px;
+    background-color: transparent;
+    border: 0;
+    font-size: 2em;
+}
+
+.card-text {
+    font-size: 1.2em;
+}
+
+.our-car-card {
+    border: none;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 255, 1) 75%,
+        transparent 25%
+    );
+    color: white;
+}
+
+.testi-width {
+    width: 90%;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    height: 2.2em !important;
+    width: 2.2em !important;
+}
+
+.carousel-control-next-black,
+.carousel-control-prev-black {
+    filter: invert(1);
+}
+
+.hidden {
+    display: none !important;
+}
