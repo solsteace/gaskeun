@@ -44,9 +44,18 @@
               <li class="nav-item mx-2">
                 <a class="nav-link" href="#">Pemesanan</a>
               </li>
+              @auth
+              <li class="nav-item mx-2">
+                <form action="/logout" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+              </li>
+              @else
               <li class="nav-item ms-2 me-4">
                 <a class="nav-link" href="{{ route('login') }}">Sign In</a>
               </li>
+              @endauth
             </ul>
           </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthManager extends Controller
 {
@@ -16,11 +17,15 @@ class AuthManager extends Controller
         return view('register');
     }
 
+    function admin(){
+        echo 'ini admin';
+    }
+
     public function store(Request $request) {
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'email' => 'required|email:dns|unique:pengguna',
-            'password' => 'required|min:8|max:255|confirmed',
+            'password' => 'required|min:2|max:255|confirmed',
             'password_confirmation' => 'required'
         ]);
 
@@ -31,5 +36,33 @@ class AuthManager extends Controller
         $request->session()->flash('success', 'Registrasi Berhasil');
 
         return redirect('/login');
+    }
+
+    public function authenticate(Request $request){
+        $credentials = $request->validate([
+            'email' => ['required', 'email:dns'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if (Auth::user()->role == 'user'){
+                return redirect()->intended('/');
+            }elseif (Auth::user()->role == 'admin'){
+                return redirect()->intended('/admin');
+            }
+        }
+        
+        return back()->with('loginError', 'Login Gagal');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
     }
 }

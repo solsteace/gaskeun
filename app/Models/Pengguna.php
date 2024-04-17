@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pesanan;
 use App\Models\Images;
 
-class Pengguna extends Model
+
+class Pengguna extends Authenticatable 
 {
     protected $fillable = [ "id_image", "nama", "email", "password"];
     protected $table = "Pengguna";

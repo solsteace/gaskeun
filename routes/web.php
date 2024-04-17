@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,16 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', [AuthManager::class, 'login'])->name("login");
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [AuthManager::class, 'login'])->name("login");
+    Route::get('/register', [AuthManager::class, 'register'])->name("register");
+});
 
-Route::get('/register', [AuthManager::class, 'register'])->name("register");
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [AuthManager::class, 'admin'])->middleware('userAccess:admin');
+});
+
+
+Route::post('/login', [AuthManager::class, 'authenticate']);
+Route::post('/logout', [AuthManager::class, 'logout']);
 Route::post('/register', [AuthManager::class, 'store']);
