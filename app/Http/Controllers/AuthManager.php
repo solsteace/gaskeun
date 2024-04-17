@@ -23,10 +23,10 @@ class AuthManager extends Controller
 
     public function store(Request $request) {
         $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'email' => 'required|email:dns|unique:pengguna',
-            'password' => 'required|min:2|max:255|confirmed',
-            'password_confirmation' => 'required'
+            'nama' => ["required", "max:255"],
+            'email' => ["required", "email:dns", "unique:Pengguna"],
+            'password' => ["required", "min:2", "max:255", "confirmed"],
+            'password_confirmation' => ['required']
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
