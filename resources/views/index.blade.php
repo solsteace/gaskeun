@@ -42,7 +42,7 @@
                 <a class="nav-link" href="#">Mobil Kami</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Pemesanan</a>
+                <a class="nav-link" href="{{ route('booking') }}">Pemesanan</a>
               </li>
               @auth
               <li class="nav-item mx-2">

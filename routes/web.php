@@ -17,7 +17,11 @@ use App\Http\Middleware;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
+
+Route::get('/booking', function() {
+    return view('booking');
+})->name("booking");
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthManager::class, 'login'])->name("login");
