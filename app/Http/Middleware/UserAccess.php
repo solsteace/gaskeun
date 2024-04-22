@@ -20,6 +20,6 @@ class UserAccess
             return $next($request);
         }
 
-        return response()->json(['Anda tidak memiliki akses ke halaman ini!!!']);
+        return abort(403);
     }
 }

@@ -9,15 +9,31 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthManager extends Controller
 {
-    function login() {
+    public function login() {
         return view('login');
     }
 
-    function register() {
+    public function register() {
         return view('register');
     }
 
-    function admin(){
+    public function booking(){
+        return view('booking');
+    }
+
+    public function pesanan(){
+        return view('pesanan');
+    }
+
+    public function mobil(){
+        return view('mobil');
+    }
+
+    public function addMobil(){
+        return view('addMobil');
+    }
+
+    public function admin(){
         return view('admin');
     }
 
