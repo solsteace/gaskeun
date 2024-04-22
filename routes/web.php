@@ -23,6 +23,18 @@ Route::get('/booking', function() {
     return view('booking');
 })->name("booking");
 
+Route::get('/admin/pesanan', function() {
+    return view('pesanan');
+})->name("pesanan");
+
+Route::get('/admin/mobil', function() {
+    return view('mobil');
+})->name("mobil");
+
+Route::get('/admin/mobil/add-mobil', function() {
+    return view('addMobil');
+})->name("addMobil");
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthManager::class, 'login'])->name("login");
     Route::get('/register', [AuthManager::class, 'register'])->name("register");

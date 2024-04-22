@@ -1,0 +1,56 @@
+.nav-link-text {
+    color: black;
+    font-size: 0.5rem;
+}
+
+.bg-navbar {
+    width: auto;
+    height: 63px;
+    background-color: rgb(245, 239, 239);
+    margin-left: auto;
+    position: fixed;
+}
+
+.d-flex.flex-column.flex-shrink-0.bg-body-tertiary {
+    position: fixed;
+}
+
+#searching {
+    margin-right: 20px;
+}
+
+.container .content {
+    /* height: 100px; */
+    padding-top: 20px;
+    /* border: 1px solid; */
+    width: 1200px;
+    margin-left: auto;
+    padding-top: 65px;
+    display: wrap;
+}
+
+
+/* DASHBOARD */
+
+.dashboard .row {
+    display: flex;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.dashboard .row .map {
+    margin-top: 30px;
+    flex: 1 1 45rem;
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+}
+
+
+/* PESANAN */
+
+.pesanan .card {
+    margin-top: 50px;
+    height: auto;
+    width: 1130px;
+}

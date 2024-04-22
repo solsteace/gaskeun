@@ -18,7 +18,7 @@ class AuthManager extends Controller
     }
 
     function admin(){
-        echo 'ini admin';
+        return view('admin');
     }
 
     public function store(Request $request) {
