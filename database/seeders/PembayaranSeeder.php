@@ -15,7 +15,7 @@ class PembayaranSeeder extends Seeder
      */
     public function run()
     {
-        for($idx = 0; $idx < 5; $idx++) {
+        for($idx = 0; $idx < 3; $idx++) {
             $random_date = mt_rand(strtotime("2024-01-01"), strtotime("2024-03-24"));
             Pembayaran::create([
                 "status" => ["lunas", "belum_lunas"][round(microtime(true)) % 2],
