@@ -26,6 +26,13 @@ class MobilFilterController extends Controller
         );
 
         $data = Mobil::with("pesanan")->get();
+        if($validator->fails()) {
+            return response()->json([
+                "msg" => "Filtering not performed",
+                "reason" => $validator->errors()
+            ], 405);
+        }
+
         $filters = $validator->safe()->all();
         foreach($filters as $filter => $value) {
             if($value != null) {
