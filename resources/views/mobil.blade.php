@@ -69,22 +69,31 @@
 
             <div class="row">
                 <!-- Dummy Card for Available Car 1 -->
+                @foreach ($mobil as $item)
                 <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
                     <div class="card shadow bg-white">
-                        <div class="card-header text-center bg-success text-white">
-                            Tersedia
-                        </div>
-                        <img src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
+                        @if ($item->status == "tersedia")
+                            <div class="card-header text-center bg-success text-white">
+                                {{$item->status}}
+                            </div>
+                        @else
+                            <div class="card-header text-center bg-danger text-white">
+                                {{-- Akan tersedia pada DD-MM-YYYY --}}
+                                {{$item->status}}
+                            </div>
+                        @endif
+                        
+                        <img src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
                         <div class="p-3">
-                            <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
-                            <p class="card-price">Rp 300.000/hari</p>
+                            <h5 class="card-title fw-semibold">{{$item->brand}}<br>{{$item->model}}</h5>
+                            <p class="card-price">Rp {{ number_format($item->harga_sewa, 0, ',', '.') }}/hari</p>
                             <div style="display: flex;">
                                 <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                                <p class="fw-medium">4 orang</p>
+                                <p class="fw-medium">{{$item->kapasitas}} orang</p>
                             </div>
                             <div style="display: flex;">
                                 <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                                <p class="fw-medium">Matic</p>
+                                <p class="fw-medium">{{$item->transmisi}}</p>
                             </div>
                             <div style="display: flex;">
                                 <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
@@ -92,7 +101,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>
-                                <p class="fw-medium">D 1234 GG</p>
+                                <p class="fw-medium">{{$item->nomor_polisi}}</p>
                             </div>
                             <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
                                 <button type="button" class="btn btn-danger">Hapus</button>
@@ -101,43 +110,8 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Dummy Card for Unavailable Car 1 -->
-                <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-                    <div class="card shadow bg-white">
-                        <div class="card-header text-center bg-danger text-white">
-                            Akan tersedia pada DD-MM-YYYY
-                        </div>
-                        <img src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
-                        <div class="p-3">
-                            <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
-                            <p class="card-price">Rp 300.000/hari</p>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                                <p class="fw-medium">4 orang</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                                <p class="fw-medium">Matic</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                                <p class="fw-medium">Bensin</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>
-                                <p class="fw-medium">D 4321 WP</p>
-                            </div>
-                            <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
                 
-
-
             </div>
 
         </div>

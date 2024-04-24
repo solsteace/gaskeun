@@ -31,7 +31,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/booking', [AuthManager::class, 'booking'])->name("booking");
 
-    Route::get('/admin', [AuthManager::class, 'admin'])->middleware('userAccess:admin');
+    Route::get('/admin', [AuthManager::class, 'admin'])->name("admin")->middleware('userAccess:admin');
     Route::get('/admin/pesanan', [AuthManager::class, 'pesanan'])->name("pesanan")->middleware('userAccess:admin');
     Route::get('/admin/mobil', [AuthManager::class, 'mobil'])->name("mobil")->middleware('userAccess:admin');
     Route::get('/admin/mobil/add-mobil', [AuthManager::class, 'addMobil'])->name("addMobil")->middleware('userAccess:admin');

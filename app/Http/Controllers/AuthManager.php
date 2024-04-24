@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
+use App\Models\Mobil;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 
 class AuthManager extends Controller
 {
@@ -26,7 +28,8 @@ class AuthManager extends Controller
     }
 
     public function mobil(){
-        return view('mobil');
+        $mobil = Mobil::join('Images', 'Images.id', '=', 'Mobil.id_image')->get();
+        return view('mobil')->with('mobil',$mobil);
     }
 
     public function addMobil(){
