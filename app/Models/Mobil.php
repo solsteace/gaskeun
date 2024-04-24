@@ -90,14 +90,14 @@ class Mobil extends Model
     }
 
     public function pengguna() {
-        return $this->belongsTo(Pengguna::class, "id_pengguna");
+        return $this->belongsTo(Pengguna::class, "id");
     }
 
     public function pesanan() {
-        return $this->belongsTo(Pesanan::class, "id");
+        return $this->hasOne(Pesanan::class, "id");
     }
 
     public function image() {
-        return $this->hasOne(Image::class, "id");
+        return $this->hasOne(Images::class, "id");
     }
 }
