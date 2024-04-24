@@ -14,7 +14,7 @@ class PenggunaController extends Controller
 {
     public function show() {
         try {
-            return Pengguna::all();
+            return Pengguna::with("image")->get();
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Pengguna`",
@@ -28,7 +28,7 @@ class PenggunaController extends Controller
 
     public function showById($id) { 
         try {
-            return Pengguna::findOrFail($id);
+            return Pengguna::with("image")->findOrFail($id);
         } catch(ModelNotFoundException $e) {
             return response()->json([
                 "msg" => "No record for `Pengguna` with id:{$id}",

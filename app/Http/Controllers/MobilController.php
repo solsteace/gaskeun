@@ -12,7 +12,7 @@ class MobilController extends Controller
 {
     public function show() {
         try {
-            return Mobil::all();
+            return Mobil::with("image")->get();
         } catch(QueryException $e) {
             return response()->json([
                 "msg" => "Exception raised during creating new `Mobil`",
@@ -26,7 +26,7 @@ class MobilController extends Controller
 
     public function showById($id) { 
         try {
-            return Mobil::findOrFail($id);
+            return Mobil::with("image")->findOrFail($id);
         } catch(ModelNotFoundException $e) {
             return response()->json([
                 "msg" => "No record for `Mobil` with id:{$id}",
