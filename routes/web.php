@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/filter', function () {
+    return view('filterCar');
+})->name('filterCar');
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthManager::class, 'login'])->name("login");
     Route::get('/register', [AuthManager::class, 'register'])->name("register");
