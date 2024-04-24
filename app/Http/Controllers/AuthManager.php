@@ -37,6 +37,10 @@ class AuthManager extends Controller
         return view('admin');
     }
 
+    public function editMobil(){
+        return view('editMobil');
+    }
+
     public function store(Request $request) {
         $validatedData = $request->validate([
             'nama' => ["required", "max:255"],

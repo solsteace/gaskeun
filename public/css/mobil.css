@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2.3em;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+p {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+i {
+    font-size: 1.5em;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.main {
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: #fafbfe;
+    width: calc(100% - 70px);
+    margin-left: 210px;
+}
+
+#sidebar {
+    width: 70px;
+    min-width: 70px;
+    z-index: 1000;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Set the sidebar to be fixed */
+    top: 0; /* Position it at the top */
+    left: 0; /* Position it at the left */
+    height: 100%; /* Make it full height */
+}
+
+#sidebar.expand {
+    width: 210px;
+    min-width: 210px;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+}
+
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.3rem;
+    color: #000000;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.7rem;
+    margin-right: .75rem;
+}
+
+a.sidebar-link:hover,
+a.sidebar-link:focus {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-left: 3px solid #3b7ddd;
+}
+
+.sidebar-link.active {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-left: 3px solid #3b7ddd;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    background-color: #0e2238;
+    padding: 0;
+    min-width: 15rem;
+    display: none;
+}
+
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+}
+
+.bg-sidebar {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.button-36 {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 188, 255, 1) 0%,
+        rgba(1, 23, 255, 1) 100%
+    );
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 3rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all 0.5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-36:hover {
+    color: #ffffff;
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 10px;
+    transition-duration: 0.1s;
+}
+
+.card-price {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.card-specs {
+    display: flex;
+    width: 40px;
+}
+
+.card-container {
+    position: relative;
+}
+
+.card-image,
+.card-content {
+    position: relative;
+    z-index: 0;
+}
+
+.card-header {
+    font-size: 0.85em !important;
+}
