@@ -6,6 +6,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\MobilFilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::get('/pesanan/{id}', [PesananController::class, "showById"]);
 Route::post('/pesanan', [PesananController::class, "create"]);
 Route::post('/pesanan/{id}', [PesananController::class, "edit"]);
 Route::delete('/pesanan/{id}', [PesananController::class, "destroy"]);
+
+Route::post('/mobilFilter', [MobilFilterController::class, "show"]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
