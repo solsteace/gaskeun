@@ -60,7 +60,7 @@
                 <h2>
                     Tambah Mobil
                 </h2>
-                <div class="card shadow-sm px-4 bg-white">
+                <div class="card shadow-sm px-4 bg-white mt-4">
                     <form action="/admin/mobil/add-mobil" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">

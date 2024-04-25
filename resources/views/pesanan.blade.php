@@ -60,7 +60,7 @@
         <h2>
           Daftar Pesanan
         </h2>
-        <div class="card shadow-sm p-4 bg-white">
+        <div class="card shadow-sm p-4 bg-white mt-4">
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
