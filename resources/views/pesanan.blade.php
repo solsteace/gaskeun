@@ -73,6 +73,8 @@
                   <th class="text-center align-middle" scope="col">Pembayaran</th>
                   <th class="text-center align-middle" scope="col">Status Pembayaran</th>
                   <th class="text-center align-middle" scope="col">SIM</th>
+                  <th class="text-center align-middle" scope="col">Titik Antar</th>
+                  <th class="text-center align-middle" scope="col">Titik Jemput</th>
                   <th class="text-center align-middle" scope="col">Aksi</th>
                 </tr>
               </thead>
@@ -90,11 +92,10 @@
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
+                  <td class="text-center align-middle">Bikini Bottom</td>
+                  <td class="text-center align-middle">Rock Bottom</td>
                   <td class="text-center align-middle">
-                    <div class="btn-group" role="group" aria-label="Button group">
-                      <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                      <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                    </div>
+                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
                   </td>
                 </tr>
                 <tr>
@@ -110,11 +111,10 @@
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
+                  <td class="text-center align-middle">Fontaine</td>
+                  <td class="text-center align-middle">Liyue</td>
                   <td class="text-center align-middle">
-                    <div class="btn-group" role="group" aria-label="Button group">
-                      <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                      <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                    </div>
+                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
                   </td>
                 </tr>
                 <tr>
@@ -130,11 +130,10 @@
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
+                  <td class="text-center align-middle">Azkaban</td>
+                  <td class="text-center align-middle">Diagon Alley</td>
                   <td class="text-center align-middle">
-                    <div class="btn-group" role="group" aria-label="Button group">
-                      <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                      <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                    </div>
+                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
                   </td>
                 </tr>
               </tbody>
