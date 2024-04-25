@@ -65,26 +65,16 @@ searchButton.addEventListener("click", () => {
     const endDate = new Date(convertDateFormat(endDateInput.value));
 
     if (endDate < startDate) {
-        // If startDate is later then endDate, reset it then show bunch of error hints
-        const iconStart = document.getElementById("icon-start");
-        const iconEnd = document.getElementById("icon-end");
-
-        startDateInput.value = "";
-        endDateInput.value = "";
-        errorMessage.style.display = "block";
-
-        startDateInput.classList.add("input-danger");
-        endDateInput.classList.add("input-danger");
-        iconStart.classList.add("input-danger");
-        iconEnd.classList.add("input-danger");
-
-        setTimeout(() => {
-            startDateInput.classList.remove("input-danger");
-            endDateInput.classList.remove("input-danger");
-            iconStart.classList.remove("input-danger");
-            iconEnd.classList.remove("input-danger");
-        }, 10000);
+        const invalidDates = document.getElementsByClassName("invalid-date");
+        for (var i = 0; i < invalidDates.length; i++) {
+            invalidDates[i].style.display = "block";
+        }
     } else {
+        const invalidDates = document.getElementsByClassName("invalid-date");
+        for (var i = 0; i < invalidDates.length; i++) {
+            invalidDates[i].style.display = "none";
+        }
+
         const minPriceInput = document.getElementById("harga-mobil-min");
         const maxPriceInput = document.getElementById("harga-mobil-max");
         const numPassengersInput = document.getElementById("jumlah-penumpang");

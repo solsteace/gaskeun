@@ -32,13 +32,13 @@ i {
     font-size: 1.5em;
 }
 
-input:not(.spin-enabled)::-webkit-outer-spin-button,
-input:not(.spin-enabled)::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type="number"]:not(.spin-enabled) {
+input[type="number"] {
     -moz-appearance: textfield;
 }
 
@@ -162,14 +162,13 @@ input[type="number"]:not(.spin-enabled) {
     display: none;
 }
 
-.input-danger {
-    border-width: 3px;
-    border-color: red;
-}
-
 #car-image {
     aspect-ratio: 4/3;
     width: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.text-bg-danger {
+    font-size: 0.9em;
 }

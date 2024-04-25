@@ -63,12 +63,18 @@
               <div class="input-group-text p-1" id="icon-start"><i class="las la-calendar-check"></i></div>
               <input type="text" id="start-date" class="form-control">
             </div>
+            <div class="invalid-date text-bg-danger rounded ps-2 py-1" id="invalid-date" style="display: none;">
+              Tanggal ambil harus sebelum tanggal kembali
+            </div>
           </div>
           <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
             <label for="end-date">Tanggal Kembali</label>
             <div class="input-group mt-1">
               <div class="input-group-text p-1" id="icon-end"><i class="las la-calendar-times"></i></div>
               <input type="text" id="end-date" class="form-control">
+            </div>
+            <div class="invalid-date text-bg-danger rounded ps-2 py-1" style="display: none;">
+              Tanggal kembali harus setelah tanggal kembali
             </div>
           </div>
           <div class="col-md-12 col-lg-12 col-xl-4 pt-3">
@@ -88,10 +94,19 @@
         </div>
         <div class="row">
           <div class="col-md-4 col-lg-4 col-xl-4 pt-3">
-            <label for="jumlah-penumpang">Jumlah Penumpang</label>
+            <label for="jumlah-penumpang">Jumlah Penumpang (minimum)</label>
             <div class="input-group mt-1">
               <div class="input-group-text p-1"><i class="las la-user-friends"></i></div>
-              <input type="number" id="jumlah-penumpang" class="form-control spin-enabled" min="1" max="8">
+              <select id="jumlah-penumpang" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8" selected>8</option>>
+              </select>
             </div>
           </div>
           <div class="col-md-4 col-lg-4 col-xl-4 pt-3">

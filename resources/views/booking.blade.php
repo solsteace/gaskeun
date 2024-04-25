@@ -112,21 +112,6 @@
                             Saya menyetujui semua Syarat & Ketentuan yang berlaku
                         </label>
                     </div>
-
-                    <div id="uploadSIM">
-                        <label class="d-flex justify-content-center mt-3" for="input-file" id="drop-area">
-                            <input type="file" accept="image/*" id="input-file" hidden>
-                            <div id="img-view">
-                                <img src="{{ asset("img/icon-upload.png") }}">
-                                <p>Seret dan lepas atau klik disini<br> untuk upload SIM anda</p>
-                                <span>Upload foto SIM</span>
-                            </div>
-                        </label>
-                    </div>
-                            
-
-
-
             </div>
         </div>
 

@@ -23,6 +23,10 @@ Route::get('/filter', function () {
     return view('filterCar');
 })->name('filterCar');
 
+Route::get('/inputDetail', function () {
+    return view('inputDetail');
+})->name('inputDetail');
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthManager::class, 'login'])->name("login");
     Route::get('/register', [AuthManager::class, 'register'])->name("register");
