@@ -67,6 +67,7 @@
                 <tr>
                   <th class="text-center align-middle" scope="col">#</th>
                   <th class="text-center align-middle" scope="col">Nama Peminjam</th>
+                  <th class="text-center align-middle" scope="col">Mobil</th>
                   <th class="text-center align-middle" scope="col">Tanggal Pinjam</th>
                   <th class="text-center align-middle" scope="col">Tanggal Pengembalian</th>
                   <th class="text-center align-middle" scope="col">Durasi Peminjaman</th>
@@ -82,13 +83,22 @@
                 <tr>
                   <th class="text-center align-middle" scope="row">1</th>
                   <td class="text-center align-middle">Deaz</td>
+                  <td class="text-center align-middle">D 1111 GG</td>
                   <td class="text-center align-middle">30/04/2024</td>
                   <td class="text-center align-middle">04/05/2024</td>
                   <td class="text-center align-middle">4 hari</td>
                   <td class="text-center align-middle">Transfer</td>
                   <td class="text-center align-middle">Lunas</td>
-                  <td class="text-center align-middle">Bikini Bottom</td>
-                  <td class="text-center align-middle">Rock Bottom</td>
+                  <td class="text-center align-middle">
+                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
+                  <td class="text-center align-middle">
+                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
                   <td class="text-center align-middle">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
@@ -101,13 +111,22 @@
                 <tr>
                   <th class="text-center align-middle" scope="row">2</th>
                   <td class="text-center align-middle">Setyo</td>
+                  <td class="text-center align-middle">D 2222 WP</td>
                   <td class="text-center align-middle">30/04/2024</td>
                   <td class="text-center align-middle">04/05/2024</td>
                   <td class="text-center align-middle">4 hari</td>
                   <td class="text-center align-middle">Debit</td>
                   <td class="text-center align-middle">Lunas</td>
-                  <td class="text-center align-middle">Fontaine</td>
-                  <td class="text-center align-middle">Liyue</td>
+                  <td class="text-center align-middle">
+                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
+                  <td class="text-center align-middle">
+                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
                   <td class="text-center align-middle">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
@@ -120,13 +139,22 @@
                 <tr>
                   <th class="text-center align-middle" scope="row">3</th>
                   <td class="text-center align-middle">Nugroho</td>
+                  <td class="text-center align-middle">D 3333 NT</td>
                   <td class="text-center align-middle">30/04/2024</td>
                   <td class="text-center align-middle">04/05/2024</td>
                   <td class="text-center align-middle">4 hari</td>
                   <td class="text-center align-middle">QRIS</td>
                   <td class="text-center align-middle">Belum lunas</td>
-                  <td class="text-center align-middle">Azkaban</td>
-                  <td class="text-center align-middle">Diagon Alley</td>
+                  <td class="text-center align-middle">
+                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
+                  <td class="text-center align-middle">
+                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
                   <td class="text-center align-middle">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
