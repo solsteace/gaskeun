@@ -45,11 +45,11 @@
                     </a>
                 </li>
             </ul>
-            <div class="sidebar-footer">
-                <a href="{{ route('login') }}" class="sidebar-link d-flex align-items-center">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
-                </a>
+            <div class="sidebar-footer mx-auto my-3">
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
             </div>
         </aside>
 

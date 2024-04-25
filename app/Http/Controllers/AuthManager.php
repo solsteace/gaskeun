@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
 use App\Models\Mobil;
+use App\Models\Images;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,4 +89,39 @@ class AuthManager extends Controller
     
         return redirect('/');
     }
+
+    public function createMobil(Request $request){
+        $validatedData = $request->validate([
+            'brand' => ['required', 'string'],
+            'model' => ['required', 'string'],
+            'kapasitas' => ['required', 'numeric'],
+            'harga_sewa' => ['required', 'numeric'],
+            'deskripsi' => ['required', 'string'],
+            'nomor_polisi' => ['required', 'string'],
+            'transmisi' => ['required'],
+            'image' => ['required','image', 'mimes:jpeg,png,jpg'],
+        ]);
+        
+        $validatedData['image'] = $request->file('image')->store('post-mobil');
+
+        $image = new Images();
+        $image->path = $validatedData['image'];
+        $image->last_update = now();
+        $image->save();
+
+        $mobil = new Mobil();
+        $mobil->id_pengguna = auth()->user()->id;
+        $mobil->id_image = $image->id;
+        $mobil->brand = $validatedData['brand'];
+        $mobil->model = $validatedData['model'];
+        $mobil->kapasitas = $validatedData['kapasitas'];
+        $mobil->harga_sewa = $validatedData['harga_sewa'];
+        $mobil->deskripsi = $validatedData['deskripsi'];
+        $mobil->nomor_polisi = $validatedData['nomor_polisi'];
+        $mobil->transmisi = $validatedData['transmisi'];
+        $mobil->save();
+
+        return redirect('/admin/mobil/add-mobil')->with('success', 'Mobil Berhasil Ditambahkan');
+    }
+
 }

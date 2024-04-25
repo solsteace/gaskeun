@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pesanan', [AuthManager::class, 'pesanan'])->name("pesanan")->middleware('userAccess:admin');
     Route::get('/admin/mobil', [AuthManager::class, 'mobil'])->name("mobil")->middleware('userAccess:admin');
     Route::get('/admin/mobil/add-mobil', [AuthManager::class, 'addMobil'])->name("addMobil")->middleware('userAccess:admin');
+    Route::post('/admin/mobil/add-mobil', [AuthManager::class, 'createMobil'])->middleware('userAccess:admin');
 
     Route::get('/admin/mobil/edit-mobil', [AuthManager::class, 'editMobil'])->name("editMobil")->middleware('userAccess:admin');
 

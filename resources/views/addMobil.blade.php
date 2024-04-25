@@ -46,11 +46,11 @@
                     </a>
                 </li>
             </ul>
-            <div class="sidebar-footer">
-                <a href="{{ route('login') }}" class="sidebar-link d-flex align-items-center">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
-                </a>
+            <div class="sidebar-footer mx-auto my-3">
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
             </div>
         </aside>
 
@@ -63,80 +63,87 @@
             </div>
             <div class="container mt-3">
                 <div class="card shadow-sm px-4 bg-white">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                            <label for="brand">Brand</label>
-                            <div class="input-group mt-1">
-                                <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
-                                <input type="text" id="brand" class="form-control">
+                    <form action="/admin/mobil/add-mobil" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                                <label for="brand">Brand</label>
+                                <div class="input-group mt-1">
+                                    <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
+                                    <input type="text" id="brand" name="brand" class="form-control" required value="{{ old('brand') }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                            <label for="brand">Model</label>
-                            <div class="input-group mt-1">
-                                <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
-                                <input type="text" id="model" class="form-control">
+                            <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                                <label for="model">Model</label>
+                                <div class="input-group mt-1">
+                                    <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
+                                    <input type="text" id="model" name="model" class="form-control" required value="{{ old('model') }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                            <label for="transmisi">Transmisi</label>
-                            <div class="input-group mt-1">
-                                <div class="input-group-text p-1"><i class="las la-cog"></i></div>
-                                <select id="transmisi" class="form-select">
-                                    <option selected value="anyTransmission"></option>
-                                    <option value="matic">Matic</option>
-                                    <option value="manual">Manual</option>
-                                </select>
+                            <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                                <label for="transmisi">Transmisi</label>
+                                <div class="input-group mt-1">
+                                    <div class="input-group-text p-1"><i class="las la-cog"></i></div>
+                                    <select id="transmisi" name="transmisi" class="form-select" required> 
+                                        <option value="" disabled selected></option>
+                                        <option value="matic" {{ old('transmisi') == 'matic' ? 'selected' : '' }}>Matic</option>
+                                        <option value="manual" {{ old('transmisi') == 'manual' ? 'selected' : '' }}>Manual</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                                <label for="nomor_polisi">Plat Nomor</label>
+                                <div class="input-group mt-1">
+                                    <div class="input-group-text p-1"><i class="las la-hashtag"></i></div>
+                                    <input type="text" id="nomor_polisi" name="nomor_polisi" class="form-control" required value="{{ old('nomor_polisi') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                                <label for="kapasitas">Kapasitas Penumpang</label>
+                                <div class="input-group mt-1">
+                                    <div class="input-group-text p-1"><i class="las la-user-friends"></i></div>
+                                    <input type="number" id="kapasitas" name="kapasitas" class="form-control" inputmode="numeric" required value="{{ old('kapasitas') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                                <label for="harga_sewa">Harga Sewa (per hari)</label>
+                                <div class="input-group mt-1">
+                                    <div class="input-group-text">Rp</div>
+                                    <input type="number" id="harga_sewa" name="harga_sewa" class="form-control" inputmode="numeric" required value="{{ old('harga-sewa') }}">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                            <label for="brand">Plat Nomor</label>
-                            <div class="input-group mt-1">
-                                <div class="input-group-text p-1"><i class="las la-hashtag"></i></div>
-                                <input type="text" id="plat-nomor" class="form-control">
+                        <div class="row mb-4">
+                            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4" required>{{ old('deskripsi') }}</textarea>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+                                <label for="image">Gambar</label>
+                                <div class="input-group mt-1">
+                                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror">
+                                    @error('image')
+                                    <div class="invalid-tooltip">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                            <label for="kapasitas-penumpang">Kapasitas Penumpang</label>
-                            <div class="input-group mt-1">
-                                <div class="input-group-text p-1"><i class="las la-user-friends"></i></div>
-                                <input type="number" id="kapasitas-penumpang" class="form-control" inputmode="numeric">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                            <label for="harga-sewa">Harga Sewa (per hari)</label>
-                            <div class="input-group mt-1">
-                                <div class="input-group-text">Rp</div>
-                                <input type="number" id="harga-sewa" class="form-control" inputmode="numeric">
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row mb-4">
-                        <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-                            <label for="description">Deskripsi</label>
-                            <textarea id="deskripsi" class="form-control" rows="4"></textarea>
+                        <div class="row mb-4">
+                            <button type="submit" class="btn button-36" id="submit-mobil">
+                                Submit
+                            </button>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-                            <label for="image">Gambar</label>
-                            <div class="input-group mt-1">
-                                <input type="file" id="image" class="form-control" accept="image/*">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <button type="submit" class="btn button-36" id="submit-mobil">
-                            Submit
-                        </button>
-                    </div>
+                    </form>
                 </div>
             </div>
-
-
         </div>
     </div>
+    @include('sweetalert::alert')
     <script src="{{ asset('js/addMobil.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
