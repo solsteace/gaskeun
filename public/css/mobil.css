@@ -187,6 +187,28 @@ a.sidebar-link:focus {
     transition-duration: 0.1s;
 }
 
+.button-36-disabled {
+    background: linear-gradient(
+        94.3deg,
+        rgba(26, 33, 64, 1) 10.9%,
+        rgba(81, 84, 115, 1) 87.1%
+    );
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 3rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all 0.5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
 .card-price {
     font-size: 1.3em;
     font-weight: 500;

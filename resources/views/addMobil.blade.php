@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="{{ asset('css/mobil.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link href="{{ asset('css/addMobil.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('img/favicon.png') }}" />
     <title>Admin Tambah Mobil</title>
 </head>
@@ -59,90 +60,84 @@
                 <h2>
                     Tambah Mobil
                 </h2>
-                <button 
-                type="button" 
-                class="btn btn-primary button-36" 
-                onclick="window.location.href = `{{ route('addMobil') }}`;"
-                >Tambah mobil</button>
-                
             </div>
-
-            <div class="row">
-                <!-- Dummy Card for Available Car 1 -->
-                <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-                    <div class="card shadow bg-white">
-                        <div class="card-header text-center bg-success text-white">
-                            Tersedia
+            <div class="container mt-3">
+                <div class="card shadow-sm px-4 bg-white">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                            <label for="brand">Brand</label>
+                            <div class="input-group mt-1">
+                                <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
+                                <input type="text" id="brand" class="form-control">
+                            </div>
                         </div>
-                        <img src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
-                        <div class="p-3">
-                            <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
-                            <p class="card-price">Rp 300.000/hari</p>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                                <p class="fw-medium">4 orang</p>
+                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                            <label for="brand">Model</label>
+                            <div class="input-group mt-1">
+                                <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
+                                <input type="text" id="model" class="form-control">
                             </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                                <p class="fw-medium">Matic</p>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                            <label for="transmisi">Transmisi</label>
+                            <div class="input-group mt-1">
+                                <div class="input-group-text p-1"><i class="las la-cog"></i></div>
+                                <select id="transmisi" class="form-select">
+                                    <option selected value="anyTransmission"></option>
+                                    <option value="matic">Matic</option>
+                                    <option value="manual">Manual</option>
+                                </select>
                             </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                                <p class="fw-medium">Bensin</p>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                            <label for="brand">Plat Nomor</label>
+                            <div class="input-group mt-1">
+                                <div class="input-group-text p-1"><i class="las la-hashtag"></i></div>
+                                <input type="text" id="plat-nomor" class="form-control">
                             </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>
-                                <p class="fw-medium">D 1234 GG</p>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                            <label for="kapasitas-penumpang">Kapasitas Penumpang</label>
+                            <div class="input-group mt-1">
+                                <div class="input-group-text p-1"><i class="las la-user-friends"></i></div>
+                                <input type="number" id="kapasitas-penumpang" class="form-control" inputmode="numeric">
                             </div>
-                            <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
+                            <label for="harga-sewa">Harga Sewa (per hari)</label>
+                            <div class="input-group mt-1">
+                                <div class="input-group-text">Rp</div>
+                                <input type="number" id="harga-sewa" class="form-control" inputmode="numeric">
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Dummy Card for Unavailable Car 1 -->
-                <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-                    <div class="card shadow bg-white">
-                        <div class="card-header text-center bg-danger text-white">
-                            Akan tersedia pada DD-MM-YYYY
+                    <div class="row mb-4">
+                        <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+                            <label for="description">Deskripsi</label>
+                            <textarea id="deskripsi" class="form-control" rows="4"></textarea>
                         </div>
-                        <img src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
-                        <div class="p-3">
-                            <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
-                            <p class="card-price">Rp 300.000/hari</p>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                                <p class="fw-medium">4 orang</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                                <p class="fw-medium">Matic</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                                <p class="fw-medium">Bensin</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>
-                                <p class="fw-medium">D 4321 WP</p>
-                            </div>
-                            <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
+                        <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+                            <label for="image">Gambar</label>
+                            <div class="input-group mt-1">
+                                <input type="file" id="image" class="form-control" accept="image/*">
                             </div>
                         </div>
                     </div>
+
+                    <div class="row mb-4">
+                        <button type="submit" class="btn button-36" id="submit-mobil">
+                            Submit
+                        </button>
+                    </div>
                 </div>
-                
-
-
             </div>
+
 
         </div>
     </div>
-    <script src="{{ asset('js/mobil.js') }}"></script>
+    <script src="{{ asset('js/addMobil.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
