@@ -19,11 +19,12 @@ return new class extends Migration
             $table->unsignedBigInteger("id_mobil");
             $table->unsignedBigInteger("id_pembayaran");
 
-            $table->string("KTP_peminjam");
             $table->string("SIM_peminjam");
             $table->string("nama_peminjam"); // Order could be made for other people
             $table->date("tanggal_peminjaman");
             $table->date("tanggal_pengembalian");
+            $table->string("titik_antar")->nullable();
+            $table->string("titik_jemput")->nullable();
 
             $table->foreign("id_pemesan")->references("id")->on("Pengguna");
             $table->foreign("id_pembayaran")->references("id")->on("Pembayaran");
