@@ -110,7 +110,7 @@
                                 <label for="harga_sewa">Harga Sewa (per hari)</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text">Rp</div>
-                                    <input type="number" id="harga_sewa" name="harga_sewa" class="form-control" inputmode="numeric" required value="{{ old('harga-sewa') }}">
+                                    <input type="number" id="harga_sewa" name="harga_sewa" class="form-control" inputmode="numeric" required value="{{ old('harga_sewa') }}">
                                 </div>
                             </div>
                         </div>
@@ -124,11 +124,6 @@
                                 <label for="image">Gambar</label>
                                 <div class="input-group mt-1">
                                     <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror">
-                                    @error('image')
-                                    <div class="invalid-tooltip">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
