@@ -19,6 +19,16 @@ class PesananSeeder extends Seeder
             "id_pemesan" => [10, 8, 4],
             "id_mobil" => [1, 4, 5],
             "id_pembayaran" => [1, 2, 3],
+            "titik_antar" =>  [
+                "35.5679 -87.6543",
+                null,
+                "0.9876 23.4567"
+            ],
+            "titik_jemput" => [
+                "34.5678 -87.6543",
+                "-12.3456 45.6789",
+                null
+            ],
             "nama" => ["Jihan", "James", "Jonathan"]
         ];
 
@@ -29,11 +39,12 @@ class PesananSeeder extends Seeder
                 "id_pemesan" => $samples["id_pemesan"][$idx],
                 "id_mobil" => $samples["id_mobil"][$idx],
                 "id_pembayaran" => $samples["id_pembayaran"][$idx],
-                "KTP_peminjam" => "",
                 "SIM_peminjam" => "",
                 "nama_peminjam" => $samples["nama"][$idx],
                 "tanggal_peminjaman" => date("Y-m-d", $random_date_begin),
-                "tanggal_pengembalian" => date("Y-m-d", $random_date_end)
+                "tanggal_pengembalian" => date("Y-m-d", $random_date_end),
+                "titik_antar" => $samples["titik_antar"][$idx],
+                "titik_jemput" => $samples["titik_jemput"][$idx]
             ]);
         }
     }
