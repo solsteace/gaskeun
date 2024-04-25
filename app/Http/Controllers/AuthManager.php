@@ -29,7 +29,7 @@ class AuthManager extends Controller
     }
 
     public function mobil(){
-        $mobil = Mobil::join('Images', 'Images.id', '=', 'Mobil.id_image')->get();
+        $mobil = Mobil::join('Images', 'Images.id', '=', 'Mobil.id_image')->select('Mobil.*', 'Images.id as id_image', 'Images.path as path')->get();
         return view('mobil')->with('mobil',$mobil);
     }
 
@@ -124,4 +124,10 @@ class AuthManager extends Controller
         return redirect('/admin/mobil/add-mobil')->with('success', 'Mobil Berhasil Ditambahkan');
     }
 
+    public function deleteMobil($id){
+        $mobil = Mobil::find($id);
+        $mobil->delete();
+        Images::where('id', $mobil->id_image)->delete();
+        return redirect('/admin/mobil')->with('success', 'Mobil Berhasil Dihapus');
+    }
 }

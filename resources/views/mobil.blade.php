@@ -104,7 +104,12 @@
                                 <p class="fw-medium">{{$item->nomor_polisi}}</p>
                             </div>
                             <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
-                                <button type="button" class="btn btn-danger">Hapus</button>
+                                <form action="/admin/mobil/{{$item->id}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                </form>
+                                
                                 <button type="button" class="btn btn-primary" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
                             </div>
                         </div>
@@ -116,6 +121,7 @@
 
         </div>
     </div>
+    @include('sweetalert::alert')
     <script src="{{ asset('js/mobil.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
