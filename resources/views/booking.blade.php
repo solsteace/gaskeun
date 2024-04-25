@@ -52,11 +52,11 @@
     
 
     <div class="container mt-5">
-        <h2 class="row p-3">Mobil Kamu</h2>
+        <h2 class="row p-3 mx-2">Mobil Kamu</h2>
 
         <div class="row mx-2">
             <div class="col">
-                <img id="car-image" src="{{ asset('img/car-zenix.png') }}" alt="" class="img-fluid">
+                <img id="car-image" src="{{ asset('img/car-zenix.png') }}" alt="" class="img-fluid rounded-4">
             </div>
             <div class="col d-flex align-items-center p-0">
                 <div class="container p-4 flex-grow-1 my-4">
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="container p-4 custom-shadow flex-grow-1 mt-4">
+            <div class="container p-4 custom-shadow flex-grow-1 mt-5 mx-2">
                 <h3>Syarat dan Ketentuan</h3>
                     <ul class="mt-3">
                         <li>Wajib berusia minimal 21 tahun dan memiliki SIM A yang masih berlaku.</li>
