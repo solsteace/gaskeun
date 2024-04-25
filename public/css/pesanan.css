@@ -208,14 +208,3 @@ a.sidebar-link:focus {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
-
-input:not(.spin-enabled)::-webkit-outer-spin-button,
-input:not(.spin-enabled)::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"]:not(.spin-enabled) {
-    -moz-appearance: textfield;
-}
-

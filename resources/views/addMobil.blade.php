@@ -56,12 +56,10 @@
 
 
         <div class="main p-4">
-            <div class="d-flex justify-content-between align-items-center ms-1 mt-4">
+            <div class="container mt-3">
                 <h2>
                     Tambah Mobil
                 </h2>
-            </div>
-            <div class="container mt-3">
                 <div class="card shadow-sm px-4 bg-white">
                     <form action="/admin/mobil/add-mobil" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -84,7 +82,7 @@
                                 <label for="transmisi">Transmisi</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-cog"></i></div>
-                                    <select id="transmisi" name="transmisi" class="form-select" required> 
+                                    <select id="transmisi" name="transmisi" class="form-select" required>
                                         <option value="" disabled selected></option>
                                         <option value="matic" {{ old('transmisi') == 'matic' ? 'selected' : '' }}>Matic</option>
                                         <option value="manual" {{ old('transmisi') == 'manual' ? 'selected' : '' }}>Manual</option>

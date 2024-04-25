@@ -83,7 +83,7 @@
                             </div>
                         @endif
                         
-                        <img src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
+                        <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
                         <div class="p-3">
                             <h5 class="card-title fw-semibold">{{$item->brand}}<br>{{$item->model}}</h5>
                             <p class="card-price">Rp {{ number_format($item->harga_sewa, 0, ',', '.') }}/hari</p>
@@ -107,10 +107,9 @@
                                 <form action="/admin/mobil/{{$item->id}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                    <button type="submit" class="btn btn-danger w-100">Hapus</button>
                                 </form>
-                                
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
+                                <button type="button" class="btn btn-primary w-100" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
                             </div>
                         </div>
                     </div>

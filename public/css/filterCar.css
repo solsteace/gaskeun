@@ -166,3 +166,10 @@ input[type="number"]:not(.spin-enabled) {
     border-width: 3px;
     border-color: red;
 }
+
+#car-image {
+    aspect-ratio: 4/3;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}

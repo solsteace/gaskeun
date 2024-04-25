@@ -19,6 +19,7 @@
                 <!-- 50% of the whole width but empty -->
             </div>
             <div class="col-6 filled-column d-flex flex-column align-items-center justify-content-center">
+            <img src="{{ asset('img/logo-navbar.png') }}" alt="Image" class="mb-4" style="width: 300px; height: auto;">
                 @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}

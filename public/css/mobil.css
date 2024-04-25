@@ -232,3 +232,10 @@ a.sidebar-link:focus {
 .card-header {
     font-size: 0.85em !important;
 }
+
+#car-image {
+    aspect-ratio: 4/3;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}

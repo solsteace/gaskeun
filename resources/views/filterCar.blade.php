@@ -157,7 +157,7 @@
             <div class="card-header text-center bg-success text-white">
               Tersedia
             </div>
-            <img src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
+            <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
             <div class="p-3">
               <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
               <p class="card-price">Rp 300.000/hari</p>
@@ -192,7 +192,7 @@
               Akan tersedia pada DD-MM-YYYY
             </div>
             <div class="overlay rounded-1 shadow"></div>
-            <img src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0 card-image" alt="Car Image">
+            <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0 card-image" alt="Car Image">
             <div class="p-3 card-content">
               <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
               <p class="card-price">Rp 300.000/hari</p>
