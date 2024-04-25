@@ -72,9 +72,9 @@
                   <th class="text-center align-middle" scope="col">Durasi Peminjaman</th>
                   <th class="text-center align-middle" scope="col">Pembayaran</th>
                   <th class="text-center align-middle" scope="col">Status Pembayaran</th>
-                  <th class="text-center align-middle" scope="col">SIM</th>
                   <th class="text-center align-middle" scope="col">Titik Antar</th>
                   <th class="text-center align-middle" scope="col">Titik Jemput</th>
+                  <th class="text-center align-middle" scope="col">SIM</th>
                   <th class="text-center align-middle" scope="col">Aksi</th>
                 </tr>
               </thead>
@@ -87,13 +87,13 @@
                   <td class="text-center align-middle">4 hari</td>
                   <td class="text-center align-middle">Transfer</td>
                   <td class="text-center align-middle">Lunas</td>
+                  <td class="text-center align-middle">Bikini Bottom</td>
+                  <td class="text-center align-middle">Rock Bottom</td>
                   <td class="text-center align-middle">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
-                  <td class="text-center align-middle">Bikini Bottom</td>
-                  <td class="text-center align-middle">Rock Bottom</td>
                   <td class="text-center align-middle">
                     <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
                   </td>
@@ -106,13 +106,13 @@
                   <td class="text-center align-middle">4 hari</td>
                   <td class="text-center align-middle">Debit</td>
                   <td class="text-center align-middle">Lunas</td>
+                  <td class="text-center align-middle">Fontaine</td>
+                  <td class="text-center align-middle">Liyue</td>
                   <td class="text-center align-middle">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
-                  <td class="text-center align-middle">Fontaine</td>
-                  <td class="text-center align-middle">Liyue</td>
                   <td class="text-center align-middle">
                     <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
                   </td>
@@ -125,13 +125,13 @@
                   <td class="text-center align-middle">4 hari</td>
                   <td class="text-center align-middle">QRIS</td>
                   <td class="text-center align-middle">Belum lunas</td>
+                  <td class="text-center align-middle">Azkaban</td>
+                  <td class="text-center align-middle">Diagon Alley</td>
                   <td class="text-center align-middle">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
-                  <td class="text-center align-middle">Azkaban</td>
-                  <td class="text-center align-middle">Diagon Alley</td>
                   <td class="text-center align-middle">
                     <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
                   </td>
