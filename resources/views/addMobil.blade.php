@@ -4,12 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link href="{{ asset('css/addMobil.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('img/favicon.png') }}" />
     <title>Admin Tambah Mobil</title>
@@ -49,7 +54,9 @@
             <div class="sidebar-footer mx-auto my-3">
                 <form action="/logout" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Logout</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-box-arrow-left"></i>
+                    </button>
                 </form>
             </div>
         </aside>
@@ -68,14 +75,16 @@
                                 <label for="brand">Brand</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
-                                    <input type="text" id="brand" name="brand" class="form-control" required value="{{ old('brand') }}">
+                                    <input type="text" id="brand" name="brand" class="form-control" required
+                                        value="{{ old('brand') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
                                 <label for="model">Model</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
-                                    <input type="text" id="model" name="model" class="form-control" required value="{{ old('model') }}">
+                                    <input type="text" id="model" name="model" class="form-control" required
+                                        value="{{ old('model') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
@@ -84,8 +93,10 @@
                                     <div class="input-group-text p-1"><i class="las la-cog"></i></div>
                                     <select id="transmisi" name="transmisi" class="form-select" required>
                                         <option value="" disabled selected></option>
-                                        <option value="matic" {{ old('transmisi') == 'matic' ? 'selected' : '' }}>Matic</option>
-                                        <option value="manual" {{ old('transmisi') == 'manual' ? 'selected' : '' }}>Manual</option>
+                                        <option value="matic" {{ old('transmisi') == 'matic' ? 'selected' : '' }}>Matic
+                                        </option>
+                                        <option value="manual" {{ old('transmisi') == 'manual' ? 'selected' : '' }}>
+                                            Manual</option>
                                     </select>
                                 </div>
                             </div>
@@ -94,21 +105,24 @@
                                 <label for="nomor_polisi">Plat Nomor</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-hashtag"></i></div>
-                                    <input type="text" id="nomor_polisi" name="nomor_polisi" class="form-control" required value="{{ old('nomor_polisi') }}">
+                                    <input type="text" id="nomor_polisi" name="nomor_polisi" class="form-control"
+                                        required value="{{ old('nomor_polisi') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
                                 <label for="kapasitas">Kapasitas Penumpang</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-user-friends"></i></div>
-                                    <input type="number" id="kapasitas" name="kapasitas" class="form-control" inputmode="numeric" required value="{{ old('kapasitas') }}">
+                                    <input type="number" id="kapasitas" name="kapasitas" class="form-control"
+                                        inputmode="numeric" required value="{{ old('kapasitas') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
                                 <label for="harga_sewa">Harga Sewa (per hari)</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text">Rp</div>
-                                    <input type="number" id="harga_sewa" name="harga_sewa" class="form-control" inputmode="numeric" required value="{{ old('harga_sewa') }}">
+                                    <input type="number" id="harga_sewa" name="harga_sewa" class="form-control"
+                                        inputmode="numeric" required value="{{ old('harga_sewa') }}">
                                 </div>
                             </div>
                         </div>
@@ -116,12 +130,14 @@
                         <div class="row mb-4">
                             <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4" required>{{ old('deskripsi') }}</textarea>
+                                <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4"
+                                    required>{{ old('deskripsi') }}</textarea>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
                                 <label for="image">Gambar</label>
                                 <div class="input-group mt-1">
-                                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror">
+                                    <input type="file" id="image" name="image"
+                                        class="form-control @error('image') is-invalid @enderror">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +154,9 @@
     </div>
     @include('sweetalert::alert')
     <script src="{{ asset('js/addMobil.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

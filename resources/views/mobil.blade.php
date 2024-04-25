@@ -48,7 +48,9 @@
             <div class="sidebar-footer mx-auto my-3">
                 <form action="/logout" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Logout</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-box-arrow-left"></i>
+                    </button>
                 </form>
             </div>
         </aside>
@@ -59,12 +61,8 @@
                 <h2>
                     Daftar Mobil
                 </h2>
-                <button 
-                type="button" 
-                class="btn btn-primary button-36" 
-                onclick="window.location.href = `{{ route('addMobil') }}`;"
-                >Tambah mobil</button>
-                
+                <button type="button" class="btn btn-primary button-36" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
+
             </div>
 
             <div class="row">
@@ -73,16 +71,16 @@
                 <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
                     <div class="card shadow bg-white">
                         @if ($item->status == "tersedia")
-                            <div class="card-header text-center bg-success text-white">
-                                {{$item->status}}
-                            </div>
+                        <div class="card-header text-center bg-success text-white">
+                            {{$item->status}}
+                        </div>
                         @else
-                            <div class="card-header text-center bg-danger text-white">
-                                {{-- Akan tersedia pada DD-MM-YYYY --}}
-                                {{$item->status}}
-                            </div>
+                        <div class="card-header text-center bg-danger text-white">
+                            {{-- Akan tersedia pada DD-MM-YYYY --}}
+                            {{$item->status}}
+                        </div>
                         @endif
-                        
+
                         <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
                         <div class="p-3">
                             <h5 class="card-title fw-semibold">{{$item->brand}}<br>{{$item->model}}</h5>
@@ -115,7 +113,7 @@
                     </div>
                 </div>
                 @endforeach
-                
+
             </div>
 
         </div>

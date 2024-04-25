@@ -49,7 +49,9 @@
       <div class="sidebar-footer mx-auto my-3">
         <form action="/logout" method="POST">
           @csrf
-          <button type="submit" class="btn btn-danger">Logout</button>
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-box-arrow-left"></i>
+          </button>
         </form>
       </div>
     </aside>
