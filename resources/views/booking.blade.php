@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="container p-4 custom-shadow flex-grow-1">
+            <div class="container p-4 custom-shadow flex-grow-1 mt-4">
                 <h3>Syarat dan Ketentuan</h3>
                     <ul class="mt-3">
                         <li>Wajib berusia minimal 21 tahun dan memiliki SIM A yang masih berlaku.</li>
