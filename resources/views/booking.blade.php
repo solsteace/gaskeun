@@ -56,7 +56,7 @@
 
         <div class="row mx-2">
             <div class="col">
-                <img src="{{ asset('img/car-zenix.png') }}" alt="" class="img-fluid">
+                <img id="car-image" src="{{ asset('img/car-zenix.png') }}" alt="" class="img-fluid">
             </div>
             <div class="col d-flex align-items-center p-0">
                 <div class="container p-4 flex-grow-1 my-4">
