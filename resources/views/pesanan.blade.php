@@ -82,90 +82,36 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th class="text-center align-middle" scope="row">1</th>
-                  <td class="text-center align-middle">Deaz</td>
-                  <td class="text-center align-middle">D 1111 GG</td>
-                  <td class="text-center align-middle">30/04/2024</td>
-                  <td class="text-center align-middle">04/05/2024</td>
-                  <td class="text-center align-middle">4 hari</td>
-                  <td class="text-center align-middle">Transfer</td>
-                  <td class="text-center align-middle">Lunas</td>
-                  <td class="text-center align-middle">
-                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="text-center align-middle" scope="row">2</th>
-                  <td class="text-center align-middle">Setyo</td>
-                  <td class="text-center align-middle">D 2222 WP</td>
-                  <td class="text-center align-middle">30/04/2024</td>
-                  <td class="text-center align-middle">04/05/2024</td>
-                  <td class="text-center align-middle">4 hari</td>
-                  <td class="text-center align-middle">Debit</td>
-                  <td class="text-center align-middle">Lunas</td>
-                  <td class="text-center align-middle">
-                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="text-center align-middle" scope="row">3</th>
-                  <td class="text-center align-middle">Nugroho</td>
-                  <td class="text-center align-middle">D 3333 NT</td>
-                  <td class="text-center align-middle">30/04/2024</td>
-                  <td class="text-center align-middle">04/05/2024</td>
-                  <td class="text-center align-middle">4 hari</td>
-                  <td class="text-center align-middle">QRIS</td>
-                  <td class="text-center align-middle">Belum lunas</td>
-                  <td class="text-center align-middle">
-                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <a href="https://maps.app.goo.gl/uAfXRSPPtNurjMBj7" target="_blank">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
-                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                    </a>
-                  </td>
-                  <td class="text-center align-middle">
-                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
-                  </td>
-                </tr>
+                @foreach ($data as $item)
+                    <tr>
+                      <th class="text-center align-middle" scope="row">1</th>
+                      <td class="text-center align-middle">{{$item->nama}}</td>
+                      <td class="text-center align-middle">{{$item->nomor_polisi}}</td>
+                      <td class="text-center align-middle">{{$item->tanggal_peminjaman}}</td>
+                      <td class="text-center align-middle">{{$item->tanggal_pengembalian}}</td>
+                      <td class="text-center align-middle">4 hari</td>
+                      <td class="text-center align-middle">Transfer</td>
+                      <td class="text-center align-middle">{{$item->status}}</td>
+                      <td class="text-center align-middle">
+                        <a href="https://www.google.com/maps/place/{{$item->titik_antar}}" target="_blank">
+                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                        </a>
+                      </td>
+                      <td class="text-center align-middle">
+                        <a href="https://www.google.com/maps/place/{{$item->titik_jemput}}" target="_blank">
+                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                        </a>
+                      </td>
+                      <td class="text-center align-middle">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                        </a>
+                      </td>
+                      <td class="text-center align-middle">
+                        <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
+                      </td>
+                    </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

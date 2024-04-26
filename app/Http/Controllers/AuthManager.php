@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
 use App\Models\Pesanan;
+use App\Models\Pembayaran;
 use App\Models\Mobil;
 use App\Models\Images;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class AuthManager extends Controller
 {
@@ -28,7 +30,14 @@ class AuthManager extends Controller
     }
 
     public function pesanan(){
-        return view('pesanan');
+        $data = DB::table('Pesanan')
+                    ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
+                    ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
+                    ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*')
+                    ->get();
+
+        return view('pesanan')->with('data',$data);
     }
 
     public function mobil(){
