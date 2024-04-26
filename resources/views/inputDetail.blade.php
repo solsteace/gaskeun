@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="icon" href="{{ asset('img/favicon.png') }}"/>
-
     <script src="https://kit.fontawesome.com/98e80d3b36.js" crossorigin="anonymous"></script>
     <link href="{{ asset('css/inputDetail.css') }}" rel="stylesheet">
+
+    <!-- https://stackoverflow.com/questions/41391862/how-to-access-php-session-variable-in-javascript -->
+    <?php
+        $script = "<script> const BOOKED_CAR={$_GET['carId']};";
+        if(Auth::check()) {
+          $userId = Auth::id();
+          $script = "{$script}const LOGGED_USER={$userId};";
+        }
+        echo $script . "</script";
+          
+    ?>
+
   </head>
   <body>
     <!-- Navbar -->
@@ -36,9 +47,18 @@
               <li class="nav-item mx-2">
                 <a class="nav-link" href="#">Pesanan Saya</a>
               </li>
+              @auth
+              <li class="nav-item mx-2">
+                <form action="/logout" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+              </li>
+              @else
               <li class="nav-item ms-2 me-4">
                 <a class="nav-link" href="{{ route('login') }}">Sign In</a>
               </li>
+              @endauth
             </ul>
           </div>
         </div>
@@ -56,171 +76,169 @@
     <!-- Filter Form -->
     <div class="container mt-3">
       <div class="card shadow-sm px-4 bg-white">
-        <form>
-          <div class="row">
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="nama-lengkap" class="form-label">Nama lengkap (sesuai KTP)</label>
-              <div class="input-group mt-1">
-                <div class="input-group-text p-1"><i class="las la-user-alt"></i></div>
-                <input type="text" id="nama-lengkap" class="form-control">
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-name" style="display: none;">
-                Belum diisi
-              </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="nama-lengkap" class="form-label">Nama lengkap (sesuai KTP)</label>
+            <div class="input-group mt-1">
+              <div class="input-group-text p-1"><i class="las la-user-alt"></i></div>
+              <input type="text" id="nama-lengkap" class="form-control">
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="email" class="form-label">Alamat email</label>
-              <div class="input-group mt-1">
-                <div class="input-group-text p-1"><i class="las la-envelope"></i></div>
-                <input type="email" id="email" class="form-control">
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-email" style="display: none;">
-                Belum diisi
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="invalid-email" style="display: none;">
-                Format email belum sesuai
-              </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-name" style="display: none;">
+              Belum diisi
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="pickup-location" class="form-label mb-0">Lokasi Pengambilan</label>
-              <div class="form-text mt-0 mb-2 text-warning">Kosongkan jika ingin mengambil mobil sewa di kantor Gaskeun.</div>
-              <div class="row">
-                <div class="col-xl-10">
-                  <input type="text" id="pickup-location" class="form-control">
-                </div>
-                <div class="col-xl-2">
-                  <div class="d-grid">
-                    <button type="button" class="btn button-36" data-bs-toggle="modal" data-bs-target="#pickup-modal" id="pickup-toggle">
-                      <i class="las la-map-marked-alt"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="email" class="form-label">Alamat email</label>
+            <div class="input-group mt-1">
+              <div class="input-group-text p-1"><i class="las la-envelope"></i></div>
+              <input type="email" id="email" class="form-control">
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="dropoff-location" class="form-label mb-0">Lokasi Pengembalian</label>
-              <div class="form-text mt-0 mb-2 text-warning">Kosongkan jika ingin mengembalikan mobil sewa di kantor Gaskeun.</div>
-              <div class="row">
-                <div class="col-xl-10">
-                  <input type="text" id="dropoff-location" class="form-control">
-                </div>
-                <div class="col-xl-2">
-                  <div class="d-grid">
-                    <button type="button" class="btn button-36" data-bs-toggle="modal" data-bs-target="#dropoff-modal" id="dropoff-toggle">
-                      <i class="las la-map-marked-alt"></i>
-                    </button>
-                  </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-email" style="display: none;">
+              Belum diisi
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="invalid-email" style="display: none;">
+              Format email belum sesuai
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="pickup-location" class="form-label mb-0">Lokasi Pengambilan</label>
+            <div class="form-text mt-0 mb-2 text-warning">Kosongkan jika ingin mengambil mobil sewa di kantor Gaskeun.</div>
+            <div class="row">
+              <div class="col-xl-10">
+                <input type="text" id="pickup-location" class="form-control">
+              </div>
+              <div class="col-xl-2">
+                <div class="d-grid">
+                  <button type="button" class="btn button-36" data-bs-toggle="modal" data-bs-target="#pickup-modal" id="pickup-toggle">
+                    <i class="las la-map-marked-alt"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="start-date">Tanggal Ambil</label>
-              <div class="input-group mt-1">
-                <div class="input-group-text p-1" id="icon-start"><i class="las la-calendar-check"></i></div>
-                <input type="text" id="start-date" class="form-control">
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="dropoff-location" class="form-label mb-0">Lokasi Pengembalian</label>
+            <div class="form-text mt-0 mb-2 text-warning">Kosongkan jika ingin mengembalikan mobil sewa di kantor Gaskeun.</div>
+            <div class="row">
+              <div class="col-xl-10">
+                <input type="text" id="dropoff-location" class="form-control">
               </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-start-date" style="display: none;">
-                Belum diisi
-              </div>
-              <div class="invalid-date text-bg-danger rounded ps-2 py-1" id="invalid-date" style="display: none;">
-                Tanggal ambil harus sebelum tanggal kembali
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="end-date">Tanggal Kembali</label>
-              <div class="input-group mt-1">
-                <div class="input-group-text p-1" id="icon-end"><i class="las la-calendar-times"></i></div>
-                <input type="text" id="end-date" class="form-control">
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-return-date" style="display: none;">
-                Belum diisi
-              </div>
-              <div class="invalid-date text-bg-danger rounded ps-2 py-1" style="display: none;">
-                Tanggal kembali harus setelah tanggal kembali
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="phone">No Telepon</label>
-              <div class="form-text mt-0 mb-2">Contoh: 085125315665</div>
-              <div class="input-group">
-                <div class="input-group-text p-1" id="icon-start"><i class="las la-phone"></i></div>
-                <input type="text" id="phone" class="form-control">
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-phone" style="display: none;">
-                Belum diisi
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="invalid-phone" style="display: none;">
-                Format no telepon belum sesuai
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
-              <label for="phone-emergency">No Telepon Darurat</label>
-              <div class="form-text mt-0 mb-2">Contoh: 081227627654</div>
-              <div class="input-group">
-                <div class="input-group-text p-1" id="icon-end"><i class="las la-phone-volume"></i></div>
-                <input type="text" id="phone-emergency" class="form-control">
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-phone-darurat" style="display: none;">
-                Belum diisi
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="invalid-phone-darurat" style="display: none;">
-                Format no telepon belum sesuai
-              </div>
-              <div class="text-bg-danger rounded ps-2 py-1" id="same-phone-darurat" style="display: none;">
-                No telepon darurat tidak boleh sama
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <label class="pt-3">Surat Izin Mengemudi kategori A</label>
-            <div class="form-text mt-0">Pastikan identitas dan foto pada SIM Anda dapat terlihat dengan jelas</div>
-            <div class="col-md-12 col-lg-12 col-xl-12">
-              <label class="d-flex justify-content-center mt-3" for="input-file" id="drop-area">
-                <input type="file" accept="image/*" id="input-file" hidden>
-                <div id="img-view">
-                  <img src="{{ asset("img/icon-upload.png") }}">
-                  <p>Seret dan lepas atau klik disini untuk upload SIM anda</p>
-                  <span>Upload foto SIM</span>
+              <div class="col-xl-2">
+                <div class="d-grid">
+                  <button type="button" class="btn button-36" data-bs-toggle="modal" data-bs-target="#dropoff-modal" id="dropoff-toggle">
+                    <i class="las la-map-marked-alt"></i>
+                  </button>
                 </div>
-              </label>
-              <div class="text-bg-danger rounded ps-2 py-1" id="empty-file" style="display: none;">
-                SIM belum diupload
               </div>
             </div>
           </div>
-          <div class="row pt-4 ps-3 pe-3">
-            <div class="col form-check">
-              <input type="checkbox" class="form-check-input" id="setuju">
-              <label class="form-check-label text-warning" for="setuju">Saya menyetujui bahwa data diri yang saya berikan akan disimpan dan digunakan oleh PT Gaskeun sesuai dengan kebijakan privasi yang berlaku.</label>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="start-date">Tanggal Ambil</label>
+            <div class="input-group mt-1">
+              <div class="input-group-text p-1" id="icon-start"><i class="las la-calendar-check"></i></div>
+              <input type="text" id="start-date" class="form-control">
             </div>
-            <div class="text-bg-danger rounded ps-2 py-1" id="empty-setuju" style="display: none;">
-              Belum menyetujui kebijakan privasi
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-start-date" style="display: none;">
+              Belum diisi
             </div>
-          </div>
-          <div class="row pt-4 pb-3">
-            <div class="d-grid gap-2 col-xl-12 mx-auto">
-              <button
-                  type="button"
-                  class="btn button-36"
-                  id="confirmButton"
-                  data-bs-toggle="modal"
-                  data-bs-target="#confirm-modal"
-                  id="confirm-toggle"
-              >
-                Konfirmasi Pemesanan
-              </button>
+            <div class="invalid-date text-bg-danger rounded ps-2 py-1" id="invalid-date" style="display: none;">
+              Tanggal ambil harus sebelum tanggal kembali
             </div>
           </div>
-          <div class="row">
-            <p class="invalid-date text-danger fw-semibold text-center" style="display: none;">*Maaf, Tanggal Ambil harus sebelum Tanggal Kembali</p>
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="end-date">Tanggal Kembali</label>
+            <div class="input-group mt-1">
+              <div class="input-group-text p-1" id="icon-end"><i class="las la-calendar-times"></i></div>
+              <input type="text" id="end-date" class="form-control">
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-return-date" style="display: none;">
+              Belum diisi
+            </div>
+            <div class="invalid-date text-bg-danger rounded ps-2 py-1" style="display: none;">
+              Tanggal kembali harus setelah tanggal kembali
+            </div>
           </div>
-        </form>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="phone">No Telepon</label>
+            <div class="form-text mt-0 mb-2">Contoh: 085125315665</div>
+            <div class="input-group">
+              <div class="input-group-text p-1" id="icon-start"><i class="las la-phone"></i></div>
+              <input type="text" id="phone" class="form-control">
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-phone" style="display: none;">
+              Belum diisi
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="invalid-phone" style="display: none;">
+              Format no telepon belum sesuai
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
+            <label for="phone-emergency">No Telepon Darurat</label>
+            <div class="form-text mt-0 mb-2">Contoh: 081227627654</div>
+            <div class="input-group">
+              <div class="input-group-text p-1" id="icon-end"><i class="las la-phone-volume"></i></div>
+              <input type="text" id="phone-emergency" class="form-control">
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-phone-darurat" style="display: none;">
+              Belum diisi
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="invalid-phone-darurat" style="display: none;">
+              Format no telepon belum sesuai
+            </div>
+            <div class="text-bg-danger rounded ps-2 py-1" id="same-phone-darurat" style="display: none;">
+              No telepon darurat tidak boleh sama
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label class="pt-3">Surat Izin Mengemudi kategori A</label>
+          <div class="form-text mt-0">Pastikan identitas dan foto pada SIM Anda dapat terlihat dengan jelas</div>
+          <div class="col-md-12 col-lg-12 col-xl-12">
+            <label class="d-flex justify-content-center mt-3" for="input-file" id="drop-area">
+              <input type="file" accept="image/*" id="input-file" hidden>
+              <div id="img-view">
+                <img src="{{ asset("img/icon-upload.png") }}">
+                <p>Seret dan lepas atau klik disini untuk upload SIM anda</p>
+                <span>Upload foto SIM</span>
+              </div>
+            </label>
+            <div class="text-bg-danger rounded ps-2 py-1" id="empty-file" style="display: none;">
+              SIM belum diupload
+            </div>
+          </div>
+        </div>
+        <div class="row pt-4 ps-3 pe-3">
+          <div class="col form-check">
+            <input type="checkbox" class="form-check-input" id="setuju">
+            <label class="form-check-label text-warning" for="setuju">Saya menyetujui bahwa data diri yang saya berikan akan disimpan dan digunakan oleh PT Gaskeun sesuai dengan kebijakan privasi yang berlaku.</label>
+          </div>
+          <div class="text-bg-danger rounded ps-2 py-1" id="empty-setuju" style="display: none;">
+            Belum menyetujui kebijakan privasi
+          </div>
+        </div>
+        <div class="row pt-4 pb-3">
+          <div class="d-grid gap-2 col-xl-12 mx-auto">
+            <button
+                type="button"
+                class="btn button-36"
+                id="confirmButton"
+                data-bs-toggle="modal"
+                data-bs-target="#confirm-modal"
+                id="confirm-toggle"
+            >
+              Konfirmasi Pemesanan
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <p class="invalid-date text-danger fw-semibold text-center" style="display: none;">*Maaf, Tanggal Ambil harus sebelum Tanggal Kembali</p>
+        </div>
       </div>
     </div>
 
@@ -267,15 +285,15 @@
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" disabled id="confirmationPopUp__close"></button>
           </div>
-          <div class="modal-body">
-            <p class="text-center mb-1">Terima Kasih, pesanan Anda telah kami terima.</p>
-            <p class="text-center mb-1">Silahkan cek email Anda untuk melanjutkan proses pembayaran.</p>
+          <div class="modal-body" >
+            <p class="text-center mb-1" id="confirmationPopUp__msgTop"> Pesanan anda sedang diproses! </p>
+            <p class="text-center mb-1" id="confirmationPopUp__msgBottom"> Mohon menunggu hingga proses selesai</p>
             <img src="{{ asset('img/icon-confirm.png') }}" class="mx-auto d-block" alt="confirmed">
           </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <a href="{{ url('/') }}" class="btn button-36 d-flex align-items-center justify-content-center">Kembali ke Halaman Utama</a>
+          <div class="modal-footer d-flex justify-content-center" style="display: none;">
+            <a href="{{ url('/') }}" class="btn button-36 d-flex align-items-center justify-content-center" id="confirmationPopUp__back">Kembali ke Halaman Utama</a>
           </div>
         </div>
       </div>
