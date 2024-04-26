@@ -50,7 +50,6 @@
       </nav>
     </div>
     
-
     <div class="container mt-5">
         <h2 class="row p-3 mx-2">Mobil Kamu</h2>
 

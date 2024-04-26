@@ -54,7 +54,7 @@ document.getElementById("pickup-toggle").addEventListener("click", function () {
     }).setView([-6.9143518, 107.6024663], 15);
 
     if (lastClickedLocationPickUp) {
-        map.removeLayer(markerPickUp);
+        map.removeLayer(markecomrPickUp);
     }
 
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -158,9 +158,18 @@ function convertDateFormat(input) {
 
 document
     .getElementById("confirmButton")
-    .addEventListener("click", function (event) {
+    .addEventListener("click", async function(event) {
         // Prevent the form from being submitted
         event.preventDefault();
+
+        // Reset to initial state
+        document.getElementById("confirmationPopUp__back").style.display = "none";
+        document.getElementById("confirmationPopUp__close").disabled = true;
+        document.getElementById("confirmButton").disabled = true;
+        document.getElementById("confirmationPopUp__msgTop")
+                .textContent = "Pesanan anda sedang diproses!";
+        document.getElementById("confirmationPopUp__msgBottom")
+                .textContent = "Mohon menunggu hingga proses selesai";
 
         var name = document.getElementById("nama-lengkap");
         var email = document.getElementById("email");
@@ -318,4 +327,56 @@ document
                 // datanya jadi null
             }
         }
-    });
+
+        /* TODO: Move this to the section where all input have been verified */
+        // Ref: https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
+        const pembayaranId = (
+            await fetch("/api/pembayaran", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+                body: [`${encodeURIComponent("status")}=${encodeURIComponent("belum_lunas")}`]
+            })
+            .then(res => {
+                if(!res.ok) throw new Error("Something is wrong");
+                return res.json();
+            })
+            .then(res => res.insertID)
+            .catch(err => {
+                document.getElementById("confirmationPopUp__msgTop")
+                        .textContent = "Mohon maaf, pesanan Anda gagal diproses";
+                document.getElementById("confirmationPopUp__msgBottom")
+                        .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
+            })
+        )
+
+        if(pembayaranId != undefined) {
+            await fetch("/api/pesanan", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+                body: Object.entries({  // Change into data retrieved from form
+                        "id_pemesan": LOGGED_USER, "id_mobil": BOOKED_CAR, "id_pembayaran": pembayaranId,
+                        "SIM_peminjam" : "a.jpg", "nama_peminjam" : "Jono Surono",
+                        "tanggal_peminjaman" : "2024-02-01", "tanggal_pengembalian" : "2024-03-01",
+                        "titik_antar": `${pickupX} ${pickupY}`, "titik_jemput" : `${dropoffX} ${dropoffY}`
+                    }).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join("&")
+            })
+            .then(res => {
+                if(!res.ok) throw new Error("Something is wrong");
+
+                document.getElementById("confirmationPopUp__back").style.display = "auto";
+                document.getElementById("confirmationPopUp__msgTop")
+                        .textContent = "Terima Kasih, pesanan Anda telah kami terima.";
+                document.getElementById("confirmationPopUp__msgBottom")
+                        .textContent = "Silahkan cek email Anda untuk melanjutkan proses pembayaran.";
+            })
+            .catch(err => {
+                document.getElementById("confirmationPopUp__msgTop")
+                        .textContent = "Mohon maaf, pesanan Anda gagal diproses";
+                document.getElementById("confirmationPopUp__msgBottom")
+                        .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
+            })
+        }
+
+    document.getElementById("confirmationPopUp__close").disabled = false;
+    document.getElementById("confirmButton").disabled = false;
+});

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Mobil;
-use App\Models\Pesanan;
+use App\Models\Pengguna;
+use App\Models\Pembayaran;
 
 class SiteController extends Controller
 {
@@ -45,8 +48,15 @@ class SiteController extends Controller
     public function saveBooking(Request $req) {
     }
 
-    public function myBookings() {
-
+    public function showMyBookings() {
+        $books = DB::table('Pesanan')
+                    ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
+                    ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
+                    ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan')
+                    ->where('Pengguna.id', '=', Auth::id())
+                    ->get();
+        return view("pesananSaya", ["books" => $books]);
     }
 
 }
