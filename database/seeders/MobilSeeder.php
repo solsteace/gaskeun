@@ -52,6 +52,7 @@ class MobilSeeder extends Seeder
                 "status" => $samples["status"][$idx],
                 "nomor_polisi" => $samples["nomorPolisi"][$idx],
                 "transmisi" => $samples["transmisi"][$idx],
+                "bahan_bakar" => "bensin",
                 "id_pengguna" => 1,
                 "id_image" => $idx + 11,
             ]);
