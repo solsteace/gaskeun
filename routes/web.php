@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\SiteController;
 use App\Http\Middleware;
 
 use App\Models\Mobil;
@@ -21,12 +22,7 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/filter', function () { // Refactor later
-    return view('filterCar', [
-        "cars" => Mobil::with("pesanan")->get(),
-        "carBrands" => Mobil::select("brand")->distinct()->get()
-    ]);
-})->name('filterCar');
+Route::get('/filter', [SiteController::class, "filterCar"])->name('filterCar');
 
 Route::get('/inputDetail', function () {
     return view('inputDetail');
