@@ -7,11 +7,11 @@ function toggleSidebar() {
 
     if (viewportWidth < 900) {
         sidebar.classList.remove("expand");
-        logoImg.src = "../../img/favicon.png";
+        logoImg.src = "../../../img/favicon.png";
         mainContent.style.marginLeft = "70px";
     } else {
         sidebar.classList.add("expand");
-        logoImg.src = "../../img/logo-navbar.png";
+        logoImg.src = "../../../img/logo-navbar.png";
         mainContent.style.marginLeft = "210px";
     }
 }
