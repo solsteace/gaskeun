@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Middleware;
@@ -39,10 +40,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pesanan', [AuthManager::class, 'pesanan'])->name("pesanan")->middleware('userAccess:admin');
     Route::get('/admin/mobil', [AuthManager::class, 'mobil'])->name("mobil")->middleware('userAccess:admin');
     Route::delete('/admin/mobil/{id}', [AuthManager::class, 'deleteMobil'])->middleware('userAccess:admin');
+    
     Route::get('/admin/mobil/add-mobil', [AuthManager::class, 'addMobil'])->name("addMobil")->middleware('userAccess:admin');
     Route::post('/admin/mobil/add-mobil', [AuthManager::class, 'createMobil'])->middleware('userAccess:admin');
 
-    Route::get('/admin/mobil/edit-mobil', [AuthManager::class, 'editMobil'])->name("editMobil")->middleware('userAccess:admin');
+    Route::get('/admin/mobil/edit-mobil/{id}', [AuthManager::class, 'editMobil'])->name("editMobil")->middleware('userAccess:admin');
+    Route::put('/admin/mobil/edit-mobil/{id}', [AuthManager::class, 'edit'])->middleware('userAccess:admin');
 
 
 });

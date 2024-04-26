@@ -105,9 +105,9 @@
                                 <form action="/admin/mobil/{{$item->id}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger w-100">Hapus</button>
+                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
                                 </form>
-                                <button type="button" class="btn btn-primary w-100" onclick="window.location.href = `{{ route('editMobil') }}`;">Edit</button>
+                                <a href="/admin/mobil/edit-mobil/{{$item->id}}" class="btn btn-primary w-100">Edit</a>
                             </div>
                         </div>
                     </div>
@@ -121,6 +121,29 @@
     @include('sweetalert::alert')
     <script src="{{ asset('js/mobil.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event){
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Yakin Hapus Mobil?",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel","Ya"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

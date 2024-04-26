@@ -8,7 +8,9 @@ use App\Models\Mobil;
 use App\Models\Images;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 
 class AuthManager extends Controller
 {
@@ -41,8 +43,9 @@ class AuthManager extends Controller
         return view('admin');
     }
 
-    public function editMobil(){
-        return view('editMobil');
+    public function editMobil($id){
+        $mobil = Mobil::find($id);
+        return view('editMobil')->with('mobil',$mobil);
     }
 
     public function store(Request $request) {
@@ -128,6 +131,26 @@ class AuthManager extends Controller
         $mobil = Mobil::find($id);
         $mobil->delete();
         Images::where('id', $mobil->id_image)->delete();
+
+
         return redirect('/admin/mobil')->with('success', 'Mobil Berhasil Dihapus');
+    }
+
+    public function edit($id, Request $request) { 
+        $validatedData = $request->validate([
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
+        ]);
+
+        $mobil = Mobil::findOrFail($id);
+        $mobil->update($request->all());
+        
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-mobil');
+            $image = Images::findOrFail($mobil->id_image);
+            $image->path =$validatedData['image'];
+            $image->save();
+        }
+
+        return redirect('/admin/mobil')->with('success', 'Mobil Berhasil Diedit');
     }
 }

@@ -68,34 +68,35 @@
                     Edit Mobil
                 </h2>
                 <div class="card shadow-sm px-4 bg-white mt-4">
-                    <form action="/admin/mobil/add-mobil" method="POST" enctype="multipart/form-data">
+                    <form action="/admin/mobil/edit-mobil/{{$mobil->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
                                 <label for="brand">Brand</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
-                                    <input type="text" id="brand" name="brand" class="form-control" required
-                                        value="{{ old('brand') }}">
+                                    <input type="text" id="brand" name="brand" class="form-control" 
+                                        value="{{ old('brand', $mobil->brand) }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
                                 <label for="model">Model</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-car-side"></i></div>
-                                    <input type="text" id="model" name="model" class="form-control" required
-                                        value="{{ old('model') }}">
+                                    <input type="text" id="model" name="model" class="form-control" 
+                                        value="{{ old('model', $mobil->model) }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
                                 <label for="transmisi">Transmisi</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-cog"></i></div>
-                                    <select id="transmisi" name="transmisi" class="form-select" required>
+                                    <select id="transmisi" name="transmisi" class="form-select" >
                                         <option value="" disabled selected></option>
-                                        <option value="matic" {{ old('transmisi') == 'matic' ? 'selected' : '' }}>Matic
+                                        <option value="matic" {{ old('transmisi',$mobil->transmisi) == 'matic' ? 'selected' : '' }}>Matic
                                         </option>
-                                        <option value="manual" {{ old('transmisi') == 'manual' ? 'selected' : '' }}>
+                                        <option value="manual" {{ old('transmisi', $mobil->transmisi) == 'manual' ? 'selected' : '' }}>
                                             Manual</option>
                                     </select>
                                 </div>
@@ -106,7 +107,7 @@
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-hashtag"></i></div>
                                     <input type="text" id="nomor_polisi" name="nomor_polisi" class="form-control"
-                                        required value="{{ old('nomor_polisi') }}">
+                                         value="{{ old('nomor_polisi', $mobil->nomor_polisi) }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
@@ -114,7 +115,7 @@
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1"><i class="las la-user-friends"></i></div>
                                     <input type="number" id="kapasitas" name="kapasitas" class="form-control"
-                                        inputmode="numeric" required value="{{ old('kapasitas') }}">
+                                        inputmode="numeric"  value="{{ old('kapasitas', $mobil->kapasitas) }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
@@ -122,7 +123,7 @@
                                 <div class="input-group mt-1">
                                     <div class="input-group-text">Rp</div>
                                     <input type="number" id="harga_sewa" name="harga_sewa" class="form-control"
-                                        inputmode="numeric" required value="{{ old('harga_sewa') }}">
+                                        inputmode="numeric"  value="{{ old('harga_sewa', $mobil->harga_sewa) }}">
                                 </div>
                             </div>
                         </div>
@@ -131,7 +132,7 @@
                             <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
                                 <label for="deskripsi">Deskripsi</label>
                                 <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4"
-                                    required>{{ old('deskripsi') }}</textarea>
+                                    >{{ old('deskripsi', $mobil->deskripsi) }}</textarea>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-6 pt-3">
                                 <label for="image">Gambar</label>
