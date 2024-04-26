@@ -82,9 +82,9 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($data as $item)
+                @foreach ($data as $index => $item)
                 <tr>
-                  <th class="text-center align-middle" scope="row">1</th>
+                  <th class="text-center align-middle" scope="row">{{ $index + 1 }}</th>
                   <td class="text-center align-middle">{{$item->nama}}</td>
                   <td class="text-center align-middle">{{$item->nomor_polisi}}</td>
                   <td class="text-center align-middle">{{$item->tanggal_peminjaman}}</td>
@@ -103,7 +103,7 @@
                     </a>
                   </td>
                   <td class="text-center align-middle">
-                    <a href="#" class="modal-trigger" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{ asset('img/deaz.jpeg') }}">
+                    <a href="#" class="modal-trigger" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{ asset('storage/' . $item->SIM_peminjam) }}">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
                     </a>
                   </td>
