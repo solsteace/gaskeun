@@ -100,6 +100,17 @@
           <div class="col-md-4">
             <div class="card text-center mt-4 shadow-sm">
               <div class="card-header bg-danger text-white">
+                Mobil Tidak Tersedia
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">??</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card text-center mt-4 shadow-sm">
+              <div class="card-header bg-secondary text-white">
                 Jumlah Pesanan
               </div>
               <div class="card-body">
@@ -107,6 +118,7 @@
               </div>
             </div>
           </div>
+
         </div>
 
       </div>
