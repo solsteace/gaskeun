@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Middleware;
 
+use App\Models\Mobil;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +21,11 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/filter', function () {
-    return view('filterCar');
+Route::get('/filter', function () { // Refactor later
+    return view('filterCar', [
+        "cars" => Mobil::with("pesanan")->get(),
+        "carBrands" => Mobil::select("brand")->distinct()->get()
+    ]);
 })->name('filterCar');
 
 Route::get('/inputDetail', function () {
