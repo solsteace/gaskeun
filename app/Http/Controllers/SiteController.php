@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Mobil;
+use App\Models\Pesanan;
 
 class SiteController extends Controller
 {
@@ -39,4 +41,12 @@ class SiteController extends Controller
 
         return view('inputDetail');
     }
+
+    public function saveBooking(Request $req) {
+    }
+
+    public function myBookings() {
+
+    }
+
 }
