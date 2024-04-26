@@ -127,20 +127,9 @@
               <select id="brand-mobil" class="form-select">
                 <!-- Dummy Brand List -->
                 <option selected value="anyBrand"></option>
-                <option value="Toyota">Toyota</option>
-                <option value="Honda">Honda</option>
-                <option value="Ford">Ford</option>
-                <option value="Chevrolet">Chevrolet</option>
-                <option value="Nissan">Nissan</option>
-                <option value="Hyundai">Hyundai</option>
-                <option value="Volkswagen">Volkswagen</option>
-                <option value="Subaru">Subaru</option>
-                <option value="Mercedes-Benz">Mercedes-Benz</option>
-                <option value="BMW">BMW</option>
-                <option value="Audi">Audi</option>
-                <option value="Lexus">Lexus</option>
-                <option value="Porsche">Porsche</option>
-                <option value="Tesla">Tesla</option>
+                @foreach ($carBrands as $item) 
+                  <option value="{{ ucwords($item->brand) }}"> {{ ucwords($item->brand) }} </option>
+                @endforeach
               </select>
             </div>
           </div>
@@ -165,76 +154,81 @@
     <!-- Result Section -->
     <div class="container pt-5" id="resultCard">
       <h4 class="mb-0">Berikut mobil pilihan untuk Anda:</h4>
-      <div class="row">
-        <!-- Dummy Card for Available Car -->
-        <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-          <div class="card shadow bg-white">
-            <div class="card-header text-center bg-success text-white">
-              Tersedia
-            </div>
-            <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
-            <div class="p-3">
-              <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
-              <p class="card-price">Rp 300.000/hari</p>
-              <div style="display: flex;">
-                <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                <p class="fw-medium">4 orang</p>
-              </div>
-              <div style="display: flex;">
-                <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                <p class="fw-medium">Matic</p>
-              </div>
-              <div style="display: flex;">
-                <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                <p class="fw-medium">Bensin</p>
-              </div>
-              <div class="d-grid pt-2">
-                <button
-                  type="button"
-                  class="btn button-36"
-                >
-                Pesan
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Dummy Card for Unavailable Car -->
-        <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-          <div class="card shadow bg-white card-container">
-            <div class="card-header text-center bg-danger text-white">
-              Akan tersedia pada DD-MM-YYYY
-            </div>
-            <div class="overlay rounded-1 shadow"></div>
-            <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0 card-image" alt="Car Image">
-            <div class="p-3 card-content">
-              <h5 class="card-title fw-semibold">Toyota<br>Innova Zenix</h5>
-              <p class="card-price">Rp 300.000/hari</p>
-              <div style="display: flex;">
-                <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                <p class="fw-medium">4 orang</p>
+      <div class="row">
+        @foreach ($cars as $car)
+          @if($car->pesanan == null) <!--  Available Car -->
+          <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+            <div class="card shadow bg-white">
+              <div class="card-header text-center bg-success text-white">
+                Tersedia
               </div>
-              <div style="display: flex;">
-                <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                <p class="fw-medium">Matic</p>
-              </div>
-              <div style="display: flex;">
-                <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                <p class="fw-medium">Bensin</p>
-              </div>
-              <div class="d-grid pt-2">
-                <button
-                  type="button"
-                  class="btn button-36-disabled text-white-50"
-                  disabled
-                >
-                Pesan
-                </button>
+              <!-- TODO: load appropiate image -->
+              <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
+              <div class="p-3">
+                <h5 class="card-title fw-semibold"> {{$car->brand}} <br> {{$car->model}} </h5>
+                <p class="card-price">Rp. {{$car->harga_sewa}}/hari</p>
+                <div style="display: flex;">
+                  <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
+                  <p class="fw-medium">{{$car->kapasitas}} orang</p>
+                </div>
+                <div style="display: flex;">
+                  <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
+                  <p class="fw-medium">{{$car->transmisi}}</p>
+                </div>
+                <div style="display: flex;">
+                  <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
+                  <p class="fw-medium">Bensin</p>
+                </div>
+                <div class="d-grid pt-2">
+                  <button
+                    type="button"
+                    class="btn button-36"
+                  >
+                  Pesan
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          @else <!-- Unavailable Car -->
+            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+              <div class="card shadow bg-white card-container">
+                <div class="card-header text-center bg-danger text-white">
+                  Akan tersedia pada {{$car->pesanan->tanggal_pengembalian}}
+                </div>
+                <div class="overlay rounded-1 shadow"></div>
+                <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0 card-image" alt="Car Image">
+                <div class="p-3 card-content">
+                  <h5 class="card-title fw-semibold">{{$car->brand}}<br>{{$car->model}}</h5>
+                  <p class="card-price">Rp. {{$car->harga_sewa}}/hari</p>
+                  <div style="display: flex;">
+                    <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
+                    <p class="fw-medium"> {{$car->kapasitas}} orang</p>
+                  </div>
+                  <div style="display: flex;">
+                    <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
+                    <p class="fw-medium">{{$car->transmisi}}</p>
+                  </div>
+                  <div style="display: flex;">
+                    <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
+                    <p class="fw-medium">Bensin</p>
+                  </div>
+                  <div class="d-grid pt-2">
+                    <button
+                      type="button"
+                      class="btn button-36-disabled text-white-50"
+                      disabled
+                    >
+                    Pesan
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endif
+        @endforeach
+
       </div>
     </div>
 
