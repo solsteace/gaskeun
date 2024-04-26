@@ -34,10 +34,18 @@ class AuthManager extends Controller
                     ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
-                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan')
                     ->get();
 
         return view('pesanan')->with('data',$data);
+    }
+
+    public function konfirmasiPesanan($id){
+        $pesanan = Pesanan::findOrFail( $id );
+        $pembayaran = Pembayaran::findOrFail($pesanan->id_pembayaran);
+        $pembayaran->status = 'lunas';
+        $pembayaran->save();
+        return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dikonfirmasi');
     }
 
     public function mobil(){
@@ -53,9 +61,10 @@ class AuthManager extends Controller
         $allCar = Mobil::count();
         $mobilDipinjam = Mobil::where('status', 'dipinjam')->count();
         $mobilTersedia = Mobil::where('status', 'tersedia')->count();
-        $allBook = Pesanan::count();
+        $mobilTidakTersedia = Mobil::where('status', 'tidak_tersedia')->count();
+        $allBooked = Pesanan::count();
 
-        return view('admin', compact('allCar', 'mobilDipinjam', 'mobilTersedia', 'allBook'));
+        return view('admin', compact('allCar', 'mobilDipinjam', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'));
     }
 
     public function editMobil($id){

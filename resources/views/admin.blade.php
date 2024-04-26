@@ -103,7 +103,7 @@
                 Mobil Tidak Tersedia
               </div>
               <div class="card-body">
-                <h5 class="card-title">??</h5>
+                <h5 class="card-title">{{$mobilTidakTersedia}}</h5>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
                 Jumlah Pesanan
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$allBook}}</h5>
+                <h5 class="card-title">{{$allBooked}}</h5>
               </div>
             </div>
           </div>

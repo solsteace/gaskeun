@@ -85,7 +85,7 @@
                 @foreach ($data as $index => $item)
                 <tr>
                   <th class="text-center align-middle" scope="row">{{ $index + 1 }}</th>
-                  <td class="text-center align-middle">{{$item->nama}}</td>
+                  <td class="text-center align-middle">{{$item->nama_peminjam}}</td>
                   <td class="text-center align-middle">{{$item->nomor_polisi}}</td>
                   <td class="text-center align-middle">{{$item->tanggal_peminjaman}}</td>
                   <td class="text-center align-middle">{{$item->tanggal_pengembalian}}</td>
@@ -108,7 +108,19 @@
                     </a>
                   </td>
                   <td class="text-center align-middle">
-                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
+                    @if ($item->status == 'lunas')
+                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                          @csrf
+                          @method('put')
+                          <button type="submit" class="btn btn-sm btn-success disabled">Konfirmasi</button>
+                        </form>
+                    @else
+                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                          @csrf
+                          @method('put')
+                          <button type="submit" class="btn btn-sm btn-success">Konfirmasi</button>
+                        </form>
+                    @endif
                   </td>
                 </tr>
                 @endforeach

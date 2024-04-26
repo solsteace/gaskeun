@@ -72,12 +72,19 @@
                     <div class="card shadow bg-white">
                         @if ($item->status == "tersedia")
                         <div class="card-header text-center bg-success text-white">
-                            {{$item->status}}
+                            Tersedia
                         </div>
-                        @else
+                        @endif
+
+                        @if ($item->status == "tidak_tersedia")
                         <div class="card-header text-center bg-danger text-white">
-                            {{-- Akan tersedia pada DD-MM-YYYY --}}
-                            {{$item->status}}
+                            Tidak Tersedia
+                        </div>
+                        @endif
+                        
+                        @if ($item->status == "dipinjam")
+                        <div class="card-header text-center bg-danger text-white">
+                            Dipinjam
                         </div>
                         @endif
 
