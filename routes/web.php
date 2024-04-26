@@ -24,23 +24,17 @@ Route::get('/', function () {
 })->name('index');
 
 
-// Move these to auth later
-Route::get('/cars', [SiteController::class, "cars"])->name('cars');
-Route::get('/booking', [SiteController::class, "booking"])->name('booking');
-Route::get('/createBooking', [SiteController::class, "createBooking"])->name('createBooking');
-Route::get('/history', [SiteController::class, "showMyBookings"])->name('history');
-
-Route::get('/inputDetail', function () {
-    return view('inputDetail');
-})->name('inputDetail');
 
 Route::middleware(['guest'])->group(function () {
+    Route::get('/cars', [SiteController::class, "cars"])->name('cars');
     Route::get('/login', [AuthManager::class, 'login'])->name("login");
     Route::get('/register', [AuthManager::class, 'register'])->name("register");
 });
 
 Route::middleware(['auth'])->group(function () {
-    // Route::get('/booking', [AuthManager::class, 'booking'])->name("booking");
+    Route::get('/booking', [SiteController::class, "booking"])->name('booking');
+    Route::get('/createBooking', [SiteController::class, "createBooking"])->name('createBooking');
+    Route::get('/history', [SiteController::class, "showMyBookings"])->name('history');
 
     Route::get('/admin', [AuthManager::class, 'admin'])->name("admin")->middleware('userAccess:admin');
     Route::get('/admin/pesanan', [AuthManager::class, 'pesanan'])->name("pesanan")->middleware('userAccess:admin');
