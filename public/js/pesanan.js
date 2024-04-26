@@ -37,3 +37,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+// sim preview START
+document.addEventListener('DOMContentLoaded', function() {
+    const modalTriggerElements = document.querySelectorAll('.modal-trigger');
+    const modalImage = document.getElementById('modalImage');
+
+    modalTriggerElements.forEach(function(element) {
+      element.addEventListener('click', function() {
+        const imageUrl = this.getAttribute('data-image-url');
+        modalImage.src = imageUrl;
+      });
+    });
+  });
+// sim preview END

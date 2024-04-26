@@ -45,6 +45,14 @@
       </nav>
     </div>    
 
+
+    @if(Session::has("err"))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{Session::get("err")}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
+
     <!-- Filter Title -->
     <div class="container">
       <div class="row"> 
