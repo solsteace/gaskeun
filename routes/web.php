@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/history', function () {
+    return view('pesananSaya');
+})->name('history');
+
 // Move these to auth later
 Route::get('/cars', [SiteController::class, "cars"])->name('cars');
 Route::get('/booking', [SiteController::class, "booking"])->name('booking');

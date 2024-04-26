@@ -1,0 +1,140 @@
+body {
+    font-family: "Poppins", sans-serif;
+    padding-top: 90px;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2.3em;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+p {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+i {
+    font-size: 1.5em;
+}
+
+td {
+    font-size: 1.1em;
+    font-weight: 500;
+    height: 30px;
+}
+
+@media (min-width: 768px) {
+    table {
+        margin-top: 20px; /* adjust as needed */
+    }
+}
+
+@media (max-width: 768px) {
+    .button-36,
+    .unpaid {
+        margin-bottom: 15px;
+    }
+}
+
+.bg-navbar {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+    color: rgba(0, 0, 0, 1);
+}
+
+.nav-link.active {
+    color: rgba(1, 23, 255, 1) !important;
+}
+
+.button-36 {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 188, 255, 1) 0%,
+        rgba(1, 23, 255, 1) 100%
+    );
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 3rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all 0.5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-36:hover {
+    color: #ffffff;
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 10px;
+    transition-duration: 0.1s;
+}
+
+.card-details {
+    font-size: 1.2em;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-specs {
+    display: flex;
+    width: 40px;
+}
+
+.card-container {
+    position: relative;
+}
+
+.card-image,
+.card-content {
+    position: relative;
+    z-index: 0;
+}
+
+.card-header {
+    font-size: 0.85em !important;
+}
+
+.label {
+    text-align: left;
+    flex: 1;
+}
+
+.value {
+    flex: 1;
+    text-align: left;
+}
+
+.unpaid {
+    height: 3rem;
+    border-radius: 8px;
+}
+
+.img-cover {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
