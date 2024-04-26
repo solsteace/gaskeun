@@ -83,34 +83,34 @@
               </thead>
               <tbody>
                 @foreach ($data as $item)
-                    <tr>
-                      <th class="text-center align-middle" scope="row">1</th>
-                      <td class="text-center align-middle">{{$item->nama}}</td>
-                      <td class="text-center align-middle">{{$item->nomor_polisi}}</td>
-                      <td class="text-center align-middle">{{$item->tanggal_peminjaman}}</td>
-                      <td class="text-center align-middle">{{$item->tanggal_pengembalian}}</td>
-                      <td class="text-center align-middle">4 hari</td>
-                      <td class="text-center align-middle">Transfer</td>
-                      <td class="text-center align-middle">{{$item->status}}</td>
-                      <td class="text-center align-middle">
-                        <a href="https://www.google.com/maps/place/{{$item->titik_antar}}" target="_blank">
-                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                        </a>
-                      </td>
-                      <td class="text-center align-middle">
-                        <a href="https://www.google.com/maps/place/{{$item->titik_jemput}}" target="_blank">
-                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                        </a>
-                      </td>
-                      <td class="text-center align-middle">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
-                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
-                        </a>
-                      </td>
-                      <td class="text-center align-middle">
-                        <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
-                      </td>
-                    </tr>
+                <tr>
+                  <th class="text-center align-middle" scope="row">1</th>
+                  <td class="text-center align-middle">{{$item->nama}}</td>
+                  <td class="text-center align-middle">{{$item->nomor_polisi}}</td>
+                  <td class="text-center align-middle">{{$item->tanggal_peminjaman}}</td>
+                  <td class="text-center align-middle">{{$item->tanggal_pengembalian}}</td>
+                  <td class="text-center align-middle">4 hari</td>
+                  <td class="text-center align-middle">Transfer</td>
+                  <td class="text-center align-middle">{{$item->status}}</td>
+                  <td class="text-center align-middle">
+                    <a href="https://www.google.com/maps/place/{{$item->titik_antar}}" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
+                  <td class="text-center align-middle">
+                    <a href="https://www.google.com/maps/place/{{$item->titik_jemput}}" target="_blank">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
+                  <td class="text-center align-middle">
+                    <a href="#" class="modal-trigger" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{ asset('img/deaz.jpeg') }}">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
+                    </a>
+                  </td>
+                  <td class="text-center align-middle">
+                    <button type="button" class="btn btn-sm btn-success">Konfirmasi</button>
+                  </td>
+                </tr>
                 @endforeach
               </tbody>
             </table>
@@ -125,7 +125,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <img src="{{ asset('img/deaz.jpeg') }}" class="img-fluid" alt="Preview Image">
+                  <img id="modalImage" src="" class="img-fluid" alt="Preview Image">
                 </div>
               </div>
             </div>
