@@ -22,7 +22,7 @@ class Pembayaran extends Model
                 Rule::in(["lunas", "belum_lunas"])
             ],
             "last_update" => [
-                "required",
+                "nullable",
                 "date"
             ]
         ];
