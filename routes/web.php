@@ -26,7 +26,6 @@ Route::get('/', function () {
 
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/cars', [SiteController::class, "cars"])->name('cars');
     Route::get('/login', [AuthManager::class, 'login'])->name("login");
     Route::get('/register', [AuthManager::class, 'register'])->name("register");
 });
@@ -60,6 +59,7 @@ Route::get('/admin/mobil/add-mobil', [AuthManager::class, 'addMobil'])->name("ad
 Route::get('/admin/mobil/edit-mobil', [AuthManager::class, 'editMobil'])->name("editMobil");
 */
 
+Route::get('/cars', [SiteController::class, "cars"])->name('cars');
 Route::post('/login', [AuthManager::class, 'authenticate']);
 Route::post('/logout', [AuthManager::class, 'logout']);
 Route::post('/register', [AuthManager::class, 'store']);
