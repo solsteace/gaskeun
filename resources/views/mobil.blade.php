@@ -95,7 +95,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                                <p class="fw-medium">Bensin</p>
+                                <p class="fw-medium">{{$item->bahan_bakar}}</p>
                             </div>
                             <div style="display: flex;">
                                 <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>

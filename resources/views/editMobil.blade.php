@@ -120,30 +120,30 @@
                             </div>
 
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                                <label for="transmisi">Bahan Bakar</label>
+                                <label for="bahan_bakar">Bahan Bakar</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1">
                                         <i class="las la-gas-pump"></i>
                                     </div>
-                                    <select id="bahan-bakar" class="form-select">
-                                        <option selected value="anyBahanBakar"></option>
-                                        <option value="bensin">Bensin</option>
-                                        <option value="diesel">Diesel</option>
-                                        <option value="listrik">Listrik</option>
+                                    <select id="bahan_bakar" name="bahan_bakar" class="form-select" required>
+                                        <option value="" disabled selected></option>
+                                        <option value="bensin" {{ old('bahan_bakar',$mobil->bahan_bakar) == 'bensin' ? 'selected' : '' }}>Bensin</option>
+                                        <option value="diesel" {{ old('bahan_bakar',$mobil->bahan_bakar) == 'diesel' ? 'selected' : '' }}>Diesel</option>
+                                        <option value="listrik" {{ old('bahan_bakar',$mobil->bahan_bakar) == 'listrik' ? 'selected' : '' }}>Listrik</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-4 pt-3">
-                                <label for="transmisi">Status</label>
+                                <label for="status">Status</label>
                                 <div class="input-group mt-1">
                                     <div class="input-group-text p-1">
                                         <i class="las la-check-circle"></i>
                                     </div>
-                                    <select id="status" class="form-select">
-                                        <option selected value="anyStatus"></option>
-                                        <option value="tersedia">Tersedia</option>
-                                        <option value="tidak-tersedia">Tidak Tersedia</option>
-                                        <option value="dipinjam">Dipinjam</option>
+                                    <select id="status" name="status" class="form-select" required>
+                                        <option value="" disabled selected></option>
+                                        <option value="tersedia" {{ old('status',$mobil->status) == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
+                                        <option value="tidak_tersedia" {{ old('status',$mobil->status) == 'tidak_tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
+                                        <option value="dipinjam" {{ old('status',$mobil->status) == 'dipinjam' ? 'selected' : '' }}>Dipinjam</option>
                                     </select>
                                 </div>
                             </div>
