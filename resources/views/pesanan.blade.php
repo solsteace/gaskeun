@@ -89,7 +89,7 @@
                   <td class="text-center align-middle">{{$item->nomor_polisi}}</td>
                   <td class="text-center align-middle">{{$item->tanggal_peminjaman}}</td>
                   <td class="text-center align-middle">{{$item->tanggal_pengembalian}}</td>
-                  <td class="text-center align-middle">4 hari</td>
+                  <td class="text-center align-middle">{{\Carbon\Carbon::parse($item->tanggal_pengembalian)->diffInDays(\Carbon\Carbon::parse($item->tanggal_peminjaman))}} hari</td>
                   <td class="text-center align-middle">Transfer</td>
                   <td class="text-center align-middle">{{$item->status}}</td>
                   <td class="text-center align-middle">
