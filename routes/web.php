@@ -24,8 +24,9 @@ Route::get('/', function () {
 })->name('index');
 
 // Move these to auth later
+Route::get('/cars', [SiteController::class, "cars"])->name('cars');
 Route::get('/booking', [SiteController::class, "booking"])->name('booking');
-Route::get('/filter', [SiteController::class, "filterCar"])->name('filterCar');
+Route::get('/createBooking', [SiteController::class, "createBooking"])->name('createBooking');
 
 Route::get('/inputDetail', function () {
     return view('inputDetail');
