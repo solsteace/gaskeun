@@ -174,7 +174,7 @@
                 </div>
                 <div style="display: flex;">
                   <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                  <p class="fw-medium">{{$car->transmisi}}</p>
+                  <p class="fw-medium">{{ucwords($car->transmisi)}}</p>
                 </div>
                 <div style="display: flex;">
                   <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
@@ -208,7 +208,7 @@
                   </div>
                   <div style="display: flex;">
                     <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                    <p class="fw-medium">{{$car->transmisi}}</p>
+                    <p class="fw-medium">{{ucwords($car->transmisi)}}</p>
                   </div>
                   <div style="display: flex;">
                     <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
