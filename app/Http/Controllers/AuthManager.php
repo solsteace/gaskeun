@@ -49,8 +49,12 @@ class AuthManager extends Controller
     }
 
     public function mobil(){
-        $mobil = Mobil::join('Images', 'Images.id', '=', 'Mobil.id_image')->select('Mobil.*', 'Images.id as id_image', 'Images.path as path')->get();
-        return view('mobil')->with('mobil',$mobil);
+        $data = DB::table('Mobil')
+                    ->join('Images','Images.id','=','Mobil.id_image')
+                    ->select('Mobil.*', 'Images.*', 'Images.id as id_image')
+                    ->get();
+
+        return view('mobil')->with('data',$data);
     }
 
     public function addMobil(){

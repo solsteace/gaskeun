@@ -67,7 +67,7 @@
 
             <div class="row">
                 <!-- Dummy Card for Available Car 1 -->
-                @foreach ($mobil as $item)
+                @foreach ($data as $item)
                 <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
                     <div class="card shadow bg-white">
                         @if ($item->status == "tersedia")
