@@ -55,14 +55,14 @@
         <h2 class="row p-3 mx-2">Mobil Kamu</h2>
 
         <div class="row mx-2">
-            <div class="col">
+            <div class="col"> <!-- TODO: load images -->
                 <img id="car-image" src="{{ asset('img/car-zenix.png') }}" alt="" class="img-fluid rounded-4">
             </div>
             <div class="col d-flex align-items-center p-0">
                 <div class="container p-4 flex-grow-1 my-4">
-                    <h3>Innova</h3>
+                    <h3>{{$car->brand}} {{$car->model}}</h3>
                     <p>Fitur mobil:</p>
-                    <p>Berkapasitas 1998 cc, serta Diesel 2393 cc. Kijang Innova tersedia dengan transmisi Manual, konsumsi BBM Kijang Innova mencapai 9.7 kmpl untuk perkotaan, 13.6 kmpl saat menjelajah perjalanan luar kota. Kijang Innova adalah MPV 7 seater dengan panjang 4735 mm, lebar 1830 mm, wheelbase 2750 mm.</p>
+                    <p>{{$car->deskripsi}}</p>
                         
                     <div style="display: block;">
                         <i class="fa-solid fa-users"></i>
@@ -70,7 +70,7 @@
                         display: inline;
                         margin-left: 8px;
                         font-weight: bold;
-                        ">4 orang</p>
+                        ">{{$car->kapasitas}} orang</p>
                     </div>
 
                     <div style="display: block;">
@@ -79,7 +79,7 @@
                         display: inline;
                         margin-left: 8px;
                         font-weight: bold;
-                        ">Manual</p>
+                        ">{{ucwords($car->transmisi)}}</p>
                     </div>
                         
                     <div style="display: block;">
@@ -88,7 +88,7 @@
                         display: inline;
                         margin-left: 8px;
                         font-weight: bold;
-                        ">Bensin</p>
+                        ">{{ ucwords($car->bahan_bakar) }}</p>
                     </div>
                 </div>
             </div>
@@ -188,7 +188,11 @@
         -->
 
         <div class="d-flex justify-content-center my-5">
-            <button type="button" class="button-36 btn-block" id="gas-button" disabled>GASS!</button>
+            @if ($car->pesanan != null)
+                <button type="button" class="button-36 btn-block" id="gas-button" disabled>TIDAK TERSEDIA HINGGA {{$car->pesanan->tanggal_pengembalian}}</button>
+            @else
+                <button type="button" class="button-36 btn-block" id="gas-button">GASS!</button>
+            @endif
         </div>
     </div>
 

@@ -185,7 +185,10 @@
                     type="button"
                     class="btn button-36"
                   >
-                  Pesan
+                    <!-- TODO:  change inline styling into something else -->
+                    <a href="{{ route('booking', ['carId' => $car->id]) }}" style="text-decoration: none; color: white">
+                      Pesan
+                    </a>
                   </button>
                 </div>
               </div>
@@ -220,7 +223,7 @@
                       class="btn button-36-disabled text-white-50"
                       disabled
                     >
-                    Pesan
+                      Pesan
                     </button>
                   </div>
                 </div>

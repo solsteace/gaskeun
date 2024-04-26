@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+// Move these to auth later
+Route::get('/booking', [SiteController::class, "booking"])->name('booking');
 Route::get('/filter', [SiteController::class, "filterCar"])->name('filterCar');
 
 Route::get('/inputDetail', function () {
@@ -35,7 +37,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/booking', [AuthManager::class, 'booking'])->name("booking");
+    // Route::get('/booking', [AuthManager::class, 'booking'])->name("booking");
 
     Route::get('/admin', [AuthManager::class, 'admin'])->name("admin")->middleware('userAccess:admin');
     Route::get('/admin/pesanan', [AuthManager::class, 'pesanan'])->name("pesanan")->middleware('userAccess:admin');
