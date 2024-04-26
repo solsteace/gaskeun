@@ -98,11 +98,11 @@ class Mobil extends Model
     }
 
     public function pengguna() {
-        return $this->belongsTo(Pengguna::class, "id");
+        return $this->belongsTo(Pengguna::class, "id_pengguna");
     }
 
     public function pesanan() {
-        return $this->hasOne(Pesanan::class, "id");
+        return $this->hasOne(Pesanan::class, "id_mobil");
     }
 
     public function image() {

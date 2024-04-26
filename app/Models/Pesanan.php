@@ -47,14 +47,14 @@ class Pesanan extends Model
     use HasFactory;
 
     public function pengguna() {
-        return $this->belongsTo(Pengguna::class, "id");
+        return $this->belongsTo(Pengguna::class, "id_pengguna");
     }
 
     public function mobil() {
-        return $this->belongsTo(Mobil::class, "id");
+        return $this->belongsTo(Mobil::class, "id_mobil");
     }
 
     public function pembayaran() {
-        return $this->belongsTo(Pembayaran::class, "id");
+        return $this->belongsTo(Pembayaran::class, "id_pembayaran");
     }
 }

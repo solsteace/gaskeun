@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pesanan;
+use App\Models\Mobil;
 use App\Models\Images;
 
 
@@ -42,7 +43,11 @@ class Pengguna extends Authenticatable
     }
 
     public function pesanan() {
-        return $this->hasMany(Pesanan::class, "id");
+        return $this->hasMany(Pesanan::class, "id_pemesan");
+    }
+
+    public function mobil() {
+        return $this->hasMany(Mobil::class, "id_pengguna");
     }
 
     public function image() {
