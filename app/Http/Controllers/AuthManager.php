@@ -115,8 +115,10 @@ class AuthManager extends Controller
             'kapasitas' => ['required', 'numeric'],
             'harga_sewa' => ['required', 'numeric'],
             'deskripsi' => ['required', 'string'],
+            'status' => ['required'],
             'nomor_polisi' => ['required', 'string'],
             'transmisi' => ['required'],
+            'bahan_bakar' => ['required'],
             'image' => ['required','image', 'mimes:jpeg,png,jpg'],
         ]);
         
@@ -135,8 +137,10 @@ class AuthManager extends Controller
         $mobil->kapasitas = $validatedData['kapasitas'];
         $mobil->harga_sewa = $validatedData['harga_sewa'];
         $mobil->deskripsi = $validatedData['deskripsi'];
+        $mobil->status = $validatedData['status'];
         $mobil->nomor_polisi = $validatedData['nomor_polisi'];
         $mobil->transmisi = $validatedData['transmisi'];
+        $mobil->bahan_bakar = $validatedData['bahan_bakar'];
         $mobil->save();
 
         return redirect('/admin/mobil/add-mobil')->with('success', 'Mobil Berhasil Ditambahkan');
