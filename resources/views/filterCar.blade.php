@@ -178,7 +178,7 @@
                 </div>
                 <div style="display: flex;">
                   <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                  <p class="fw-medium">Bensin</p>
+                  <p class="fw-medium">{{ucwords($car->bahan_bakar)}}</p>
                 </div>
                 <div class="d-grid pt-2">
                   <button
@@ -212,7 +212,7 @@
                   </div>
                   <div style="display: flex;">
                     <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                    <p class="fw-medium">Bensin</p>
+                    <p class="fw-medium">{{ucwords($car->bahan_bakar)}}</p>
                   </div>
                   <div class="d-grid pt-2">
                     <button
