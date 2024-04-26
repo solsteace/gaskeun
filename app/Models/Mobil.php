@@ -51,6 +51,10 @@ class Mobil extends Model
                 "required",
                 Rule::in(["manual", "matic"])
             ],
+            "bahan_bakar" => [
+                "required",
+                Rule::in(["bensin", "listrik", "diesel"])
+            ],
             "image" => ["nullable", "image"]
         ];
     }
@@ -84,6 +88,10 @@ class Mobil extends Model
             "transmisi" => [
                 "nullable",
                 Rule::in(["manual", "matic"])
+            ],
+            "bahan_bakar" => [
+                "nullable",
+                Rule::in(["bensin", "listrik", "diesel"])
             ],
             "image" => ["nullable", "image"]
         ];

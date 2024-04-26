@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum("status", ["tersedia", "dipinjam", "tidak_tersedia"])->default("tersedia");
             $table->string("nomor_polisi", 16);
             $table->enum("transmisi", ["manual", "matic", "lainnya"])->default("manual");
+            $table->enum("bahan_bakar", ["bensin", "listrik", "diesel"])->default("bensin");
 
             $table->foreign("id_pengguna")->references("id")->on("Pengguna");
             $table->foreign("id_image")->references("id")->on("Images");
