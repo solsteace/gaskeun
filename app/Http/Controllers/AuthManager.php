@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
+use App\Models\Pesanan;
 use App\Models\Mobil;
 use App\Models\Images;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +41,12 @@ class AuthManager extends Controller
     }
 
     public function admin(){
-        return view('admin');
+        $allCar = Mobil::count();
+        $mobilDipinjam = Mobil::where('status', 'dipinjam')->count();
+        $mobilTersedia = Mobil::where('status', 'tersedia')->count();
+        $allBook = Pesanan::count();
+
+        return view('admin', compact('allCar', 'mobilDipinjam', 'mobilTersedia', 'allBook'));
     }
 
     public function editMobil($id){

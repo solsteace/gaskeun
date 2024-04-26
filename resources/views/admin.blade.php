@@ -70,7 +70,7 @@
                 Jumlah Mobil
               </div>
               <div class="card-body">
-                <h5 class="card-title">15</h5>
+                <h5 class="card-title">{{$allCar}}</h5>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
                 Mobil Tersedia
               </div>
               <div class="card-body">
-                <h5 class="card-title">10</h5>
+                <h5 class="card-title">{{$mobilTersedia}}</h5>
               </div>
             </div>
           </div>
@@ -89,10 +89,21 @@
           <div class="col-md-4">
             <div class="card text-center mt-4 shadow-sm">
               <div class="card-header bg-danger text-white">
-                Mobil Disewa
+                Mobil Dipinjam
               </div>
               <div class="card-body">
-                <h5 class="card-title">5</h5>
+                <h5 class="card-title">{{$mobilDipinjam}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card text-center mt-4 shadow-sm">
+              <div class="card-header bg-danger text-white">
+                Jumlah Pesanan
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{$allBook}}</h5>
               </div>
             </div>
           </div>
