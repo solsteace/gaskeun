@@ -76,6 +76,7 @@ p {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    text-decoration: none;
 }
 
 .button-36:disabled {
@@ -86,7 +87,7 @@ p {
 .button-36:hover:not([disabled]) {
     box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
     transition-duration: 0.1s;
-    color: #000000;
+    color: #ffffff;
 }
 
 @media (min-width: 768px) {

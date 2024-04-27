@@ -197,12 +197,7 @@
                     )  
                 )
             ) <!--  Available Car --> <!-- TODO: remove this inline style -->
-                <button type="button" class="button-36 btn-block" id="gas-button">
-                    <a href=" {{ route('createBooking', ['carId' => $_GET['carId']]) }}"
-                        class="text-white"
-                        style="text-decoration: none; "
-                    > GASS! </a>
-                </button>
+                <a class="btn-block button-36 d-flex align-items-center justify-content-cente" href="{{ route('createBooking', ['carId' => $_GET['carId']]) }}" role="button" id="gas-button">GASS!</a>
             @else 
                 <button type="button" class="button-36 btn-block" id="gas-button" disabled>
                     @if($car->pesanan()->exists())
