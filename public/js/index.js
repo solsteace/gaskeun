@@ -1,7 +1,5 @@
-$(document).ready(function () {
-    $(".btn-hero-resp").click(function () {
-        window.location.href = "/cars";
-    });
+$(".btn-hero-resp").click(function () {
+    window.location.href = "/cars";
 });
 
 // Dynamic wording for the hero section
