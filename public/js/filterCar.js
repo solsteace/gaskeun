@@ -166,7 +166,7 @@ function generateCarCard(data) {
     button.textContent = "Pesan";
     if(carIsAvailable) {
         const a = document.createElement("a");
-        a.href = `/booking?carId=${data.id}`;
+        a.href = `/booking?carId=${activeBook[0].id}`;
         a.style.textDecoration = "none";
         a.style.color = "white";
         a.textContent = "Pesan"
