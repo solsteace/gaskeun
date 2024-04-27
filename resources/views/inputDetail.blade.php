@@ -248,7 +248,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">Klik pada peta untuk memilih pengambilan mobil</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="pickup-cancel"></button>
           </div>
           <div class="modal-body">
             <div id="pickup-map"></div>
@@ -267,7 +267,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">Klik pada peta untuk memilih pengembalian mobil</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="dropoff-cancel"></button>
           </div>
           <div class="modal-body">
             <div id="dropoff-map"></div>
@@ -293,7 +293,7 @@
             <img src="{{ asset('img/icon-confirm.png') }}" class="mx-auto d-block" alt="confirmed">
           </div>
           <div class="modal-footer d-flex justify-content-center" style="display: none;">
-            <a href="{{ url('/') }}" class="btn button-36 d-flex align-items-center justify-content-center" id="confirmationPopUp__back">Kembali ke Halaman Utama</a>
+            <a href="{{ route('history') }}" class="btn button-36 d-flex align-items-center justify-content-center" id="confirmationPopUp__back">Lihat pesanan saya</a>
           </div>
         </div>
       </div>

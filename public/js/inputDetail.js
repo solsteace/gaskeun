@@ -77,6 +77,14 @@ document.getElementById("pickup-toggle").addEventListener("click", function () {
         markerPickUp = L.marker(lastClickedLocationPickUp).addTo(map);
     });
 
+    // Add a click event listener to the cancel button
+    document.getElementById("pickup-cancel").addEventListener("click", function () {
+        if (markerPickUp) {
+            map.removeLayer(markerPickUp);
+            lastClickedLocationPickUp = null;
+        }
+    });
+
     document
         .getElementById("pickup-confirm")
         .addEventListener("click", function () {
@@ -130,7 +138,15 @@ document
             markerDropOff = L.marker(lastClickedLocationDropOff).addTo(map);
         });
 
-        // Add a click event listener to the button
+        // Add a click event listener to the cancel button
+        document.getElementById("dropoff-cancel").addEventListener("click", function () {
+            if (markerDropOff) {
+                map.removeLayer(markerDropOff);
+                lastClickedLocationDropOff = null;
+            }
+        });
+
+        // Add a click event listener to the submit location button
         document
             .getElementById("dropoff-confirm")
             .addEventListener("click", function () {
@@ -150,10 +166,16 @@ document
     });
 
 // Data validation
-function convertDateFormat(input) {
+function convertDateFormatUS(input) {
     // Return reformatted date format to US format (MM-DD-YYYY)
     let [day, month, year] = input.split("-");
     return `${month}-${day}-${year}`;
+}
+
+function convertDateFormatISO(input) {
+    // Return reformatted date format to US format (MM-DD-YYYY)
+    let [day, month, year] = input.split("-");
+    return `${year}-${month}-${day}`;
 }
 
 document
@@ -192,12 +214,14 @@ document
 
         if (name.value === "") {
             document.getElementById("empty-name").style.display = "block";
+            isValid = false;
         } else {
             document.getElementById("empty-name").style.display = "none";
         }
 
         if (email.value === "") {
             document.getElementById("empty-email").style.display = "block";
+            isValid = false;
         } else if (!emailRegex.test(email.value)) {
             document.getElementById("empty-email").style.display = "none";
             document.getElementById("invalid-email").style.display = "block";
@@ -233,10 +257,10 @@ document
         }
 
         if (isValid) {
-            const startDateValue = new Date(convertDateFormat(startDate.value));
-            const endDateValue = new Date(convertDateFormat(endDate.value));
+            const startDateValueUS = new Date(convertDateFormatUS(startDate.value));
+            const endDateValueUS = new Date(convertDateFormatUS(endDate.value));
 
-            if (endDateValue < startDateValue) {
+            if (endDateValueUS < startDateValueUS) {
                 const invalidDates =
                     document.getElementsByClassName("invalid-date");
                 for (var i = 0; i < invalidDates.length; i++) {
@@ -254,6 +278,7 @@ document
 
         if (phone.value === "") {
             document.getElementById("empty-phone").style.display = "block";
+            isValid = false;
         } else if (!phoneRegex.test(phone.value)) {
             document.getElementById("empty-phone").style.display = "none";
             document.getElementById("invalid-phone").style.display = "block";
@@ -266,6 +291,7 @@ document
         if (emergencyPhone.value === "") {
             document.getElementById("empty-phone-darurat").style.display =
                 "block";
+            isValid = false;
         } else if (!phoneRegex.test(emergencyPhone.value)) {
             document.getElementById("empty-phone-darurat").style.display =
                 "none";
@@ -296,95 +322,87 @@ document
 
         if (!agreementCheckbox.checked) {
             document.getElementById("empty-setuju").style.display = "block";
+            isValid = false;
         } else {
             document.getElementById("empty-setuju").style.display = "none";
         }
 
         if (isValid) {
+            let pickupCoordinate = null;
+            let dropoffCoordinate = null;
+
+            if (pickupX !== 0.0 && pickupY !== 0.0) {
+                pickupCoordinate = `${pickupX} ${pickupY}`;
+            } 
+            if (dropoffX !== 0.0 && dropoffY !== 0.0) {
+                dropoffCoordinate = `${dropoffX} ${dropoffY}`;
+            }
+
             console.log("Name: ", name.value);
             console.log("Email: ", email.value);
             console.log("Phone: ", phone.value);
-            console.log("Start Date: ", startDate.value);
-            console.log("End Date: ", endDate.value);
             console.log("Emergency Phone: ", emergencyPhone.value);
             console.log("SIM File: ", simFile.value);
+            console.log("Pickup Coordinate: ", pickupCoordinate);
+            console.log("Dropoff Coordinate: ", dropoffCoordinate);
 
-            if (pickupX !== 0.0 && pickupY !== 0.0) {
-                console.log("Pickup coordinate: ", pickupX, pickupY);
+            // Ref: https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
+            const pembayaranId = (
+                await fetch("/api/pembayaran", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+                    body: [`${encodeURIComponent("status")}=${encodeURIComponent("belum_lunas")}`]
+                }).then(res => {
+                    if(!res.ok) throw new Error("Something is wrong");
+                    return res.json();
+                }).then(res => res.insertID)
+                .catch(err => {
+                    document.getElementById("confirmationPopUp__msgTop")
+                            .textContent = "Mohon maaf, pesanan Anda gagal diproses";
+                    document.getElementById("confirmationPopUp__msgBottom")
+                            .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
+                })
+            )
 
-                const pickupLink = `https://www.google.com/maps/place/${pickupX},${pickupY}`;
-                console.log(pickupLink);
-            } else {
-                // datanya jadi null
+            if(pembayaranId != undefined) {
+                const formData = new FormData();
+                Object.entries({  // Change into data retrieved from form
+                    "id_pemesan": LOGGED_USER, 
+                    "id_mobil": BOOKED_CAR, 
+                    "id_pembayaran": pembayaranId,
+                    "SIM_peminjam" : document.getElementById("input-file").files[0], 
+                    "nama_peminjam" : name.value,
+                    "tanggal_peminjaman" : convertDateFormatISO(startDate.value), 
+                    "tanggal_pengembalian" : convertDateFormatISO(endDate.value),
+                    "titik_antar": pickupCoordinate, 
+                    "titik_jemput" : dropoffCoordinate
+                }).map(([key, value]) => {
+                    formData.append(key, value)
+                });
+
+                console.log(formData)
+
+                await fetch("/api/pesanan", {
+                    method: "POST",
+                    body:  formData           
+                }).then(res => {
+                    if(!res.ok) throw new Error("Something is wrong");
+
+                    document.getElementById("confirmationPopUp__back").style.display = "auto";
+                    document.getElementById("confirmationPopUp__msgTop")
+                            .textContent = "Terima Kasih, pesanan Anda telah kami terima.";
+                    document.getElementById("confirmationPopUp__msgBottom")
+                            .textContent = "Silahkan cek email Anda untuk melanjutkan proses pembayaran.";
+                    return res.json()
+                }).then(res => console.log(res))
+                .catch(err => {
+                    document.getElementById("confirmationPopUp__msgTop")
+                            .textContent = "Mohon maaf, pesanan Anda gagal diproses";
+                    document.getElementById("confirmationPopUp__msgBottom")
+                            .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
+                })
             }
-
-            if (dropoffX !== 0.0 && dropoffY !== 0.0) {
-                console.log("Dropoff coordinate: ", dropoffX, dropoffY);
-
-                const dropoffLink = `https://www.google.com/maps/place/${dropoffX},${dropoffY}`;
-                console.log(dropoffLink);
-            } else {
-                // datanya jadi null
-            }
-        }
-
-        /* TODO: Move this to the section where all input have been verified */
-        // Ref: https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
-        const pembayaranId = (
-            await fetch("/api/pembayaran", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-                body: [`${encodeURIComponent("status")}=${encodeURIComponent("belum_lunas")}`]
-            }).then(res => {
-                if(!res.ok) throw new Error("Something is wrong");
-                return res.json();
-            }).then(res => res.insertID)
-            .catch(err => {
-                document.getElementById("confirmationPopUp__msgTop")
-                        .textContent = "Mohon maaf, pesanan Anda gagal diproses";
-                document.getElementById("confirmationPopUp__msgBottom")
-                        .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
-            })
-        )
-
-        if(pembayaranId != undefined) {
-            const formData = new FormData();
-            Object.entries({  // Change into data retrieved from form
-                "id_pemesan": LOGGED_USER, 
-                "id_mobil": BOOKED_CAR, 
-                "id_pembayaran": pembayaranId,
-                "SIM_peminjam" : document.getElementById("input-file").files[0], 
-                "nama_peminjam" : "Jono Surono",
-                "tanggal_peminjaman" : "2024-02-01", 
-                "tanggal_pengembalian" : "2024-03-01",
-                "titik_antar": `${pickupX} ${pickupY}`, 
-                "titik_jemput" : `${dropoffX} ${dropoffY}`
-            }).map(([key, value]) => {
-                formData.append(key, value)
-            });
-
-            console.log(formData)
-
-            await fetch("/api/pesanan", {
-                method: "POST",
-                body:  formData           
-            }).then(res => {
-                if(!res.ok) throw new Error("Something is wrong");
-
-                document.getElementById("confirmationPopUp__back").style.display = "auto";
-                document.getElementById("confirmationPopUp__msgTop")
-                        .textContent = "Terima Kasih, pesanan Anda telah kami terima.";
-                document.getElementById("confirmationPopUp__msgBottom")
-                        .textContent = "Silahkan cek email Anda untuk melanjutkan proses pembayaran.";
-                return res.json()
-            }).then(res => console.log(res))
-            .catch(err => {
-                document.getElementById("confirmationPopUp__msgTop")
-                        .textContent = "Mohon maaf, pesanan Anda gagal diproses";
-                document.getElementById("confirmationPopUp__msgBottom")
-                        .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
-            })
-        }
+        } 
 
     document.getElementById("confirmationPopUp__close").disabled = false;
     document.getElementById("confirmButton").disabled = false;
