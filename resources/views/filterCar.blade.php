@@ -207,15 +207,7 @@
                   <p class="fw-medium">{{ucwords($car->bahan_bakar)}}</p>
                 </div>
                 <div class="d-grid pt-2">
-                  <button
-                    type="button"
-                    class="btn button-36"
-                  >
-                    <!-- TODO:  change inline styling into something else -->
-                    <a href="{{ route('booking', ['carId' => $car->id]) }}" style="text-decoration: none; color: white">
-                      Pesan
-                    </a>
-                  </button>
+                  <a class="btn button-36 d-flex align-items-center justify-content-center" href="{{ route('booking', ['carId' => $car->id]) }}" role="button">Pesan</a>
                 </div>
               </div>
             </div>
