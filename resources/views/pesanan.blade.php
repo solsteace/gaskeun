@@ -62,14 +62,24 @@
         <h2>
           Daftar Pesanan
         </h2>
-        <form class="form-inline d-flex mt-4 justify-content-end" method="GET">
-          <div class="input-group" style="width: 300px;">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">
-              <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
-            </button>
+
+        <div class="row mt-3 align-items-center justify-content-between">
+          <div class="col">
+            <button type="button" class="btn btn-outline-primary">All</button>
           </div>
-        </form>
+          <div class="col-auto">
+            <form class="form-inline d-flex" method="GET">
+              <div class="input-group" style="width: 300px;">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                  <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
         <div class="card shadow-sm p-4 bg-white mt-4">
           <div class="table-responsive">
             <table class="table table-bordered">

@@ -64,11 +64,14 @@
             </div>
 
             <div class="row mt-2 align-items-center justify-content-between">
+
                 <div class="col">
-                    <button type="button" class="btn btn-primary button-36" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
+                        <button type="button" class="btn btn-outline-primary">All</button>
+                        <button type="button" class="btn btn-outline-success mx-2" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
                 </div>
-                <div class="col my-4">
-                    <form class="form-inline d-flex justify-content-end" method="GET">
+
+                <div class="col-auto">
+                    <form class="form-inline d-flex" method="GET">
                         <div class="input-group" style="width: 300px;">
                             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-primary my-2 my-sm-0" type="submit">
@@ -77,6 +80,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
 
             <div class="row">
