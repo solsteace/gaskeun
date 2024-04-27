@@ -58,10 +58,18 @@
 
 
     <div class="main p-4">
-      <div class="container mt-3">
+      <div class="container">
         <h2>
           Daftar Pesanan
         </h2>
+        <form class="form-inline d-flex mt-4 justify-content-end">
+          <div class="input-group" style="width: 300px;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+              <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
+            </button>
+          </div>
+        </form>
         <div class="card shadow-sm p-4 bg-white mt-4">
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -111,30 +119,30 @@
                   </td>
                   <td class="text-center align-middle">
                     @if ($item->status == 'lunas')
-                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
-                          @csrf
-                          @method('put')
-                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit disabled">Konfirmasi Pembayaran</button>
-                        </form>
+                    <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                      @csrf
+                      @method('put')
+                      <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit disabled">Konfirmasi Pembayaran</button>
+                    </form>
                     @else
-                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
-                          @csrf
-                          @method('put')
-                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit">Konfirmasi Pembayaran</button>
-                        </form>
+                    <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                      @csrf
+                      @method('put')
+                      <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit">Konfirmasi Pembayaran</button>
+                    </form>
                     @endif
                     @if ($item->status_pesanan == 'selesai' || $item->status == 'belum_lunas')
-                        <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}/selesai" method="POST">
-                          @csrf
-                          @method('put')
-                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan my-1 disabled">Selesaikan Pesanan</button>
-                        </form>
+                    <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}/selesai" method="POST">
+                      @csrf
+                      @method('put')
+                      <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan my-1 disabled">Selesaikan Pesanan</button>
+                    </form>
                     @else
-                        <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}" method="POST">
-                          @csrf
-                          @method('put')
-                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan my-1">Selesaikan Pesanan</button>
-                        </form>
+                    <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}" method="POST">
+                      @csrf
+                      @method('put')
+                      <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan my-1">Selesaikan Pesanan</button>
+                    </form>
                     @endif
                     <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
                       @csrf
@@ -173,64 +181,64 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
-    <script type="text/javascript">
-        $('.show-alert-delete-box').click(function(event){
-            var form =  $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: "Yakin Hapus Pesanan?",
-                icon: "warning",
-                type: "warning",
-                buttons: ["Cancel","Ya"],
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-        });
+  <script type="text/javascript">
+    $('.show-alert-delete-box').click(function(event) {
+      var form = $(this).closest("form");
+      var name = $(this).data("name");
+      event.preventDefault();
+      swal({
+        title: "Yakin Hapus Pesanan?",
+        icon: "warning",
+        type: "warning",
+        buttons: ["Cancel", "Ya"],
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((willDelete) => {
+        if (willDelete) {
+          form.submit();
+        }
+      });
+    });
 
-        $('.show-alert-confirm-submit').click(function(event){
-            var form =  $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: "Yakin Konfirmasi Pembayaran?",
-                icon: "info",
-                type: "info",
-                buttons: ["Cancel","Ya"],
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-        });
+    $('.show-alert-confirm-submit').click(function(event) {
+      var form = $(this).closest("form");
+      var name = $(this).data("name");
+      event.preventDefault();
+      swal({
+        title: "Yakin Konfirmasi Pembayaran?",
+        icon: "info",
+        type: "info",
+        buttons: ["Cancel", "Ya"],
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((willDelete) => {
+        if (willDelete) {
+          form.submit();
+        }
+      });
+    });
 
-        $('.show-alert-confirm-pesanan').click(function(event){
-            var form =  $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: "Yakin Selesaikan Pesanan?",
-                icon: "info",
-                type: "info",
-                buttons: ["Cancel","Ya"],
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-        });
-    </script>
+    $('.show-alert-confirm-pesanan').click(function(event) {
+      var form = $(this).closest("form");
+      var name = $(this).data("name");
+      event.preventDefault();
+      swal({
+        title: "Yakin Selesaikan Pesanan?",
+        icon: "info",
+        type: "info",
+        buttons: ["Cancel", "Ya"],
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((willDelete) => {
+        if (willDelete) {
+          form.submit();
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

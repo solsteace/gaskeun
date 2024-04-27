@@ -57,12 +57,26 @@
 
 
         <div class="main p-4">
-            <div class="d-flex justify-content-between align-items-center ms-1 mt-4">
+            <div class="d-flex justify-content-between align-items-center ms-1">
                 <h2>
                     Daftar Mobil
                 </h2>
-                <button type="button" class="btn btn-primary button-36" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
+            </div>
 
+            <div class="row mt-2 align-items-center justify-content-between">
+                <div class="col">
+                    <button type="button" class="btn btn-primary button-36" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
+                </div>
+                <div class="col my-4">
+                    <form class="form-inline d-flex justify-content-end">
+                        <div class="input-group" style="width: 300px;">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                                <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="row">
@@ -71,19 +85,19 @@
                 <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
                     <div class="card shadow bg-white">
                         @if ($item->status == "tersedia")
-                            <div class="card-header text-center bg-success text-white">
-                                Tersedia
-                            </div>
+                        <div class="card-header text-center bg-success text-white">
+                            Tersedia
+                        </div>
                         @endif
                         @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
-                            <div class="card-header text-center bg-danger text-white">
-                                Akan Tersedia Pada {{$item->tanggal_pengembalian}}
-                            </div>
+                        <div class="card-header text-center bg-danger text-white">
+                            Akan Tersedia Pada {{$item->tanggal_pengembalian}}
+                        </div>
                         @endif
                         @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
-                            <div class="card-header text-center bg-danger text-white">
-                                Sementara Tidak Ditawarkan
-                            </div>
+                        <div class="card-header text-center bg-danger text-white">
+                            Sementara Tidak Ditawarkan
+                        </div>
                         @endif
 
                         <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
@@ -108,25 +122,25 @@
                             </div>
                             <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
                                 @if ($item->status == "tersedia")
-                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
-                                    </form>
+                                <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
+                                </form>
                                 @endif
                                 @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
-                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger w-100 show-alert-delete-box disabled">Hapus</button>
-                                    </form>
+                                <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box disabled">Hapus</button>
+                                </form>
                                 @endif
                                 @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
-                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
-                                    </form>
+                                <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
+                                </form>
                                 @endif
                                 <a href="/admin/mobil/edit-mobil/{{$item->id_mobil}}" class="btn btn-primary w-100">Edit</a>
                             </div>
@@ -146,15 +160,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <script type="text/javascript">
-        $('.show-alert-delete-box').click(function(event){
-            var form =  $(this).closest("form");
+        $('.show-alert-delete-box').click(function(event) {
+            var form = $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();
             swal({
                 title: "Yakin Hapus Mobil?",
                 icon: "warning",
                 type: "warning",
-                buttons: ["Cancel","Ya"],
+                buttons: ["Cancel", "Ya"],
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
