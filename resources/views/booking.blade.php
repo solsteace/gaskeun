@@ -205,7 +205,7 @@
                 </button>
             @else 
                 <button type="button" class="button-36 btn-block" id="gas-button" disabled>
-                    @if(($car->pesanan()->exists())
+                    @if($car->pesanan()->exists())
                       TIDAK TERSEDIA HINGGA {{
                           ($car->pesanan()
                           ->where('status', "belum_selesai")
