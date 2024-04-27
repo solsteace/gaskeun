@@ -47,9 +47,8 @@ class PesananController extends Controller
             ], 400);
         }
         
-        $orderData = $validator->safe()->all();
-
         // Restrict car listed on many `Pesanan` records
+        $orderData = $validator->safe()->all();
         $isBookedCar = (count(Pesanan::where("id_mobil", "=", $orderData["id_mobil"])
                             ->where("status", "=", "belum_selesai")->get()) > 0);
         if($isBookedCar) {
@@ -59,6 +58,7 @@ class PesananController extends Controller
             ], 400);
         }
 
+        $orderData["SIM_peminjam"] = $request->file('SIM_peminjam')->store('sim-peminjam');
         try {
             $newPesanan = Pesanan::create($orderData);
         } catch(QueryException $e) {

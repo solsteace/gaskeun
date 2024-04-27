@@ -24,7 +24,7 @@ function uploadImage() {
     imgView.textContent = "";
     imgView.style.border = 0;
     imgView.style.width = "300px";
-    checkbox.dispatchEvent(new Event("change"));
+    // checkbox.dispatchEvent(new Event("change"));
 }
 
 dropArea.addEventListener("dragover", function (e) {
@@ -335,12 +335,10 @@ document
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
                 body: [`${encodeURIComponent("status")}=${encodeURIComponent("belum_lunas")}`]
-            })
-            .then(res => {
+            }).then(res => {
                 if(!res.ok) throw new Error("Something is wrong");
                 return res.json();
-            })
-            .then(res => res.insertID)
+            }).then(res => res.insertID)
             .catch(err => {
                 document.getElementById("confirmationPopUp__msgTop")
                         .textContent = "Mohon maaf, pesanan Anda gagal diproses";
@@ -350,17 +348,27 @@ document
         )
 
         if(pembayaranId != undefined) {
+            const formData = new FormData();
+            Object.entries({  // Change into data retrieved from form
+                "id_pemesan": LOGGED_USER, 
+                "id_mobil": BOOKED_CAR, 
+                "id_pembayaran": pembayaranId,
+                "SIM_peminjam" : document.getElementById("input-file").files[0], 
+                "nama_peminjam" : "Jono Surono",
+                "tanggal_peminjaman" : "2024-02-01", 
+                "tanggal_pengembalian" : "2024-03-01",
+                "titik_antar": `${pickupX} ${pickupY}`, 
+                "titik_jemput" : `${dropoffX} ${dropoffY}`
+            }).map(([key, value]) => {
+                formData.append(key, value)
+            });
+
+            console.log(formData)
+
             await fetch("/api/pesanan", {
                 method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-                body: Object.entries({  // Change into data retrieved from form
-                        "id_pemesan": LOGGED_USER, "id_mobil": BOOKED_CAR, "id_pembayaran": pembayaranId,
-                        "SIM_peminjam" : "a.jpg", "nama_peminjam" : "Jono Surono",
-                        "tanggal_peminjaman" : "2024-02-01", "tanggal_pengembalian" : "2024-03-01",
-                        "titik_antar": `${pickupX} ${pickupY}`, "titik_jemput" : `${dropoffX} ${dropoffY}`
-                    }).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join("&")
-            })
-            .then(res => {
+                body:  formData           
+            }).then(res => {
                 if(!res.ok) throw new Error("Something is wrong");
 
                 document.getElementById("confirmationPopUp__back").style.display = "auto";
@@ -368,7 +376,8 @@ document
                         .textContent = "Terima Kasih, pesanan Anda telah kami terima.";
                 document.getElementById("confirmationPopUp__msgBottom")
                         .textContent = "Silahkan cek email Anda untuk melanjutkan proses pembayaran.";
-            })
+                return res.json()
+            }).then(res => console.log(res))
             .catch(err => {
                 document.getElementById("confirmationPopUp__msgTop")
                         .textContent = "Mohon maaf, pesanan Anda gagal diproses";
