@@ -190,7 +190,7 @@
                 Tersedia
               </div>
               <!-- TODO: load appropiate image -->
-              <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0" alt="Car Image">
+              <img id="car-image" src="{{ asset( 'storage/' . $car->image()->first()->path ) }}" class="card-img-top rounded-0" alt="Car Image">
               <div class="p-3">
                 <h5 class="card-title fw-semibold"> {{$car->brand}} <br> {{$car->model}} </h5>
                 <p class="card-price">Rp. {{$car->harga_sewa}}/hari</p>
@@ -228,7 +228,7 @@
                   @endif
                 </div>
                 <div class="overlay rounded-1 shadow"></div>
-                <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0 card-image" alt="Car Image">
+                <img id="car-image" src="{{ asset( 'storage/' . $car->image()->first()->path ) }}" class="card-img-top rounded-0 card-image" alt="Car Image">
                 <div class="p-3 card-content">
                   <h5 class="card-title fw-semibold">{{$car->brand}}<br>{{$car->model}}</h5>
                   <p class="card-price">Rp. {{$car->harga_sewa}}/hari</p>
