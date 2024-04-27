@@ -71,12 +71,18 @@
                 <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
                     <div class="card shadow bg-white">
                         @if ($item->status == "tersedia")
-                        <div class="card-header text-center bg-success text-white">
-                            Tersedia
-                        </div>
-                        @else
+                            <div class="card-header text-center bg-success text-white">
+                                Tersedia
+                            </div>
+                        @endif
+                        @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
                             <div class="card-header text-center bg-danger text-white">
                                 Akan Tersedia Pada {{$item->tanggal_pengembalian}}
+                            </div>
+                        @endif
+                        @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
+                            <div class="card-header text-center bg-danger text-white">
+                                Sementara Tidak Ditawarkan
                             </div>
                         @endif
 
@@ -107,11 +113,19 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
                                     </form>
-                                @else
+                                @endif
+                                @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
                                     <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger w-100 show-alert-delete-box disabled">Hapus</button>
+                                    </form>
+                                @endif
+                                @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
+                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
                                     </form>
                                 @endif
                                 <a href="/admin/mobil/edit-mobil/{{$item->id_mobil}}" class="btn btn-primary w-100">Edit</a>
