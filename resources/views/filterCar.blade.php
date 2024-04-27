@@ -174,7 +174,13 @@
 
       <div class="row" id="availableCars">
         @foreach ($cars as $car)
-          @if($car->pesanan == null) <!--  Available Car -->
+          @if( 
+            !($car->pesanan()->exists())
+            || !($car->pesanan()
+                ->where('status', 'belum_selesai')
+                ->exists()
+                )
+          ) <!--  Available Car -->
           <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
             <div class="card shadow bg-white">
               <div class="card-header text-center bg-success text-white">
@@ -215,7 +221,12 @@
             <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
               <div class="card shadow bg-white card-container">
                 <div class="card-header text-center bg-danger text-white">
-                  Akan tersedia pada {{$car->pesanan->tanggal_pengembalian}}
+                  Akan tersedia pada {{
+                    ($car->pesanan()
+                      ->where('status', "belum_selesai")
+                      ->first()->tanggal_pengembalian
+                    )
+                  }}
                 </div>
                 <div class="overlay rounded-1 shadow"></div>
                 <img id="car-image" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" class="card-img-top rounded-0 card-image" alt="Car Image">

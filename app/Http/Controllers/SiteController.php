@@ -38,7 +38,15 @@ class SiteController extends Controller
             return abort(404);
         }
 
-        if($car->pesanan != null) {
+        $carIsAvailable  = (
+            !($car->pesanan()->exists())
+            || !($car->pesanan()
+                    ->where('status', 'belum_selesai')
+                    ->exists()
+                )
+        );
+
+        if(!$carIsAvailable) {
             return redirect("/cars")->with("err", "Mobil ini tidak tersedia! Silakan pilih mobil lainnya");
         }
 
