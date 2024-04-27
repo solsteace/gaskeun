@@ -102,7 +102,7 @@ class Mobil extends Model
     }
 
     public function pesanan() {
-        return $this->hasOne(Pesanan::class, "id_mobil");
+        return $this->hasMany(Pesanan::class, "id_mobil");
     }
 
     public function image() {

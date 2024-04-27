@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date("tanggal_pengembalian");
             $table->string("titik_antar")->nullable();
             $table->string("titik_jemput")->nullable();
+            $table->enum("status", ["selesai", "belum_selesai"])->default("belum_selesai");
 
             $table->foreign("id_pemesan")->references("id")->on("Pengguna");
             $table->foreign("id_pembayaran")->references("id")->on("Pembayaran");

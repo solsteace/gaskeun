@@ -15,17 +15,16 @@ class MobilFilterController extends Controller
     public function show(Request $request) {
         $validator = Validator::make($request->all(),
             [   
-                "brand" => [ "string" ],
-                "transmission" => [ Rule::in(["manual", "matic"]), "string"],
-                "numPassengers" => [ "integer" ],
-                "minPrice" => [ "integer" ],
-                "maxPrice" => [ "integer" ],
-                "startDate" => [ "date", "date_format:Y-m-d" ],
-                "endDate" => [ "date", "date_format: Y-m-d" ]
+                "brand" => [ "nullable", "string" ],
+                "transmission" => [ "nullable", "string"],
+                "numPassengers" => [ "nullable", "integer" ],
+                "minPrice" => [ "nullable", "integer" ],
+                "maxPrice" => [ "nullable", "integer" ],
+                "startDate" => [ "nullable",  "date" ],
+                "endDate" => [ "nullable", "date" ]
             ]
         );
 
-        $data = Mobil::with("pesanan")->get();
         if($validator->fails()) {
             return response()->json([
                 "msg" => "Filtering not performed",
@@ -33,6 +32,7 @@ class MobilFilterController extends Controller
             ], 405);
         }
 
+        $data = Mobil::with("pesanan")->get();
         $filters = $validator->safe()->all();
         foreach($filters as $filter => $value) {
             if($value != null) {

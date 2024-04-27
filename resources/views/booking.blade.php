@@ -187,14 +187,27 @@
         -->
 
         <div class="d-flex justify-content-center my-5">
-            @if ($car->pesanan != null)
-                <button type="button" class="button-36 btn-block" id="gas-button" disabled>TIDAK TERSEDIA HINGGA {{$car->pesanan->tanggal_pengembalian}}</button>
-            @else <!-- TODO: remove this inline style -->
+            @if( 
+                !($car->pesanan()->exists())
+                || !($car->pesanan()
+                    ->where('status', 'belum_selesai')
+                    ->exists()
+                    )
+            ) <!--  Available Car --> <!-- TODO: remove this inline style -->
                 <button type="button" class="button-36 btn-block" id="gas-button">
                     <a href=" {{ route('createBooking', ['carId' => $_GET['carId']]) }}"
                         class="text-white"
                         style="text-decoration: none; "
                     > GASS! </a>
+                </button>
+            @else 
+                <button type="button" class="button-36 btn-block" id="gas-button" disabled>
+                    TIDAK TERSEDIA HINGGA {{
+                        ($car->pesanan()
+                        ->where('status', "belum_selesai")
+                        ->first()->tanggal_pengembalian
+                        )
+                    }}
                 </button>
             @endif
         </div>
