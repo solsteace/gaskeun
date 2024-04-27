@@ -29,10 +29,10 @@
                 <a class="nav-link" href="{{ route('index') }}">Beranda</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link active" href="#" aria-current="page">Pemesanan</a>
+                <a class="nav-link" href="{{ route('cars') }}">Pemesanan</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="{{ route('history') }}">Pesanan Saya</a>
+                <a class="nav-link active" href="#"  aria-current="page">Pesanan Saya</a>
               </li>
               @auth
               <li class="nav-item mx-2">
@@ -61,73 +61,78 @@
     </div>
 
     <div class="container" id="historyCard">
-      @foreach ($books as $book) 
-      <div class="row">
-        <div class="col-12 pt-4">
-          <div class="card shadow bg-white">
-              <div class="row">
-              <div class="col-md-12 col-lg-3 col-xl-3">
-                <img class="img-fluid img-cover" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" alt="Car Image">
-              </div>
-              <div class="col-md-6 col-lg-5 col-xl-5 px-4">
-                <h5 class="card-title fw-semibold fs-2 pt-3"> {{$book->brand}} {{$book->model}}</h5>
-                <div style="display: flex;" class="pt-2">
-                  <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                  <p class="fw-medium"> {{$book->nomor_polisi}} </p>
+      @forelse ($books as $book) 
+        <div class="row">
+          <div class="col-12 pt-4">
+            <div class="card shadow bg-white">
+                <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3">
+                  <img class="img-fluid img-cover" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" alt="Car Image">
                 </div>
-                <div style="display: flex;" class="mb-0">
-                  <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                  <p class="fw-medium">{{$book->transmisi}}</p>
-                </div>
-                <div style="display: flex;" class="pb-3">
-                  <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                  <p class="fw-medium mb-0">{{$book->bahan_bakar}}</p>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-xl-4 px-4">
-                <table>
-                  <tr>
-                    <td>Ambil</td>
-                    <td>: {{$book->tanggal_peminjaman}}</td>
-                  </tr>
-                  <tr>
-                    <td>Balik</td>
-                    <td>: {{$book->tanggal_pengembalian}}</td>
-                  </tr>
-                  <tr> <!-- ref: https://www.w3schools.com/php/phptryit.asp?filename=tryphp_func_date_diff -->
-                    <td>Total</td>
-                    <td>: Rp. {{ $book->harga_sewa * 
-                                (date_diff(
-                                    date_create($book->tanggal_peminjaman),
-                                    date_create($book->tanggal_pengembalian)
-                                  )->format('%a')
-                                )
-                              }}
-                    </td>
-                  </tr>
-                </table>
-                
-                @if ($book->status == "lunas") <!-- If status pembayaran is paid -->
-                  <div class="d-grid mt-3">
-                    <button
-                      type="button"
-                      class="btn button-36"
-                    >
-                      <a href="" style="text-decoration: none; color: white">
-                        Pesan Lagi
-                      </a>
-                    </button>
+                <div class="col-md-6 col-lg-5 col-xl-5 px-4">
+                  <h5 class="card-title fw-semibold fs-2 pt-3"> {{$book->brand}} {{$book->model}}</h5>
+                  <div style="display: flex;" class="pt-2">
+                    <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
+                    <p class="fw-medium"> {{$book->nomor_polisi}} </p>
                   </div>
-                @else <!-- If status pembayaran is unpaid -->
-                  <div class="d-flex align-items-center justify-content-center unpaid bg-danger text-white mt-3">
-                    Belum dibayar
+                  <div style="display: flex;" class="mb-0">
+                    <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
+                    <p class="fw-medium">{{$book->transmisi}}</p>
                   </div>
-                @endif
-              </div>
+                  <div style="display: flex;" class="pb-3">
+                    <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
+                    <p class="fw-medium mb-0">{{$book->bahan_bakar}}</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-4 px-4">
+                  <table>
+                    <tr>
+                      <td>Ambil</td>
+                      <td>: {{$book->tanggal_peminjaman}}</td>
+                    </tr>
+                    <tr>
+                      <td>Balik</td>
+                      <td>: {{$book->tanggal_pengembalian}}</td>
+                    </tr>
+                    <tr> <!-- ref: https://www.w3schools.com/php/phptryit.asp?filename=tryphp_func_date_diff -->
+                      <td>Total</td>
+                      <td>: Rp. {{ $book->harga_sewa * 
+                                  (date_diff(
+                                      date_create($book->tanggal_peminjaman),
+                                      date_create($book->tanggal_pengembalian)
+                                    )->format('%a')
+                                  )
+                                }}
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  @if ($book->status == "lunas") <!-- If status pembayaran is paid -->
+                    <div class="d-grid mt-3">
+                      <button
+                        type="button"
+                        class="btn button-36"
+                      >
+                        <a href="" style="text-decoration: none; color: white">
+                          Pesan Lagi
+                        </a>
+                      </button>
+                    </div>
+                  @else <!-- If status pembayaran is unpaid -->
+                    <div class="d-flex align-items-center justify-content-center unpaid bg-danger text-white mt-3">
+                      Belum dibayar
+                    </div>
+                  @endif
+                </div>
+            </div>
           </div>
         </div>
       </div>
-      @endforeach
+      @empty
+        <div class="row text-center pt-4 pb-3 my-5">
+          <h5 class="text-danger fs-5">Maaf, Anda belum pernah memesan mobil</h5>
+        </div>
+      @endforelse
     </div>
 
     <!-- Footer -->

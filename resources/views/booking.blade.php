@@ -188,11 +188,14 @@
 
         <div class="d-flex justify-content-center my-5">
             @if( 
-                !($car->pesanan()->exists())
-                || !($car->pesanan()
-                    ->where('status', 'belum_selesai')
-                    ->exists()
-                    )
+                $car->status == "tersedia" 
+                && (
+                  !($car->pesanan()->exists())
+                  || !($car->pesanan()
+                      ->where('status', 'belum_selesai')
+                      ->exists()
+                    )  
+                )
             ) <!--  Available Car --> <!-- TODO: remove this inline style -->
                 <button type="button" class="button-36 btn-block" id="gas-button">
                     <a href=" {{ route('createBooking', ['carId' => $_GET['carId']]) }}"
@@ -202,12 +205,16 @@
                 </button>
             @else 
                 <button type="button" class="button-36 btn-block" id="gas-button" disabled>
-                    TIDAK TERSEDIA HINGGA {{
-                        ($car->pesanan()
-                        ->where('status', "belum_selesai")
-                        ->first()->tanggal_pengembalian
-                        )
-                    }}
+                    @if($car->pesanan()->exists())
+                      TIDAK TERSEDIA HINGGA {{
+                          ($car->pesanan()
+                          ->where('status', "belum_selesai")
+                          ->first()->tanggal_pengembalian
+                          )
+                      }}
+                    @else
+                      TIDAK DITAWARKAN SEMENTARA
+                    @endif
                 </button>
             @endif
         </div>
