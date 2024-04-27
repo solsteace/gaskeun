@@ -109,20 +109,20 @@
                                 <p class="fw-medium">{{$item->nomor_polisi}}</p>
                             </div>
                             <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
-                                @if ($item->status == "dipinjam")
-                                    <form action="/admin/mobil/{{$item->id}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger w-100 show-alert-delete-box disabled">Hapus</button>
-                                    </form>
-                                @else
-                                    <form action="/admin/mobil/{{$item->id}}" method="POST">
+                                @if ($item->status == "tersedia")
+                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
                                     </form>
+                                @else
+                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger w-100 show-alert-delete-box disabled">Hapus</button>
+                                    </form>
                                 @endif
-                                <a href="/admin/mobil/edit-mobil/{{$item->id}}" class="btn btn-primary w-100">Edit</a>
+                                <a href="/admin/mobil/edit-mobil/{{$item->id_mobil}}" class="btn btn-primary w-100">Edit</a>
                             </div>
                         </div>
                     </div>

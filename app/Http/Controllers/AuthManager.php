@@ -48,10 +48,16 @@ class AuthManager extends Controller
         return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dikonfirmasi');
     }
 
+    public function deletePesanan($id){
+        $pesanan = Pesanan::find($id);
+        $pesanan->delete();
+        
+        return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dihapus');
+    }
     public function mobil(){
         $data = DB::table('Mobil')
                     ->join('Images','Images.id','=','Mobil.id_image')
-                    ->select('Mobil.*', 'Images.*', 'Images.id as id_image')
+                    ->select('Mobil.*', 'Images.*', 'Images.id as id_image', 'Mobil.id as id_mobil')
                     ->get();
 
         return view('mobil')->with('data',$data);
@@ -170,11 +176,20 @@ class AuthManager extends Controller
 
     public function edit($id, Request $request) { 
         $validatedData = $request->validate([
+            'brand' => ['required', 'string'],
+            'model' => ['required', 'string'],
+            'kapasitas' => ['required', 'numeric'],
+            'harga_sewa' => ['required', 'numeric'],
+            'deskripsi' => ['required', 'string'],
+            'status' => ['required'],
+            'nomor_polisi' => ['required', 'string'],
+            'transmisi' => ['required'],
+            'bahan_bakar' => ['required'],
             'image' => ['image', 'mimes:jpeg,png,jpg'],
         ]);
 
         $mobil = Mobil::findOrFail($id);
-        $mobil->update($request->all());
+        $mobil->update($validatedData);
         
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-mobil');

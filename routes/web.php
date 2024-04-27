@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AuthManager::class, 'admin'])->name("admin")->middleware('userAccess:admin');
     Route::get('/admin/pesanan', [AuthManager::class, 'pesanan'])->name("pesanan")->middleware('userAccess:admin');
     Route::put('/admin/pesanan/{id}', [AuthManager::class, 'konfirmasiPesanan'])->middleware('userAccess:admin');
+    Route::delete('/admin/pesanan/{id}', [AuthManager::class, 'deletePesanan'])->middleware('userAccess:admin');
 
     Route::get('/admin/mobil', [AuthManager::class, 'mobil'])->name("mobil")->middleware('userAccess:admin');
     Route::delete('/admin/mobil/{id}', [AuthManager::class, 'deleteMobil'])->middleware('userAccess:admin');

@@ -75,6 +75,7 @@
                   <th class="text-center align-middle" scope="col">Durasi Peminjaman</th>
                   <th class="text-center align-middle" scope="col">Pembayaran</th>
                   <th class="text-center align-middle" scope="col">Status Pembayaran</th>
+                  <th class="text-center align-middle" scope="col">Status Pesanan</th>
                   <th class="text-center align-middle" scope="col">Titik Antar</th>
                   <th class="text-center align-middle" scope="col">Titik Jemput</th>
                   <th class="text-center align-middle" scope="col">SIM</th>
@@ -91,6 +92,7 @@
                   <td class="text-center align-middle">{{$item->tanggal_pengembalian}}</td>
                   <td class="text-center align-middle">{{\Carbon\Carbon::parse($item->tanggal_pengembalian)->diffInDays(\Carbon\Carbon::parse($item->tanggal_peminjaman))}} hari</td>
                   <td class="text-center align-middle">Transfer</td>
+                  <td class="text-center align-middle">{{$item->status}}</td>
                   <td class="text-center align-middle">{{$item->status}}</td>
                   <td class="text-center align-middle">
                     <a href="https://www.google.com/maps/place/{{$item->titik_antar}}" target="_blank">
@@ -112,15 +114,33 @@
                         <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
                           @csrf
                           @method('put')
-                          <button type="submit" class="btn btn-sm btn-success disabled">Konfirmasi</button>
+                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit disabled">Konfirmasi Pembayaran</button>
                         </form>
                     @else
                         <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
                           @csrf
                           @method('put')
-                          <button type="submit" class="btn btn-sm btn-success">Konfirmasi</button>
+                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit">Konfirmasi Pembayaran</button>
                         </form>
                     @endif
+                    @if ($item->status == 'lunas')
+                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                          @csrf
+                          @method('put')
+                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan disabled">Selesaikan Pesanan</button>
+                        </form>
+                    @else
+                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                          @csrf
+                          @method('put')
+                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan">Selesaikan Pesanan</button>
+                        </form>
+                    @endif
+                    <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                      @csrf
+                      @method('delete')
+                      <button type="submit" class="btn btn-danger show-alert-delete-box">Hapus</button>
+                    </form>
                   </td>
                 </tr>
                 @endforeach
@@ -150,6 +170,67 @@
   @include('sweetalert::alert')
   <script src="{{ asset('js/pesanan.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event){
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Yakin Hapus Pesanan?",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel","Ya"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+
+        $('.show-alert-confirm-submit').click(function(event){
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Yakin Konfirmasi Pembayaran?",
+                icon: "info",
+                type: "info",
+                buttons: ["Cancel","Ya"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+
+        $('.show-alert-confirm-pesanan').click(function(event){
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Yakin Selesaikan Pesanan?",
+                icon: "info",
+                type: "info",
+                buttons: ["Cancel","Ya"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
