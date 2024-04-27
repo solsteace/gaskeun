@@ -101,7 +101,6 @@
                         <li>Bertanggung jawab atas kerusakan mobil selama masa sewa.</li>
                         <li>Mematuhi peraturan lalu lintas yang berlaku.</li>
                         <li>Pemesanan dapat dilakukan melalui website dan aplikasi.</li>
-                        <li>Pembayaran sewa dilakukan secara offline.</li>
                         <li>Penyewa bertanggung jawab atas segala kerusakan yang terjadi pada mobil selama masa sewa.</li>
                         <li>Rental mobil tidak bertanggung jawab atas kehilangan barang bawaan penyewa.</li>
                     </ul>
@@ -186,7 +185,11 @@
         </div>
         -->
 
-        <div class="d-flex justify-content-center my-5">
+        <div class="text-center mt-5 fs-6 fw-semibold text-danger" id="invalidCheck" style="display: none;">
+          Anda belum menyetujui syarat dan ketentuan
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
             @if( 
                 $car->status == "tersedia" 
                 && (

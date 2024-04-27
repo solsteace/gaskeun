@@ -118,3 +118,7 @@ p {
     background-color: rgba(0, 0, 255, 1);
     color: rgba(255, 255, 255, 1);
 }
+
+#invalidCheck {
+    display: none;
+}

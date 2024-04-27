@@ -328,6 +328,12 @@ document
         }
 
         if (isValid) {
+            var myModal = new bootstrap.Modal(document.getElementById('confirm-modal'), {
+                keyboard: false,
+                backdrop: 'static'
+            });
+            myModal.toggle();
+
             let pickupCoordinate = null;
             let dropoffCoordinate = null;
 
@@ -389,17 +395,22 @@ document
                     if(!res.ok) throw new Error("Something is wrong");
 
                     document.getElementById("confirmationPopUp__back").style.display = "auto";
+                    document.getElementById("confirmationPopUp__back").textContent = "Lihat pesanan saya";
+                    document.getElementById("confirmationPopUp__back").classList.remove("disabled");
+                    document.getElementById("confirmationPopUp__back").style.pointerEvents = "auto";
                     document.getElementById("confirmationPopUp__msgTop")
                             .textContent = "Terima Kasih, pesanan Anda telah kami terima.";
                     document.getElementById("confirmationPopUp__msgBottom")
                             .textContent = "Silahkan cek email Anda untuk melanjutkan proses pembayaran.";
+                    document.querySelector('#confirmationPopUp__icon').src = iconConfirm;
                     return res.json()
                 }).then(res => console.log(res))
                 .catch(err => {
-                    document.getElementById("confirmationPopUp__msgTop")
-                            .textContent = "Mohon maaf, pesanan Anda gagal diproses";
-                    document.getElementById("confirmationPopUp__msgBottom")
-                            .textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
+                    document.getElementById("confirmationPopUp__back").textContent = "Gagal";
+                    document.getElementById("confirmationPopUp__back").style.backgroundColor = "rgba(220, 53, 69, 1)";
+                    document.getElementById("confirmationPopUp__msgTop").textContent = "Mohon maaf, pesanan Anda gagal diproses";
+                    document.getElementById("confirmationPopUp__msgBottom").textContent = "Silakan perbarui laman dan lakukan pemesanan kembali";
+                    document.querySelector('#confirmationPopUp__icon').src = iconDecline;
                 })
             }
         } 
