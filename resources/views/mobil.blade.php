@@ -74,18 +74,10 @@
                         <div class="card-header text-center bg-success text-white">
                             Tersedia
                         </div>
-                        @endif
-
-                        @if ($item->status == "tidak_tersedia")
-                        <div class="card-header text-center bg-danger text-white">
-                            Tidak Tersedia
-                        </div>
-                        @endif
-                        
-                        @if ($item->status == "dipinjam")
-                        <div class="card-header text-center bg-danger text-white">
-                            Dipinjam
-                        </div>
+                        @else
+                            <div class="card-header text-center bg-danger text-white">
+                                Akan Tersedia Pada {{$item->tanggal_pengembalian}}
+                            </div>
                         @endif
 
                         <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">

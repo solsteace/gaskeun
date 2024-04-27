@@ -68,7 +68,8 @@ class AuthManager extends Controller
     public function mobil(){
         $data = DB::table('Mobil')
                     ->join('Images','Images.id','=','Mobil.id_image')
-                    ->select('Mobil.*', 'Images.*', 'Images.id as id_image', 'Mobil.id as id_mobil')
+                    ->leftJoin('Pesanan','Pesanan.id_mobil','=','Mobil.id')
+                    ->select('Mobil.*', 'Images.*', 'Pesanan.tanggal_pengembalian', 'Images.id as id_image', 'Mobil.id as id_mobil')
                     ->get();
 
         return view('mobil')->with('data',$data);
