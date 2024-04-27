@@ -93,7 +93,7 @@
                   <td class="text-center align-middle">{{\Carbon\Carbon::parse($item->tanggal_pengembalian)->diffInDays(\Carbon\Carbon::parse($item->tanggal_peminjaman))}} hari</td>
                   <td class="text-center align-middle">Transfer</td>
                   <td class="text-center align-middle">{{$item->status}}</td>
-                  <td class="text-center align-middle">{{$item->status}}</td>
+                  <td class="text-center align-middle">{{$item->status_pesanan}}</td>
                   <td class="text-center align-middle">
                     <a href="https://www.google.com/maps/place/{{$item->titik_antar}}" target="_blank">
                       <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 1rem;"></i>
@@ -123,14 +123,14 @@
                           <button type="submit" class="btn btn-sm btn-success show-alert-confirm-submit">Konfirmasi Pembayaran</button>
                         </form>
                     @endif
-                    @if ($item->status == 'lunas')
-                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                    @if ($item->status_pesanan == 'selesai' || $item->status == 'belum_lunas')
+                        <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}/selesai" method="POST">
                           @csrf
                           @method('put')
                           <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan disabled">Selesaikan Pesanan</button>
                         </form>
                     @else
-                        <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
+                        <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}" method="POST">
                           @csrf
                           @method('put')
                           <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan">Selesaikan Pesanan</button>

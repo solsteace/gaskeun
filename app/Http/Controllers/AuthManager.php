@@ -34,7 +34,7 @@ class AuthManager extends Controller
                     ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
-                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan')
                     ->get();
 
         return view('pesanan')->with('data',$data);
@@ -46,6 +46,17 @@ class AuthManager extends Controller
         $pembayaran->status = 'lunas';
         $pembayaran->save();
         return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dikonfirmasi');
+    }
+
+    public function selesaikanPesanan($id){
+        $pesanan = Pesanan::findOrFail( $id );
+        $mobil = Mobil::findOrFail($pesanan->id_mobil);
+        $mobil->status = 'tersedia';
+        $pesanan->status = 'selesai';
+        $mobil->save();
+        $pesanan->save();
+
+        return redirect('/admin/pesanan')->with('success', 'Pesanan Selesai');
     }
 
     public function deletePesanan($id){
