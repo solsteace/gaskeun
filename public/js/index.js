@@ -1,7 +1,3 @@
-$(".btn-hero-resp").click(function () {
-    window.location.href = carsRoute;
-});
-
 // Dynamic wording for the hero section
 var words = [
     "<span class='changing-word-width'>Keluarga.</span>",
@@ -109,7 +105,9 @@ var originalHero = `
         <div class="col-sm-12 col-md-4 col-lg-5 col-xl-6 pr-5">
             <h1 class="h1-hero-resp">Jelajahi Bandung<br \>dengan <span id="changing-word">Gaskeun.</span></h1>
             <p class="p-hero-resp"></p>
-            <button type="button" class="btn button-36 btn-lg mt-2 btn-hero-resp">Pesan Sekarang</button>
+            <a href="/cars">
+                <button type="button" class="btn button-36 btn-lg mt-2 btn-hero-resp">Pesan Sekarang</button>
+            </a>
         </div>
     </div>
 </div>
@@ -166,7 +164,9 @@ $(window).on("load resize", function () {
                 <div class="col-sm-12">
                     <h1 class="h1-hero-resp">Jelajahi Bandung<br \>dengan <span id="changing-word">Gaskeun.</span></h1>
                     <p class="p-hero-resp"></p>
-                    <button type="button" class="btn button-36 btn-lg mt-2 btn-hero-resp">Pesan Sekarang</button>
+                    <a href="/cars">
+                        <button type="button" class="btn button-36 btn-lg mt-2 btn-hero-resp">Pesan Sekarang</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -178,7 +178,9 @@ $(window).on("load resize", function () {
                 <div class="col-sm-12 pr-5">
                     <h1 class="h1-hero-resp">Jelajahi Bandung<br \>dengan <span id="changing-word">Gaskeun.</span></h1>
                     <p class="p-hero-resp"></p>
-                    <button type="button" class="btn button-36 btn-lg mt-2 btn-hero-resp">Pesan Sekarang</button>
+                    <a href="/cars">
+                        <button type="button" class="btn button-36 btn-lg mt-2 btn-hero-resp">Pesan Sekarang</button>
+                    </a>
                 </div>
             </div>
         </div>
