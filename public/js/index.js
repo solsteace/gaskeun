@@ -1,3 +1,9 @@
+$(document).ready(function () {
+    $(".btn-hero-resp").click(function () {
+        window.location.href = "/cars";
+    });
+});
+
 // Dynamic wording for the hero section
 var words = [
     "<span class='changing-word-width'>Keluarga.</span>",
