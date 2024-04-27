@@ -93,6 +93,7 @@ p {
 }
 
 .button-36:hover {
+    color: #ffffff;
     box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
     transition-duration: 0.1s;
 }
@@ -205,4 +206,10 @@ p {
 
 .hidden {
     display: none !important;
+}
+
+.footer {
+    border-top-right-radius: 200px;
+    background-color: rgba(0, 0, 255, 1);
+    color: rgba(255, 255, 255, 1);
 }

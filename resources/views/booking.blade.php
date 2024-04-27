@@ -15,7 +15,7 @@
     <div>
       <nav class="navbar navbar-expand-lg fixed-top bg-navbar">
         <div class="container">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="{{ route('index') }">
             <img src="{{ asset('img/logo-navbar.png') }}" alt="Gaskeun Logo" height="35" />
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,10 @@
                 <a class="nav-link" href="{{ route('index') }}">Beranda</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Mobil Kami</a>
+                <a class="nav-link active" href="#" aria-current="page">Pemesanan</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link active" href="#" aria-current="page">Pemesanan</a>
+                <a class="nav-link" href="{{ route('history') }}">Pesanan Saya</a>
               </li>
               @auth
               <li class="nav-item mx-2">
@@ -212,6 +212,55 @@
             @endif
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2 mt-5">
+            <img src="{{ asset("img/logo-footer.png") }}" class="img-fluid" alt="Logo White">
+            <p class="m-0 ms-4">&copy; 2024 PT Gaskeun</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-4 col-xl-4">
+            <h4 class="mt-4 mb-0">Alamat</h3>
+            <p>Menara Embun Pagi<br>Jl. Sukabirus No.110, Citeureup, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</p>
+
+            <h4 class="mt-4 mb-0">Jam Kerja</h3>
+            <p class="mb-0">00:00 - 23:59 (24 jam)</p>
+            <p>Senin - Minggu (setiap hari)</p>
+          </div>
+          <div class="com-md-0 col-lg-2 col-xl-2"></div>
+          <div class="col-md-12 col-lg-6 col-xl-6">
+            <h4 class="mt-4 mb-0">Pusat bantuan</h3>
+            <table>
+              <tr>
+                <td class="fw-medium">Bantuan Pemesanan</td>
+                <td class="ps-3">022-20271564</td>
+              </tr>
+              <tr>
+                <td class="fw-medium">Bantuan Perjalanan</td>
+                <td class="ps-3">022-20431245</td>
+              </tr>
+              <tr>
+                <td class="fw-medium">Bantuan Website</td>
+                <td class="ps-3">022-20180523</td>
+              </tr>
+            </table>
+
+            <h4 class="mt-4 mb-1">Ikuti Kami</h4>
+            <div class="row-4 mb-5">
+              <a href="https://www.facebook.com" target="_blank"><img src="{{ asset("img/icon-facebook.png") }}" alt="Facebook icon" height=35 width=35 class="me-3"/></a>
+              <a href="https://www.instagram.com" target="_blank"><img src="{{ asset("img/icon-instagram.png") }}" alt="Instagram icon" height=35 width=35 class="me-3"/></a>
+              <a href="https://twitter.com" target="_blank"><img src="{{ asset("img/icon-x.png") }}" alt="X icon" height=35 width=35 class="me-3"/></a>
+              <a href="https://wa.me/yourphonenumber" target="_blank"><img src="{{ asset("img/icon-whatsapp.png") }}" alt="Whatsapp icon" height=35 width=35 class="me-3"/></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="{{ asset('js/booking.js') }}"></script>
