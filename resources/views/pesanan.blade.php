@@ -133,13 +133,13 @@
                         <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}" method="POST">
                           @csrf
                           @method('put')
-                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan">Selesaikan Pesanan</button>
+                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan my-1">Selesaikan Pesanan</button>
                         </form>
                     @endif
                     <form action="/admin/pesanan/{{$item->id_pesanan}}" method="POST">
                       @csrf
                       @method('delete')
-                      <button type="submit" class="btn btn-danger show-alert-delete-box">Hapus</button>
+                      <button type="submit" class="btn btn-danger show-alert-delete-box w-100">Hapus</button>
                     </form>
                   </td>
                 </tr>
