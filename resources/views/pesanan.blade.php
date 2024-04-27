@@ -127,7 +127,7 @@
                         <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}/selesai" method="POST">
                           @csrf
                           @method('put')
-                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan disabled">Selesaikan Pesanan</button>
+                          <button type="submit" class="btn btn-sm btn-success show-alert-confirm-pesanan my-1 disabled">Selesaikan Pesanan</button>
                         </form>
                     @else
                         <form action="/admin/pesanan/selesai/{{$item->id_pesanan}}" method="POST">

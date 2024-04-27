@@ -81,12 +81,11 @@ class AuthManager extends Controller
 
     public function admin(){
         $allCar = Mobil::count();
-        $mobilDipinjam = Mobil::where('status', 'dipinjam')->count();
         $mobilTersedia = Mobil::where('status', 'tersedia')->count();
         $mobilTidakTersedia = Mobil::where('status', 'tidak_tersedia')->count();
         $allBooked = Pesanan::count();
 
-        return view('admin', compact('allCar', 'mobilDipinjam', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'));
+        return view('admin', compact('allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'));
     }
 
     public function editMobil($id){

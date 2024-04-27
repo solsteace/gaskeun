@@ -64,7 +64,7 @@
         </h2>
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="card text-center mt-4 shadow-sm">
               <div class="card-header bg-primary text-white">
                 Jumlah Mobil
@@ -75,7 +75,18 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-6">
+            <div class="card text-center mt-4 shadow-sm">
+              <div class="card-header bg-danger text-white">
+                Jumlah Pesanan
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{$allBooked}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
             <div class="card text-center mt-4 shadow-sm">
               <div class="card-header bg-success text-white">
                 Mobil Tersedia
@@ -86,35 +97,13 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-danger text-white">
-                Mobil Dipinjam
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">{{$mobilDipinjam}}</h5>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-danger text-white">
+              <div class="card-header bg-secondary text-white">
                 Mobil Tidak Tersedia
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{$mobilTidakTersedia}}</h5>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-secondary text-white">
-                Jumlah Pesanan
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">{{$allBooked}}</h5>
               </div>
             </div>
           </div>
