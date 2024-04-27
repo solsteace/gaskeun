@@ -46,9 +46,19 @@ class PesananController extends Controller
                 "reason" => $validator->errors()
             ], 400);
         }
-
-
+        
         $orderData = $validator->safe()->all();
+
+        // Restrict car listed on many `Pesanan` records
+        $isBookedCar = (count(Pesanan::where("id_mobil", "=", $orderData["id_mobil"])
+                            ->where("status", "=", "belum_selesai")->get()) > 0);
+        if($isBookedCar) {
+            return response()->json([
+                "msg" => "Provided data is not valid",
+                "reason" => "This car has already been booked",
+            ], 400);
+        }
+
         try {
             $newPesanan = Pesanan::create($orderData);
         } catch(QueryException $e) {
