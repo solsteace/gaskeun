@@ -16,7 +16,17 @@ class SiteController extends Controller
     //
     public function cars() {
         return view('filterCar', [
-            "cars" => Mobil::with("pesanan")->get(),
+            "cars" => Mobil::with("pesanan")
+                    ->get()
+                    ->sortBy(function($item, $key) {
+                        return !(
+                            $item->status == "tersedia" 
+                            && (
+                                !($item->pesanan()->exists()) 
+                                || !($item->pesanan()->where("status", "belum_selesai")->exists())
+                            )
+                        );
+            }),
             "carBrands" => Mobil::select("brand")->distinct()->get()
         ]);
     }

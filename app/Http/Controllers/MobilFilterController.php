@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 use App\Models\Pengguna;
 use App\Models\Pesanan;
 use App\Models\Mobil;
@@ -32,7 +33,18 @@ class MobilFilterController extends Controller
             ], 405);
         }
 
-        $data = Mobil::with("pesanan")->get();
+        $data = Mobil::with("pesanan")
+                    ->get()
+                    ->sortBy(function($item, $key) {
+                        return !(
+                            $item->status == "tersedia" 
+                            && (
+                                !($item->pesanan()->exists()) 
+                                || !($item->pesanan()->where("status", "belum_selesai")->exists())
+                            )
+                        );
+                    })
+                    ->values();
         $filters = $validator->safe()->all();
         foreach($filters as $filter => $value) {
             if($value != null) {

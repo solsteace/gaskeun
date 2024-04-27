@@ -70,8 +70,11 @@ function generateCarCard(data) {
     const activeBook = data.pesanan
                             .filter(entry => entry["status"] == "belum_selesai")
     const carIsAvailable = (
-        data.pesanan.length == 0
-        || activeBook.length == 0
+        data.status == "tersedia" &&
+        (
+            data.pesanan.length == 0
+            || activeBook.length == 0
+        )
     )
 
     const div0 = document.createElement("div");
@@ -88,7 +91,11 @@ function generateCarCard(data) {
         ["card-header", "text-center", "bg-success", "text-white"]
             .forEach(elemClass => div2_0.classList.add(elemClass));
     } else {
-        div2_0.textContent = `Akan tersedia pada ${activeBook[0].tanggal_pengembalian}`;
+        div2_0.textContent = (activeBook.length == 0?
+                            "Sementara tidak ditawarkan"
+                            : `Akan tersedia pada ${activeBook[0].tanggal_pengembalian}`
+        );
+
         ["card-header", "text-center", "bg-danger", "text-white"]
             .forEach(elemClass => div2_0.classList.add(elemClass));
     }
@@ -253,7 +260,6 @@ searchButton.addEventListener("click", async() => {
             return res.json();
         }).then(res => {
             // To do: Display the cards
-            console.log(res)
             const carList = document.getElementById("availableCars")
             carList.innerHTML = "";
             Object.entries(res).forEach(([_, data]) => {
