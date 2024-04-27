@@ -67,7 +67,7 @@
             <div class="card shadow bg-white">
                 <div class="row">
                 <div class="col-md-12 col-lg-3 col-xl-3">
-                  <img class="img-fluid img-cover" src="{{ asset('img/car-zenix-dummyFilter.jpg') }}" alt="Car Image">
+                  <img class="img-fluid img-cover" src="{{ asset('storage/' . $book->path) }}" alt="Car Image">
                 </div>
                 <div class="col-md-6 col-lg-5 col-xl-5 px-4">
                   <h5 class="card-title fw-semibold fs-2 pt-3"> {{$book->brand}} {{$book->model}}</h5>

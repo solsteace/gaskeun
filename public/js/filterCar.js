@@ -105,7 +105,7 @@ function generateCarCard(data) {
         .forEach(elemClass => div2_1.classList.add(elemClass));
 
     const img = document.createElement("img");
-    img.src = "/img/car-zenix-dummyFilter.jpg";
+    img.src = `/storage/${data.carImgPath}`;
     img.id = "car-image";
     img.alt = "Car Image";
     ["card-img-top", "rounded-0", "card-image"]

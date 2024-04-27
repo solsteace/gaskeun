@@ -74,7 +74,8 @@ class SiteController extends Controller
                     ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
-                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan')
+                    ->join('Images','Images.id','=','Mobil.id_image')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', "Images.path as path")
                     ->where('Pengguna.id', '=', Auth::id())
                     ->get();
         return view("pesananSaya", ["books" => $books]);
