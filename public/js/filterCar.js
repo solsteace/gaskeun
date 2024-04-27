@@ -67,6 +67,13 @@ function convertDateFormatYMD(input) {
 }
 
 function generateCarCard(data) {
+    const activeBook = data.pesanan
+                            .filter(entry => entry["status"] == "belum_selesai")
+    const carIsAvailable = (
+        data.pesanan.length == 0
+        || activeBook.length == 0
+    )
+
     const div0 = document.createElement("div");
     ["col-md-6", "col-lg-4", "col-xl-3", "pt-4"]
         .forEach(elemClass => div0.classList.add(elemClass));
@@ -76,12 +83,12 @@ function generateCarCard(data) {
         .forEach(elemClass => div1.classList.add(elemClass));
     
     const div2_0 = document.createElement("div");
-    if(data.pesanan == null) {
+    if(carIsAvailable) {
         div2_0.textContent = "Tersedia";
         ["card-header", "text-center", "bg-success", "text-white"]
             .forEach(elemClass => div2_0.classList.add(elemClass));
     } else {
-        div2_0.textContent = `Akan tersedia pada ${data.pesanan.tanggal_pengembalian}`;
+        div2_0.textContent = `Akan tersedia pada ${activeBook[0].tanggal_pengembalian}`;
         ["card-header", "text-center", "bg-danger", "text-white"]
             .forEach(elemClass => div2_0.classList.add(elemClass));
     }
@@ -157,7 +164,7 @@ function generateCarCard(data) {
     button.type = "button";
     button.disabled = data.pesanan != null;
     button.textContent = "Pesan";
-    if(data.pesanan == null) {
+    if(carIsAvailable) {
         const a = document.createElement("a");
         a.href = `/booking?carId=${data.id}`;
         a.style.textDecoration = "none";
@@ -187,7 +194,7 @@ function generateCarCard(data) {
 
     [div2_0, div2_1, img, div2_2]
         .forEach(elem => {
-            if( !(data.pesanan == null && elem == div2_1) ) {
+            if( !(carIsAvailable && elem == div2_1) ) {
                 div1.appendChild(elem)
             }
         });
@@ -246,6 +253,7 @@ searchButton.addEventListener("click", async() => {
             return res.json();
         }).then(res => {
             // To do: Display the cards
+            console.log(res)
             const carList = document.getElementById("availableCars")
             carList.innerHTML = "";
             Object.entries(res).forEach(([_, data]) => {
