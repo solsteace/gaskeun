@@ -30,6 +30,7 @@ class AuthManager extends Controller
     }
 
     public function pesanan(Request $request) {
+        // Menyimpan data Pesanan, Pengguna, Mobil, Pembayaran, Pesanan dari database dan menambahkan searching dengan where
         $data = DB::table('Pesanan')
                     ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
@@ -42,6 +43,7 @@ class AuthManager extends Controller
                     ->orderBy('Pesanan.id', 'desc')
                     ->get();
 
+        // return view pesanan dan data 
         return view('pesanan')->with('data',$data);
     }
 

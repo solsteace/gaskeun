@@ -65,7 +65,7 @@
 
         <div class="row mt-3 align-items-center justify-content-between">
           <div class="col">
-            <button type="button" class="btn btn-outline-primary">All</button>
+            <a href="/admin/pesanan" type="button" class="btn btn-outline-primary">All</a>
           </div>
           <div class="col-auto">
             <form class="form-inline d-flex" method="GET">

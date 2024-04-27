@@ -66,7 +66,7 @@
             <div class="row mt-2 align-items-center justify-content-between">
 
                 <div class="col">
-                        <button type="button" class="btn btn-outline-primary">All</button>
+                        <a href="/admin/mobil" type="button" class="btn btn-outline-primary">All</a>
                         <button type="button" class="btn btn-outline-success mx-2" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
                 </div>
 
