@@ -255,42 +255,42 @@
             <img src="{{ asset("img/car-zenix.png") }}" class="card-img-top" alt="Innova Zenix">
             <div class="card-body">
               <h5 class="card-title">Toyota<br \>Innova Zenix</h5>
-              <p class="card-text">RpXXX.XXX / hari</p>
+              <p class="card-text">Rp300.000 / hari</p>
             </div>
           </div>
           <div class="card our-car-card pb-3">
             <img src="{{ asset("img/car-brio.png") }}" class="card-img-top" alt="Brio">
             <div class="card-body">
               <h5 class="card-title">Honda<br \>Brio</h5>
-              <p class="card-text">RpXXX.XXX / hari</p>
+              <p class="card-text">Rp200.000 / hari</p>
             </div>
           </div>
           <div class="card our-car-card pb-3">
             <img src="{{ asset("img/car-cKlasse.png") }}" class="card-img-top" alt="C-Class">
             <div class="card-body">
               <h5 class="card-title">Mercedes<br \>C-Class</h5>
-              <p class="card-text">RpXXX.XXX / hari</p>
+              <p class="card-text">Rp600.000 / hari</p>
             </div>
           </div>
           <div class="card our-car-card pb-3">
             <img src="{{ asset("img/car-sigra.png") }}" class="card-img-top" alt="Sigra">
             <div class="card-body">
               <h5 class="card-title">Daihatsu<br \>Sigra</h5>
-              <p class="card-text">RpXXX.XXX / hari</p>
+              <p class="card-text">Rp200.000 / hari</p>
             </div>
           </div>
           <div class="card our-car-card pb-3">
             <img src="{{ asset("img/car-tototArogan.png") }}" class="card-img-top" alt="Mobil Arogan">
             <div class="card-body">
               <h5 class="card-title">Mitsubishi<br \>Pajero Sport</h5>
-              <p class="card-text">RpXXX.XXX / hari</p>
+              <p class="card-text">Rp400.000 / hari</p>
             </div>
           </div>
           <div class="card our-car-card pb-3">
             <img src="{{ asset("img/car-neunelf.png") }}" class="card-img-top" alt="Porsche 911">
             <div class="card-body">
               <h5 class="card-title">Porsche<br \>911 Cabriolet</h5>
-              <p class="card-text">RpXXX.XXX / hari</p>
+              <p class="card-text">Rp999.999 / hari</p>
             </div>
           </div>
         </div>

@@ -23,7 +23,6 @@
         echo $script . "</script";
           
     ?>
-
   </head>
   <body>
     <!-- Navbar -->
@@ -229,7 +228,6 @@
                 class="btn button-36"
                 id="confirmButton"
                 data-bs-toggle="modal"
-                data-bs-target="#confirm-modal"
                 id="confirm-toggle"
             >
               Konfirmasi Pemesanan
@@ -290,10 +288,10 @@
           <div class="modal-body" >
             <p class="text-center mb-1" id="confirmationPopUp__msgTop"> Pesanan anda sedang diproses! </p>
             <p class="text-center mb-1" id="confirmationPopUp__msgBottom"> Mohon menunggu hingga proses selesai</p>
-            <img src="{{ asset('img/icon-confirm.png') }}" class="mx-auto d-block" alt="confirmed">
+            <img src="{{ asset('img/icon-loading.gif') }}" id="confirmationPopUp__icon" class="mx-auto d-block" alt="confirmed" height=150 width=150>
           </div>
           <div class="modal-footer d-flex justify-content-center" style="display: none;">
-            <a href="{{ route('history') }}" class="btn button-36 d-flex align-items-center justify-content-center" id="confirmationPopUp__back">Lihat pesanan saya</a>
+            <a href="{{ route('history') }}" class="btn button-36 d-flex align-items-center justify-content-center disabled" id="confirmationPopUp__back" style="pointer-events: none;">Memproses...</a>
           </div>
         </div>
       </div>
@@ -347,6 +345,10 @@
       </div>
     </div>
 
+    <script>
+      var iconConfirm = "{{ asset('img/icon-confirm.png') }}";
+      var iconDecline = "{{ asset('img/icon-decline.png') }}";
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/wnumb@1.2.0/wNumb.js"></script>
