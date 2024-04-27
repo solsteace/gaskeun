@@ -1,5 +1,5 @@
 $(".btn-hero-resp").click(function () {
-    window.location.href = "/cars";
+    window.location.href = carsRoute;
 });
 
 // Dynamic wording for the hero section
