@@ -106,6 +106,6 @@ class Mobil extends Model
     }
 
     public function image() {
-        return $this->hasOne(Images::class, "id");
+        return $this->belongsTo(Images::class, "id_image");
     }
 }
