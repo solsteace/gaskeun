@@ -35,6 +35,7 @@ class AuthManager extends Controller
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
                     ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan')
+                    ->orderBy('Pesanan.id', 'desc')
                     ->get();
 
         return view('pesanan')->with('data',$data);
@@ -70,6 +71,13 @@ class AuthManager extends Controller
                     ->join('Images','Images.id','=','Mobil.id_image')
                     ->leftJoin('Pesanan','Pesanan.id_mobil','=','Mobil.id')
                     ->select('Mobil.*', 'Images.*', 'Pesanan.tanggal_pengembalian', 'Images.id as id_image', 'Mobil.id as id_mobil')
+                    ->orderByRaw('CASE 
+                                    WHEN Mobil.status = "tersedia" THEN 0 
+                                    WHEN Mobil.status = "tidak_tersedia" AND Pesanan.id IS NOT NULL THEN 1 
+                                    ELSE 2 
+                                END')
+                    ->orderBy('Mobil.status', 'asc')
+                    ->orderBy('Mobil.brand', 'asc')
                     ->get();
 
         return view('mobil')->with('data',$data);
