@@ -62,9 +62,9 @@
         <h2>
           Daftar Pesanan
         </h2>
-        <form class="form-inline d-flex mt-4 justify-content-end">
+        <form class="form-inline d-flex mt-4 justify-content-end" method="GET">
           <div class="input-group" style="width: 300px;">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">
             <button class="btn btn-primary my-2 my-sm-0" type="submit">
               <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
             </button>

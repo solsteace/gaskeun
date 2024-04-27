@@ -29,11 +29,15 @@ class AuthManager extends Controller
         return view('booking');
     }
 
-    public function pesanan(){
+    public function pesanan(Request $request) {
         $data = DB::table('Pesanan')
                     ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
+                    ->where('Pesanan.nama_peminjam', 'like', '%'.$request->search.'%')
+                    ->orWhere('Pesanan.tanggal_peminjaman', 'like', '%'.$request->search.'%')
+                    ->orWhere('Pesanan.tanggal_pengembalian', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.nomor_polisi', 'like', '%'.$request->search.'%')
                     ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan')
                     ->orderBy('Pesanan.id', 'desc')
                     ->get();
@@ -66,11 +70,16 @@ class AuthManager extends Controller
         
         return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dihapus');
     }
-    public function mobil(){
+    public function mobil(Request $request){
         $data = DB::table('Mobil')
                     ->join('Images','Images.id','=','Mobil.id_image')
                     ->leftJoin('Pesanan','Pesanan.id_mobil','=','Mobil.id')
                     ->select('Mobil.*', 'Images.*', 'Pesanan.tanggal_pengembalian', 'Images.id as id_image', 'Mobil.id as id_mobil')
+                    ->where('Mobil.brand', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.model', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.nomor_polisi', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.transmisi', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.bahan_bakar', 'like', '%'.$request->search.'%')
                     ->orderByRaw('CASE 
                                     WHEN Mobil.status = "tersedia" THEN 0 
                                     WHEN Mobil.status = "tidak_tersedia" AND Pesanan.id IS NOT NULL THEN 1 
