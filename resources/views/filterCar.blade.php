@@ -19,7 +19,7 @@
     <div>
       <nav class="navbar navbar-expand-lg fixed-top bg-navbar">
         <div class="container">
-          <a class="navbar-brand" href="{{ route('index') }">
+          <a class="navbar-brand" href="{{ route('index') }}">
             <img src="{{ asset('img/logo-navbar.png') }}" alt="Gaskeun Logo" height="35" />
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -263,7 +263,7 @@
       </div>
     </div>
 
-!-- Footer -->
+    <!-- Footer -->
     <div class="footer mt-5">
       <div class="container">
         <div class="row">

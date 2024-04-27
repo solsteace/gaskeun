@@ -141,3 +141,9 @@ i {
 #dropoff-map {
     height: 500px;
 }
+
+.footer {
+    border-top-right-radius: 200px;
+    background-color: rgba(0, 0, 255, 1);
+    color: rgba(255, 255, 255, 1);
+}
