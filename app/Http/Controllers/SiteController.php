@@ -39,11 +39,14 @@ class SiteController extends Controller
         }
 
         $carIsAvailable  = (
-            !($car->pesanan()->exists())
-            || !($car->pesanan()
-                    ->where('status', 'belum_selesai')
-                    ->exists()
-                )
+            $car->status == "tersedia" 
+            && (
+                !($car->pesanan()->exists())
+                || !($car->pesanan()
+                        ->where('status', 'belum_selesai')
+                        ->exists()
+                    )
+            )
         );
 
         if(!$carIsAvailable) {
