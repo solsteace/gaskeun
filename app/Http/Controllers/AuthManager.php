@@ -48,31 +48,41 @@ class AuthManager extends Controller
     }
 
     public function konfirmasiPesanan($id){
+        // Mencari Pesanan dan Pembayaran berdasarkan ID 
         $pesanan = Pesanan::findOrFail( $id );
         $pembayaran = Pembayaran::findOrFail($pesanan->id_pembayaran);
+        // Mengubah status pembayaran menjadi lunas
         $pembayaran->status = 'lunas';
+        // Simpan data pembayaran ke table pembayaran
         $pembayaran->save();
+        // Mengarahkan ke halaman /admin/pesanan dan pesan sukses
         return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dikonfirmasi');
     }
 
     public function selesaikanPesanan($id){
+        // Mencari Pesanan dan Mobil berdasarkan ID 
         $pesanan = Pesanan::findOrFail( $id );
         $mobil = Mobil::findOrFail($pesanan->id_mobil);
+        // Ubah status mobil menjadi tersedia dan status pesanan menjadi selesai
         $mobil->status = 'tersedia';
         $pesanan->status = 'selesai';
+        // Simpan data ke dalam database
         $mobil->save();
         $pesanan->save();
-
+        // Mengarahkan ke halaman /admin/pesanan dan pesan sukses
         return redirect('/admin/pesanan')->with('success', 'Pesanan Selesai');
     }
 
     public function deletePesanan($id){
+        // Mencari Pesanan berdasarkan ID
         $pesanan = Pesanan::find($id);
+        // Delete pesanan di database
         $pesanan->delete();
-        
+        // Mengarahkan ke halaman /admin/pesanan dan pesan sukses
         return redirect('/admin/pesanan')->with('success', 'Pesanan Berhasil Dihapus');
     }
     public function mobil(Request $request){
+        // Menyimpan data Mobil, Images, Pesanan dari database dan menambahkan searching dengan where
         $data = DB::table('Mobil')
                     ->join('Images','Images.id','=','Mobil.id_image')
                     ->leftJoin('Pesanan','Pesanan.id_mobil','=','Mobil.id')
@@ -90,51 +100,63 @@ class AuthManager extends Controller
                     ->orderBy('Mobil.status', 'asc')
                     ->orderBy('Mobil.brand', 'asc')
                     ->get();
-
+        // return view mobil dan data 
         return view('mobil')->with('data',$data);
     }
 
     public function addMobil(){
+        // return view add-mobil dan data 
         return view('addMobil');
     }
 
     public function admin(){
+        // Mendapatkan jumlah data dalam database untuk statistik
         $allCar = Mobil::count();
         $mobilTersedia = Mobil::where('status', 'tersedia')->count();
         $mobilTidakTersedia = Mobil::where('status', 'tidak_tersedia')->count();
         $allBooked = Pesanan::count();
 
+        // return view admin dan 'allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'
         return view('admin', compact('allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'));
     }
 
     public function editMobil($id){
+        // Mencari data Mobil berdasarkan ID
         $mobil = Mobil::find($id);
+        // return view editMobil dan mobil 
         return view('editMobil')->with('mobil',$mobil);
     }
 
     public function store(Request $request) {
+        // Validasi data dari request
         $validatedData = $request->validate([
             'nama' => ["required", "max:255"],
             'email' => ["required", "email:dns", "unique:Pengguna"],
-            'password' => ["required", "min:2", "max:255", "confirmed"],
+            'password' => ["required", "min:8", "max:255", "confirmed"],
             'password_confirmation' => ['required']
         ]);
 
+        // Hash password yang di validasi
         $validatedData['password'] = Hash::make($validatedData['password']);
 
+        // Membuat pengguna di database
         Pengguna::create($validatedData);
 
+        // Membuat session dan mengembalikan pesan sukses
         $request->session()->flash('success', 'Registrasi Berhasil');
 
+        // return ke halaman /login
         return redirect('/login');
     }
 
     public function authenticate(Request $request){
+        // Validasi data dari request
         $credentials = $request->validate([
             'email' => ['required', 'email:dns'],
             'password' => ['required'],
         ]);
  
+        // mengarahkan user ke halaman landing page dan admin ke /admin
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 'user'){
@@ -144,6 +166,7 @@ class AuthManager extends Controller
             }
         }
         
+        //return ke halaman login dan menampilkan pesan login gagal
         return back()->with('loginError', 'Login Gagal');
     }
 
@@ -158,6 +181,7 @@ class AuthManager extends Controller
     }
 
     public function createMobil(Request $request){
+        // Validasi data request
         $validatedData = $request->validate([
             'brand' => ['required', 'string'],
             'model' => ['required', 'string'],
@@ -171,13 +195,16 @@ class AuthManager extends Controller
             'image' => ['required','image', 'mimes:jpeg,png,jpg'],
         ]);
         
+        // store image ke folder storage/post-mobil
         $validatedData['image'] = $request->file('image')->store('post-mobil');
 
+        // membuat image baru di database
         $image = new Images();
         $image->path = $validatedData['image'];
         $image->last_update = now();
         $image->save();
 
+        // membuat mobil baru di database
         $mobil = new Mobil();
         $mobil->id_pengguna = auth()->user()->id;
         $mobil->id_image = $image->id;
@@ -192,19 +219,24 @@ class AuthManager extends Controller
         $mobil->bahan_bakar = $validatedData['bahan_bakar'];
         $mobil->save();
 
+        // return ke halaman /admin/mobil/add-mobil dan pesan sukses
         return redirect('/admin/mobil/add-mobil')->with('success', 'Mobil Berhasil Ditambahkan');
     }
 
     public function deleteMobil($id){
+        // Mencari mobil berdasarkan ID
         $mobil = Mobil::find($id);
+        // Hapus mobil
         $mobil->delete();
+        // menghapus gambar dari mobil
         Images::where('id', $mobil->id_image)->delete();
 
-
+        // Mengarahkan /admin/mobil dan pesan sukses
         return redirect('/admin/mobil')->with('success', 'Mobil Berhasil Dihapus');
     }
 
     public function edit($id, Request $request) { 
+        // Validasi data request
         $validatedData = $request->validate([
             'brand' => ['required', 'string'],
             'model' => ['required', 'string'],
@@ -218,9 +250,12 @@ class AuthManager extends Controller
             'image' => ['image', 'mimes:jpeg,png,jpg'],
         ]);
 
+        // Mencari data mobil berdasarkan ID
         $mobil = Mobil::findOrFail($id);
+        // Update data mobil di table Mobil
         $mobil->update($validatedData);
         
+        // Updata image jika image ada atau not null
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-mobil');
             $image = Images::findOrFail($mobil->id_image);
@@ -228,6 +263,7 @@ class AuthManager extends Controller
             $image->save();
         }
 
+        // Mengarahkan halaman /admin/mobil dan pesan sukses
         return redirect('/admin/mobil')->with('success', 'Mobil Berhasil Diedit');
     }
 }
