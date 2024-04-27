@@ -172,7 +172,7 @@
     <div class="container pt-5" id="resultCard">
       <h4 class="mb-0">Berikut mobil pilihan untuk Anda:</h4>
 
-      <div class="row">
+      <div class="row" id="availableCars">
         @foreach ($cars as $car)
           @if($car->pesanan == null) <!--  Available Car -->
           <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
