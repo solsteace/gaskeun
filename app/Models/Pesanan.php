@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\Models\Pengguna;
 use App\Models\Mobil;
 use App\Models\Pembayaran;
@@ -14,7 +15,7 @@ class Pesanan extends Model
         "id_pemesan", "id_mobil", "id_pembayaran",
         "SIM_peminjam", "nama_peminjam", 
         "tanggal_peminjaman", "tanggal_pengembalian",
-        "titik_antar", "titik_jemput"
+        "titik_antar", "titik_jemput", "status"
     ];
 
     static function getCreateRules() {
@@ -27,7 +28,11 @@ class Pesanan extends Model
             "tanggal_peminjaman" => ["required", "date"], 
             "tanggal_pengembalian" => ["required", "date"],
             "titik_antar" => ["nullable", "string"],
-            "titik_jemput" => ["nullable", "string"]
+            "titik_jemput" => ["nullable", "string"],
+            "status" => [
+                "nullable", 
+                Rule::in(["selesai", "belum_selesai"])
+            ]
         ];
     }
 
@@ -38,7 +43,11 @@ class Pesanan extends Model
             "tanggal_peminjaman" => ["nullable", "date"], 
             "tanggal_pengembalian" => ["nullable", "date"],
             "titik_antar" => ["nullable", "string"],
-            "titik_jemput" => ["nullable", "string"]
+            "titik_jemput" => ["nullable", "string"],
+            "status" => [
+                "nullable", 
+                Rule::in(["selesai", "belum_selesai"])
+            ]
         ];
     } 
 
