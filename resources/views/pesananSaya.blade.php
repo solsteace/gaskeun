@@ -127,6 +127,7 @@
             </div>
           </div>
         </div>
+      </div>
       @empty
         <div class="row text-center pt-4 pb-3 my-5">
           <h5 class="text-danger fs-5">Maaf, Anda belum pernah memesan mobil</h5>
