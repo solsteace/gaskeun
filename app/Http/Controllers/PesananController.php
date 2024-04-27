@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Pesanan;
+use App\Models\Mobil;
 
 class PesananController extends Controller
 {
@@ -69,6 +70,10 @@ class PesananController extends Controller
                 )
             ], 500);
         }
+
+        $mobil = Mobil::find($orderData["id_mobil"]);
+        $mobil->status = "tidak_tersedia";
+        $mobil->save();
 
         return response()->json([
             "msg" => "Created `Pesanan`",
