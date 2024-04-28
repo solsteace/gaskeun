@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Pengguna;
 
 class PenggunaSeeder extends Seeder
@@ -35,8 +36,8 @@ class PenggunaSeeder extends Seeder
             Pengguna::create([
                 "nama" => $samples["nama"][$idx],
                 "email" => $samples["email"][$idx],
-                "password" => $samples["nama"][$idx],
-                "image" => ""
+                "password" => Hash::make($samples["nama"][$idx]),
+                "id_image" => $idx + 1,
             ]);
         }
     }

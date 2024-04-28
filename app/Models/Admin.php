@@ -7,18 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
-    protected $table = "admin";
     protected $fillable = [ "nama", "email", "password", "image" ];
-
+    protected $table = "Admin";
     public $timestamps = false;
     use HasFactory;
 
     public function mobil() {
         return $this->hasMany(Mobil::class);
     }
-
-    public function create() {}
-    public function show() {}
-    public function edit() {}
-    public function destroy() {}
 }

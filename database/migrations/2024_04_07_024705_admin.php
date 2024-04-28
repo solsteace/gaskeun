@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("admin", function(Blueprint $table) {
+        Schema::create("Admin", function(Blueprint $table) {
             // Do admins necessarily needs name and profile image?
             $table->id();
             $table->string("nama", 16); 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('Admin');
     }
 };

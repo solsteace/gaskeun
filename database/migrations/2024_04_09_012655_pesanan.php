@@ -13,21 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("pesanan", function(Blueprint $table) {
+        Schema::create("Pesanan", function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("id_pemesan");
             $table->unsignedBigInteger("id_mobil");
             $table->unsignedBigInteger("id_pembayaran");
 
-            $table->string("KTP_peminjam");
             $table->string("SIM_peminjam");
             $table->string("nama_peminjam"); // Order could be made for other people
             $table->date("tanggal_peminjaman");
             $table->date("tanggal_pengembalian");
+            $table->string("titik_antar")->nullable();
+            $table->string("titik_jemput")->nullable();
+            $table->enum("status", ["selesai", "belum_selesai"])->default("belum_selesai");
 
-            $table->foreign("id_pemesan")->references("id")->on("pengguna");
-            $table->foreign("id_pembayaran")->references("id")->on("pembayaran");
-            $table->foreign("id_mobil")->references("id")->on("mobil");
+            $table->foreign("id_pemesan")->references("id")->on("Pengguna");
+            $table->foreign("id_pembayaran")->references("id")->on("Pembayaran");
+            $table->foreign("id_mobil")->references("id")->on("Mobil");
         });
     }
 
@@ -38,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pesanan');
+        Schema::dropIfExists('Pesanan');
     }
 };

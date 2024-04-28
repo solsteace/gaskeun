@@ -13,21 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("mobil", function(Blueprint $table) {
+        Schema::create("Mobil", function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_admin");
+            $table->unsignedBigInteger("id_pengguna");
+            $table->unsignedBigInteger("id_image");
 
             $table->string("brand", 32);
             $table->string("model", 64);
             $table->unsignedTinyInteger("kapasitas");
             $table->unsignedInteger("harga_sewa");
             $table->string("deskripsi", 1024);
-            $table->string("image");
-            $table->string("status", 16);
+            $table->enum("status", ["tersedia", "dipinjam", "tidak_tersedia"])->default("tersedia");
             $table->string("nomor_polisi", 16);
-            $table->string("transmisi", 8);
+            $table->enum("transmisi", ["manual", "matic", "lainnya"])->default("manual");
+            $table->enum("bahan_bakar", ["bensin", "listrik", "diesel"])->default("bensin");
 
-            $table->foreign("id_admin")->references("id")->on("admin");
+            $table->foreign("id_pengguna")->references("id")->on("Pengguna");
+            $table->foreign("id_image")->references("id")->on("Images");
         });
     }
 
@@ -38,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobil');
+        Schema::dropIfExists('Mobil');
     }
 };

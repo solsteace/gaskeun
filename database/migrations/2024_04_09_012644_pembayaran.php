@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("pembayaran", function(Blueprint $table) {
+        Schema::create("Pembayaran", function(Blueprint $table) {
             $table->id();
-            $table->string("status", 16);
-            $table->date("last_update");
+            $table->enum("status", ["belum_lunas", "lunas"])->default("belum_lunas");
+            $table->date("last_update")->default(now());
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembayaran');
+        Schema::dropIfExists('Pembayaran');
     }
 };

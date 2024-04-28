@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(ImageSeeder::class);
         $this->call(PenggunaSeeder::class);
-        $this->call(AdminSeeder::class);
         $this->call(MobilSeeder::class);
         $this->call(PembayaranSeeder::class);
+        $this->call(PesananSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 
