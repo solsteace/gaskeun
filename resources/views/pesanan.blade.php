@@ -64,10 +64,10 @@
         </h2>
 
         <div class="row mt-3 align-items-center justify-content-between">
-          <div class="col">
+          <div class="col-auto">
             <a href="/admin/pesanan" type="button" class="btn btn-outline-primary">All</a>
           </div>
-          <div class="col-auto">
+          <div class="col-auto my-2">
             <form class="form-inline d-flex" method="GET">
               <div class="input-group" style="width: 300px;">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">

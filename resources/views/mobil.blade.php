@@ -65,12 +65,12 @@
 
             <div class="row mt-2 align-items-center justify-content-between">
 
-                <div class="col">
+                <div class="col-auto">
                         <a href="/admin/mobil" type="button" class="btn btn-outline-primary">All</a>
                         <button type="button" class="btn btn-outline-success mx-2" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
                 </div>
 
-                <div class="col-auto">
+                <div class="col-auto my-2">
                     <form class="form-inline d-flex" method="GET">
                         <div class="input-group" style="width: 300px;">
                             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">

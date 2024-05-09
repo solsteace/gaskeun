@@ -64,58 +64,134 @@
         </h2>
 
         <div class="row">
-          <div class="col-md-6">
+
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-primary text-white">
+              <div class="card-header bg-info text-white">
                 Jumlah Mobil
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$allCar}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$allCar}}</h5>
+                <button class="btn btn-success w-100">Lihat</button>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
               <div class="card-header bg-danger text-white">
                 Jumlah Pesanan
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$allBooked}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$allBooked}}</h5>
+                <button class="btn btn-success w-100">Lihat</button>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-success text-white">
+              <div class="card-header bg-primary text-white">
                 Mobil Tersedia
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$mobilTersedia}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$mobilTersedia}}</h5>
+                <button class="btn btn-success w-100">Lihat</button>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
               <div class="card-header bg-secondary text-white">
                 Mobil Tidak Tersedia
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$mobilTidakTersedia}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$mobilTidakTersedia}}</h5>
+                <button class="btn btn-success w-100">Lihat</button>
               </div>
             </div>
           </div>
 
         </div>
 
+        <div class="card shadow-sm p-4 bg-white mt-4">
+          <h4>
+            Transaksi Terakhir
+          </h4>
+
+
+          <div class="row">
+            <!-- Dummy Card for Latest Tarnsaction -->
+            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+              <div class="card shadow bg-white">
+                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
+                <div class="p-3">
+                  <h5 class="card-title fw-semibold">Nama Pemesan</h5>
+                  <div class="pt-2">
+                    <p class="fw-medium">Pesan mobil namaMobil</p>
+                    <p class="fw-medium">Pada 99-99-2099</p>
+                  </div>
+                  <p class="card-price">Rp Total yang dibayar</p>
+                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+              <div class="card shadow bg-white">
+                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
+                <div class="p-3">
+                  <h5 class="card-title fw-semibold">Zaga Zigi</h5>
+                  <div class="pt-2">
+                    <p class="fw-medium">Pesan mobil Brio</p>
+                    <p class="fw-medium">Pada 99-99-2099</p>
+                  </div>
+                  <p class="card-price">Rp 999.000</p>
+                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+              <div class="card shadow bg-white">
+                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
+                <div class="p-3">
+                  <h5 class="card-title fw-semibold">Nama Pemesan</h5>
+                  <div class="pt-2">
+                    <p class="fw-medium">Pesan mobil namaMobil</p>
+                    <p class="fw-medium">Pada 99-99-2099</p>
+                  </div>
+                  <p class="card-price">Rp Total yang dibayar</p>
+                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+              <div class="card shadow bg-white">
+                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
+                <div class="p-3">
+                  <h5 class="card-title fw-semibold">Nama Pemesan</h5>
+                  <div class="pt-2">
+                    <p class="fw-medium">Pesan mobil namaMobil</p>
+                    <p class="fw-medium">Pada 99-99-2099</p>
+                  </div>
+                  <p class="card-price">Rp Total yang dibayar</p>
+                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
       </div>
     </div>
-  </div>
-  @include('sweetalert::alert')
-  <script src="{{ asset('js/admin.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @include('sweetalert::alert')
+    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

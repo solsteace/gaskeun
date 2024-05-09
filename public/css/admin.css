@@ -208,3 +208,15 @@ a.sidebar-link:focus {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
+
+#car-image {
+    aspect-ratio: 4/3;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-price {
+    font-size: 1.3em;
+    font-weight: 500;
+}
