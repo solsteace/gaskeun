@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Storage;
 
 class AuthManager extends Controller
 {
@@ -228,6 +229,11 @@ class AuthManager extends Controller
         $mobil = Mobil::find($id);
         // Hapus mobil
         $mobil->delete();
+
+        // delete image from storage
+        $image = Images::find($mobil->id_image);
+        Storage::delete($image->path);
+
         // menghapus gambar dari mobil
         Images::where('id', $mobil->id_image)->delete();
 
@@ -259,6 +265,8 @@ class AuthManager extends Controller
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-mobil');
             $image = Images::findOrFail($mobil->id_image);
+            // delete image from storage
+            Storage::delete($image->path);
             $image->path =$validatedData['image'];
             $image->save();
         }
