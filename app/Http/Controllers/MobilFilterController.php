@@ -34,11 +34,10 @@ class MobilFilterController extends Controller
         }
 
         $data = Mobil::with("pesanan")
-                    // ->join("Images", "Mobil.id_image", '=', "Images.id")
-                    // ->join("Pesanan", "Mobil.id", '=', "Pesanan.id_mobil")
-                    // ->select(
-                    //     "Mobil.*", "Images.path as carImgPath"
-                    // )
+                    ->join("Images", "Mobil.id_image", '=', "Images.id")
+                    ->select(
+                        "Mobil.*", "Images.path as carImgPath"
+                    )
                     ->get()
                     ->sortBy(function($item, $key) {
                         return !(
