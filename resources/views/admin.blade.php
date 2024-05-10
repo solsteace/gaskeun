@@ -67,7 +67,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-info text-white">
+              <div class="card-header text-white" style="background-color: #7868E6;">
                 Jumlah Mobil
               </div>
               <div class="card-body">
@@ -79,7 +79,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-danger text-white">
+              <div class="card-header text-white" style="background-color: #01A4FF;">
                 Jumlah Pesanan
               </div>
               <div class="card-body">
@@ -91,7 +91,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-primary text-white">
+              <div class="card-header text-white" style="background-color: #FFBA08;">
                 Mobil Tersedia
               </div>
               <div class="card-body">
@@ -103,7 +103,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-secondary text-white">
+              <div class="card-header text-white" style="background-color: #E85D04;">
                 Mobil Tidak Tersedia
               </div>
               <div class="card-body">
@@ -116,88 +116,48 @@
         </div>
 
         <div class="card shadow-sm p-4 bg-white mt-4">
-          <h4>
-            Transaksi Terakhir
-          </h4>
+
+          <div class="row align-items-center justify-content-between">
+            <div class="col-auto">
+              <h4>
+                Menunggu Konfirmasi
+              </h4>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-success" onclick="window.location.href = `{{ route('pesanan') }}`;">Lakukan Konfirmasi</button>
+            </div>
+          </div>
 
 
-          <div class="row">
-            <!-- Dummy Card for Latest Tarnsaction -->
-            @foreach ($data as $item)
-                <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-                  <div class="card shadow bg-white">
-                    <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
-                    <div class="p-3">
-                      <h5 class="card-title fw-semibold">{{$item->nama_peminjam}}</h5>
-                      <div class="pt-2">
-                        <p class="fw-medium">Pesan mobil {{$item->brand}} {{$item->model}}</p>
-                        <p class="fw-medium">Pada {{$item->tanggal_peminjaman}}</p>
-                      </div>
-                      <p class="card-price">Rp {{ number_format($item->harga_sewa * 
-                                  (date_diff(
-                                      date_create($item->tanggal_peminjaman),
-                                      date_create($item->tanggal_pengembalian)
-                                    )->format('%a')
-                                  ),0, ',', '.') 
-                                }}</p>
-                      <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
-                    </div>
-                  </div>
-                </div>
-            @endforeach
-
-            {{-- <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-              <div class="card shadow bg-white">
-                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
-                <div class="p-3">
-                  <h5 class="card-title fw-semibold">Zaga Zigi</h5>
-                  <div class="pt-2">
-                    <p class="fw-medium">Pesan mobil Brio</p>
-                    <p class="fw-medium">Pada 99-99-2099</p>
-                  </div>
-                  <p class="card-price">Rp 999.000</p>
-                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
-                </div>
+          <div class="container custom-shadow mt-3">
+            <div class="row pt-3 pb-3 align-items-center justify-content-between">
+              <div class="col-auto">
+                <h5 class="card-title fw-semibold">Jue Viole Grace</h5>
+                <p class="m-0">Pesan mobil Innova pada 29-04-2024</p>
+              </div>
+              <div class="col-auto">
+                <p class="card-price m-0 mt-2">Rp 1.000.000</p>
               </div>
             </div>
+          </div>
 
-            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-              <div class="card shadow bg-white">
-                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
-                <div class="p-3">
-                  <h5 class="card-title fw-semibold">Nama Pemesan</h5>
-                  <div class="pt-2">
-                    <p class="fw-medium">Pesan mobil namaMobil</p>
-                    <p class="fw-medium">Pada 99-99-2099</p>
-                  </div>
-                  <p class="card-price">Rp Total yang dibayar</p>
-                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
-                </div>
+          <div class="container custom-shadow mt-3">
+            <div class="row pt-3 pb-3 align-items-center justify-content-between">
+              <div class="col-auto">
+                <h5 class="card-title fw-semibold">Khun Aguero Agnes</h5>
+                <p class="m-0">Pesan mobil Innova pada 29-04-2024</p>
+              </div>
+              <div class="col-auto">
+                <p class="card-price m-0 mt-2">Rp 1.000.000</p>
               </div>
             </div>
-
-            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-              <div class="card shadow bg-white">
-                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
-                <div class="p-3">
-                  <h5 class="card-title fw-semibold">Nama Pemesan</h5>
-                  <div class="pt-2">
-                    <p class="fw-medium">Pesan mobil namaMobil</p>
-                    <p class="fw-medium">Pada 99-99-2099</p>
-                  </div>
-                  <p class="card-price">Rp Total yang dibayar</p>
-                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
-                </div>
-              </div>
-            </div> --}}
-
           </div>
 
 
         </div>
       </div>
     </div>
-    @include('sweetalert::alert')
+
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

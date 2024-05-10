@@ -43,7 +43,7 @@ p {
 
 .custom-shadow {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
-    border: 2px solid #979797;
+    border: 1px solid #A5A5A5;
     border-radius: 16px;
 }
 

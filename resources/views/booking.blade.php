@@ -106,90 +106,18 @@
                     </ul>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <label class="form-check-label text-primary" for="flexCheckDefault">
                             Saya menyetujui semua Syarat & Ketentuan yang berlaku
                         </label>
                     </div>
             </div>
         </div>
 
-
-        <!--
-        <div class="row justify-content-between">
-            <div class="col p-0 mx-3 d-flex flex-column">
-                <img src="{{ asset('img/car-zenix.png') }}" alt="" class="img-fluid">
-                <div class="container p-4 custom-shadow flex-grow-1" style="border: 2px solid #979797;">
-                    <h3>Innova</h3>
-                    <p>Fitur mobil:</p>
-                    <p>Berkapasitas 1998 cc, serta Diesel 2393 cc. Kijang Innova tersedia dengan transmisi Manual, konsumsi BBM Kijang Innova mencapai 9.7 kmpl untuk perkotaan, 13.6 kmpl saat menjelajah perjalanan luar kota. Kijang Innova adalah MPV 7 seater dengan panjang 4735 mm, lebar 1830 mm, wheelbase 2750 mm.</p>
-                    
-                    <div style="display: block;">
-                        <i class="fa-solid fa-users"></i>
-                        <p style="
-                        display: inline;
-                        margin-left: 8px;
-                        font-weight: bold;
-                        ">4 orang</p>
-                    </div>
-
-                    <div style="display: block;">
-                        <i class="fa-solid fa-gear"></i>
-                        <p style="
-                        display: inline;
-                        margin-left: 8px;
-                        font-weight: bold;
-                        ">Manual</p>
-                    </div>
-                    
-                    <div style="display: block;">
-                        <i class="fa-solid fa-gas-pump"></i>
-                        <p style="
-                        display: inline;
-                        margin-left: 8px;
-                        font-weight: bold;
-                        ">Bensin</p>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="col p-0 mx-3 mt-4 d-flex flex-column">
-                <div class="container p-4 custom-shadow" style="border: 2px solid #979797;">
-                    <h3>Syarat dan Ketentuan</h3>
-                    <ul class="mt-3">
-                        <li>Wajib berusia minimal 21 tahun dan memiliki SIM A yang masih berlaku.</li>
-                        <li>Menunjukkan KTP dan SIM asli saat pengambilan mobil.</li>
-                        <li>Memberikan deposit sebagai jaminan keamanan.</li>
-                        <li>Bertanggung jawab atas kerusakan mobil selama masa sewa.</li>
-                        <li>Mematuhi peraturan lalu lintas yang berlaku.</li>
-                        <li>Pemesanan dapat dilakukan melalui website dan aplikasi.</li>
-                        <li>Pembayaran sewa dilakukan secara offline.</li>
-                        <li>Penyewa bertanggung jawab atas segala kerusakan yang terjadi pada mobil selama masa sewa.</li>
-                        <li>Rental mobil tidak bertanggung jawab atas kehilangan barang bawaan penyewa.</li>
-                    </ul>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Saya menyetujui semua Syarat & Ketentuan yang berlaku
-                        </label>
-                    </div>
-                </div>
-
-                <div class="container p-5 custom-shadow flex-grow-1 mt-4" style="border: 2px solid #979797;">
-                    Unggah KTP dan SIM anda
-                </div>
-            </div>
-            
-
-        </div>
-        -->
-
-        <div class="text-center mt-5 fs-6 fw-semibold text-danger" id="invalidCheck" style="display: none;">
+        <div class="text-center mt-5 fs-6 fw-semibold text-danger ms-3" id="invalidCheck" style="display: none;">
           Anda belum menyetujui syarat dan ketentuan
         </div>
 
-        <div class="d-flex justify-content-center mt-4">
+        <div class="d-flex justify-content-center mt-4 ms-3">
             @if( 
                 $car->status == "tersedia" 
                 && (
@@ -200,7 +128,7 @@
                     )  
                 )
             ) <!--  Available Car --> <!-- TODO: remove this inline style -->
-                <a class="btn-block button-36 d-flex align-items-center justify-content-cente" href="{{ route('createBooking', ['carId' => $_GET['carId']]) }}" role="button" id="gas-button">GASS!</a>
+                <a class="w-100 btn-block button-36 d-flex align-items-center justify-content-center" href="{{ route('createBooking', ['carId' => $_GET['carId']]) }}" role="button" id="gas-button">GASS!</a>
             @else 
                 <button type="button" class="button-36 btn-block" id="gas-button" disabled>
                     @if($car->pesanan()->exists())
