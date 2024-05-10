@@ -72,7 +72,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title fw-semibold mt-3 mb-4">{{$allCar}}</h5>
-                <button class="btn btn-success w-100">Lihat</button>
+                <a href="/admin/mobil" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title fw-semibold mt-3 mb-4">{{$allBooked}}</h5>
-                <button class="btn btn-success w-100">Lihat</button>
+                <a href="/admin/pesanan" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title fw-semibold mt-3 mb-4">{{$mobilTersedia}}</h5>
-                <button class="btn btn-success w-100">Lihat</button>
+                <a href="/admin/mobil?search=tersedia" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title fw-semibold mt-3 mb-4">{{$mobilTidakTersedia}}</h5>
-                <button class="btn btn-success w-100">Lihat</button>
+                <a href="/admin/mobil?search=tidak_tersedia" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
@@ -123,22 +123,30 @@
 
           <div class="row">
             <!-- Dummy Card for Latest Tarnsaction -->
-            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-              <div class="card shadow bg-white">
-                <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
-                <div class="p-3">
-                  <h5 class="card-title fw-semibold">Nama Pemesan</h5>
-                  <div class="pt-2">
-                    <p class="fw-medium">Pesan mobil namaMobil</p>
-                    <p class="fw-medium">Pada 99-99-2099</p>
+            @foreach ($data as $item)
+                <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+                  <div class="card shadow bg-white">
+                    <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
+                    <div class="p-3">
+                      <h5 class="card-title fw-semibold">{{$item->nama_peminjam}}</h5>
+                      <div class="pt-2">
+                        <p class="fw-medium">Pesan mobil {{$item->brand}} {{$item->model}}</p>
+                        <p class="fw-medium">Pada {{$item->tanggal_peminjaman}}</p>
+                      </div>
+                      <p class="card-price">Rp {{ number_format($item->harga_sewa * 
+                                  (date_diff(
+                                      date_create($item->tanggal_peminjaman),
+                                      date_create($item->tanggal_pengembalian)
+                                    )->format('%a')
+                                  ),0, ',', '.') 
+                                }}</p>
+                      <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
+                    </div>
                   </div>
-                  <p class="card-price">Rp Total yang dibayar</p>
-                  <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
                 </div>
-              </div>
-            </div>
+            @endforeach
 
-            <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+            {{-- <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
               <div class="card shadow bg-white">
                 <img id="car-image" src="{{ asset('img/car-brio.png') }}" class="card-img-top rounded-0" alt="Car Image">
                 <div class="p-3">
@@ -181,7 +189,7 @@
                   <button onclick="window.location.href = `{{ route('pesanan') }}`;" class="btn btn-success w-100">Lihat</button>
                 </div>
               </div>
-            </div>
+            </div> --}}
 
           </div>
 

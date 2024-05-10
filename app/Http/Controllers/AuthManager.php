@@ -93,6 +93,7 @@ class AuthManager extends Controller
                     ->orWhere('Mobil.nomor_polisi', 'like', '%'.$request->search.'%')
                     ->orWhere('Mobil.transmisi', 'like', '%'.$request->search.'%')
                     ->orWhere('Mobil.bahan_bakar', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.status', '=', $request->search)
                     ->orderByRaw('CASE 
                                     WHEN Mobil.status = "tersedia" THEN 0 
                                     WHEN Mobil.status = "tidak_tersedia" AND Pesanan.id IS NOT NULL THEN 1 
@@ -116,9 +117,18 @@ class AuthManager extends Controller
         $mobilTersedia = Mobil::where('status', 'tersedia')->count();
         $mobilTidakTersedia = Mobil::where('status', 'tidak_tersedia')->count();
         $allBooked = Pesanan::count();
+        $data = DB::table('Pesanan')
+                    ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
+                    ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
+                    ->join('Images','Images.id','=','Mobil.id_image')
+                    ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan', 'Images.path as path')
+                    ->orderBy('Pesanan.id', 'desc')
+                    ->take(4)
+                    ->get();
 
         // return view admin dan 'allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'
-        return view('admin', compact('allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'));
+        return view('admin', compact('allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked', 'data'));
     }
 
     public function editMobil($id){
