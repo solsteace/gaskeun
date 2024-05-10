@@ -123,36 +123,40 @@
                 Menunggu Konfirmasi
               </h4>
             </div>
-            <div class="col-auto">
-              <button class="btn btn-success" onclick="window.location.href = `{{ route('pesanan') }}`;">Lakukan Konfirmasi</button>
-            </div>
+            @if ($data->isEmpty())
+                <div class="col-auto">
+                  <a href="/admin/pesanan?search=belum_lunas" class="btn btn-success disabled" >Lakukan Konfirmasi</a>
+                </div>
+            @else
+              <div class="col-auto">
+                <a href="/admin/pesanan?search=belum_lunas" class="btn btn-success" >Lakukan Konfirmasi</a>
+              </div>
+            @endif
           </div>
 
-
-          <div class="container custom-shadow mt-3">
-            <div class="row pt-3 pb-3 align-items-center justify-content-between">
-              <div class="col-auto">
-                <h5 class="card-title fw-semibold">Jue Viole Grace</h5>
-                <p class="m-0">Pesan mobil Innova pada 29-04-2024</p>
-              </div>
-              <div class="col-auto">
-                <p class="card-price m-0 mt-2">Rp 1.000.000</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="container custom-shadow mt-3">
-            <div class="row pt-3 pb-3 align-items-center justify-content-between">
-              <div class="col-auto">
-                <h5 class="card-title fw-semibold">Khun Aguero Agnes</h5>
-                <p class="m-0">Pesan mobil Innova pada 29-04-2024</p>
-              </div>
-              <div class="col-auto">
-                <p class="card-price m-0 mt-2">Rp 1.000.000</p>
-              </div>
-            </div>
-          </div>
-
+          @if ($data->isEmpty())
+              <p>Semua pembayaran telah dikonfirmasi</p>
+          @else
+            @foreach ($data as $item)
+                <div class="container custom-shadow mt-3">
+                  <div class="row pt-3 pb-3 align-items-center justify-content-between">
+                    <div class="col-auto">
+                      <h5 class="card-title fw-semibold">{{$item->nama_peminjam}}</h5>
+                      <p class="m-0">Pesan mobil {{$item->brand}} {{$item->model}} pada {{$item->tanggal_peminjaman}}</p>
+                    </div>
+                    <div class="col-auto">
+                      <p class="card-price m-0 mt-2">Rp. {{ number_format($item->harga_sewa * 
+                                    (date_diff(
+                                        date_create($item->tanggal_peminjaman),
+                                        date_create($item->tanggal_pengembalian)
+                                      )->format('%a')), 0, ',', '.') }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            @endforeach
+          @endif
+          
 
         </div>
       </div>

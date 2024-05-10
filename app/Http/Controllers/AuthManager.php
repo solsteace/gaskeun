@@ -40,8 +40,9 @@ class AuthManager extends Controller
                     ->orWhere('Pesanan.tanggal_peminjaman', 'like', '%'.$request->search.'%')
                     ->orWhere('Pesanan.tanggal_pengembalian', 'like', '%'.$request->search.'%')
                     ->orWhere('Mobil.nomor_polisi', 'like', '%'.$request->search.'%')
+                    ->orWhere('Pembayaran.status', '=', $request->search)
                     ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan')
-                    ->orderBy('Pesanan.id', 'desc')
+                    ->orderBy('Pesanan.tanggal_peminjaman', 'asc')
                     ->get();
 
         // return view pesanan dan data 
@@ -118,13 +119,10 @@ class AuthManager extends Controller
         $mobilTidakTersedia = Mobil::where('status', 'tidak_tersedia')->count();
         $allBooked = Pesanan::count();
         $data = DB::table('Pesanan')
-                    ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
-                    ->join('Images','Images.id','=','Mobil.id_image')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
-                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan', 'Images.path as path')
-                    ->orderBy('Pesanan.id', 'desc')
-                    ->take(4)
+                    ->where('Pembayaran.status', 'belum_lunas')
+                    ->select('Pesanan.*', 'Mobil.*', 'Pembayaran.*')
                     ->get();
 
         // return view admin dan 'allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'
