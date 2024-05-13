@@ -183,7 +183,7 @@ p {
     border: none;
     background: linear-gradient(
         to right,
-        rgba(0, 0, 255, 1) 75%,
+        #5D5BFF 75%,
         transparent 25%
     );
     color: white;
@@ -210,6 +210,6 @@ p {
 
 .footer {
     border-top-right-radius: 200px;
-    background-color: rgba(0, 0, 255, 1);
+    background-color: #5D5BFF;
     color: rgba(255, 255, 255, 1);
 }
