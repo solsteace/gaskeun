@@ -64,58 +64,106 @@
         </h2>
 
         <div class="row">
-          <div class="col-md-6">
+
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-primary text-white">
+              <div class="card-header text-white" style="background-color: #7868E6;">
                 Jumlah Mobil
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$allCar}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$allCar}}</h5>
+                <a href="/admin/mobil" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-danger text-white">
+              <div class="card-header text-white" style="background-color: #01A4FF;">
                 Jumlah Pesanan
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$allBooked}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$allBooked}}</h5>
+                <a href="/admin/pesanan" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-success text-white">
+              <div class="card-header text-white" style="background-color: #FFBA08;">
                 Mobil Tersedia
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$mobilTersedia}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$mobilTersedia}}</h5>
+                <a href="/admin/mobil?search=tersedia" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header bg-secondary text-white">
+              <div class="card-header text-white" style="background-color: #E85D04;">
                 Mobil Tidak Tersedia
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$mobilTidakTersedia}}</h5>
+                <h5 class="card-title fw-semibold mt-3 mb-4">{{$mobilTidakTersedia}}</h5>
+                <a href="/admin/mobil?search=tidak_tersedia" class="btn btn-success w-100">Lihat</a>
               </div>
             </div>
           </div>
 
         </div>
 
+        <div class="card shadow-sm p-4 bg-white mt-4">
+
+          <div class="row align-items-center justify-content-between">
+            <div class="col-auto">
+              <h4>
+                Menunggu Konfirmasi
+              </h4>
+            </div>
+            @if ($data->isEmpty())
+                <div class="col-auto">
+                  <a href="/admin/pesanan?search=belum_lunas" class="btn btn-success disabled" >Lakukan Konfirmasi</a>
+                </div>
+            @else
+              <div class="col-auto">
+                <a href="/admin/pesanan?search=belum_lunas" class="btn btn-success" >Lakukan Konfirmasi</a>
+              </div>
+            @endif
+          </div>
+
+          @if ($data->isEmpty())
+              <p>Semua pembayaran telah dikonfirmasi</p>
+          @else
+            @foreach ($data as $item)
+                <div class="container custom-shadow mt-3">
+                  <div class="row pt-3 pb-3 align-items-center justify-content-between">
+                    <div class="col-auto">
+                      <h5 class="card-title fw-semibold">{{$item->nama_peminjam}}</h5>
+                      <p class="m-0">Pesan mobil {{$item->brand}} {{$item->model}} pada {{$item->tanggal_peminjaman}}</p>
+                    </div>
+                    <div class="col-auto">
+                      <p class="card-price m-0 mt-2">Rp. {{ number_format($item->harga_sewa * 
+                                    (date_diff(
+                                        date_create($item->tanggal_peminjaman),
+                                        date_create($item->tanggal_pengembalian)
+                                      )->format('%a')), 0, ',', '.') }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            @endforeach
+          @endif
+          
+
+        </div>
       </div>
     </div>
-  </div>
-  @include('sweetalert::alert')
-  <script src="{{ asset('js/admin.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

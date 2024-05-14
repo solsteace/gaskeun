@@ -57,104 +57,105 @@
 
 
         <div class="main p-4">
-            <div class="d-flex justify-content-between align-items-center ms-1">
-                <h2>
-                    Daftar Mobil
-                </h2>
-            </div>
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center ms-1">
+                    <h2>
+                        Daftar Mobil
+                    </h2>
+                </div>
 
-            <div class="row mt-2 align-items-center justify-content-between">
+                <div class="row mt-2 align-items-center justify-content-between">
 
-                <div class="col">
+                    <div class="col-auto">
                         <a href="/admin/mobil" type="button" class="btn btn-outline-primary">All</a>
                         <button type="button" class="btn btn-outline-success mx-2" onclick="window.location.href = `{{ route('addMobil') }}`;">Tambah mobil</button>
+                    </div>
+
+                    <div class="col-auto my-2">
+                        <form class="form-inline d-flex" method="GET">
+                            <div class="input-group" style="width: 300px;">
+                                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                                    <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
 
-                <div class="col-auto">
-                    <form class="form-inline d-flex" method="GET">
-                        <div class="input-group" style="width: 300px;">
-                            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">
-                                <i class="bi bi-search bi-sm" style="font-size: 1rem;"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                <div class="row">
+                    <!-- Dummy Card for Available Car 1 -->
+                    @foreach ($data as $item)
+                    <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
+                        <div class="card shadow bg-white">
+                            @if ($item->status == "tersedia")
+                            <div class="card-header text-center text-white" style="background-color: #52B788;">
+                                Tersedia
+                            </div>
+                            @endif
+                            @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
+                            <div class="card-header text-center text-white" style="background-color: #FF6969;">
+                                Akan Tersedia Pada {{$item->tanggal_pengembalian}}
+                            </div>
+                            @endif
+                            @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
+                            <div class="card-header text-center text-white" style="background-color: #FF6969;">
+                                Sementara Tidak Ditawarkan
+                            </div>
+                            @endif
 
-            </div>
-
-            <div class="row">
-                <!-- Dummy Card for Available Car 1 -->
-                @foreach ($data as $item)
-                <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
-                    <div class="card shadow bg-white">
-                        @if ($item->status == "tersedia")
-                        <div class="card-header text-center bg-success text-white">
-                            Tersedia
-                        </div>
-                        @endif
-                        @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
-                        <div class="card-header text-center bg-danger text-white">
-                            Akan Tersedia Pada {{$item->tanggal_pengembalian}}
-                        </div>
-                        @endif
-                        @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
-                        <div class="card-header text-center bg-danger text-white">
-                            Sementara Tidak Ditawarkan
-                        </div>
-                        @endif
-
-                        <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
-                        <div class="p-3">
-                            <h5 class="card-title fw-semibold">{{$item->brand}}<br>{{$item->model}}</h5>
-                            <p class="card-price">Rp {{ number_format($item->harga_sewa, 0, ',', '.') }}/hari</p>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
-                                <p class="fw-medium">{{$item->kapasitas}} orang</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
-                                <p class="fw-medium">{{$item->transmisi}}</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
-                                <p class="fw-medium">{{$item->bahan_bakar}}</p>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>
-                                <p class="fw-medium">{{$item->nomor_polisi}}</p>
-                            </div>
-                            <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
-                                @if ($item->status == "tersedia")
-                                <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
-                                </form>
-                                @endif
-                                @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
-                                <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box disabled">Hapus</button>
-                                </form>
-                                @endif
-                                @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
-                                <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger w-100 show-alert-delete-box">Hapus</button>
-                                </form>
-                                @endif
-                                <a href="/admin/mobil/edit-mobil/{{$item->id_mobil}}" class="btn btn-primary w-100">Edit</a>
+                            <img id="car-image" src="{{ asset('storage/' . $item->path) }}" class="card-img-top rounded-0" alt="Car Image">
+                            <div class="p-3">
+                                <h5 class="card-title fw-semibold">{{$item->brand}}<br>{{$item->model}}</h5>
+                                <p class="card-price">Rp {{ number_format($item->harga_sewa, 0, ',', '.') }}/hari</p>
+                                <div style="display: flex;">
+                                    <div style="width: 40px;"><i class="fa-solid fa-users"></i></div>
+                                    <p class="fw-medium">{{$item->kapasitas}} orang</p>
+                                </div>
+                                <div style="display: flex;">
+                                    <div style="width: 40px;"><i class="fa-solid fa-gear"></i></div>
+                                    <p class="fw-medium">{{$item->transmisi}}</p>
+                                </div>
+                                <div style="display: flex;">
+                                    <div style="width: 40px;"><i class="fa-solid fa-gas-pump"></i></div>
+                                    <p class="fw-medium">{{$item->bahan_bakar}}</p>
+                                </div>
+                                <div style="display: flex;">
+                                    <div style="width: 40px;"><i class="fa-solid fa-hashtag"></i></div>
+                                    <p class="fw-medium">{{$item->nomor_polisi}}</p>
+                                </div>
+                                <div class="d-grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, minmax(0, 1fr));">
+                                    @if ($item->status == "tersedia")
+                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn w-100 show-alert-delete-box text-white" style="background-color: #FF6969;">Hapus</button>
+                                    </form>
+                                    @endif
+                                    @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian != '')
+                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn w-100 show-alert-delete-box disabled text-white" style="background-color: #FF6969;">Hapus</button>
+                                    </form>
+                                    @endif
+                                    @if ($item->status == "tidak_tersedia" && $item->tanggal_pengembalian == '')
+                                    <form action="/admin/mobil/{{$item->id_mobil}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn w-100 show-alert-delete-box text-white" style="background-color: #FF6969;">Hapus</button>
+                                    </form>
+                                    @endif
+                                    <a href="/admin/mobil/edit-mobil/{{$item->id_mobil}}" class="btn btn-primary w-100" style="background-color: #7160FF;">Edit</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+
                 </div>
-                @endforeach
-
             </div>
-
         </div>
     </div>
     @include('sweetalert::alert')

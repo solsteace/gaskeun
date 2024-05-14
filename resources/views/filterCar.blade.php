@@ -186,7 +186,7 @@
           ) <!--  Available Car -->
           <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
             <div class="card shadow bg-white">
-              <div class="card-header text-center bg-success text-white">
+              <div class="card-header text-center text-white" style="background-color: #52B788;">
                 Tersedia
               </div>
               <!-- TODO: load appropiate image -->
@@ -215,7 +215,7 @@
           @else <!-- Unavailable Car -->
             <div class="col-md-6 col-lg-4 col-xl-3 pt-4">
               <div class="card shadow bg-white card-container">
-                <div class="card-header text-center bg-danger text-white">
+                <div class="card-header text-center text-white" style="background-color: #FF6969;">
                   @if($car->pesanan()->exists())
                     Akan tersedia pada {{
                       ($car->pesanan()

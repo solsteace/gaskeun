@@ -40,8 +40,9 @@ class AuthManager extends Controller
                     ->orWhere('Pesanan.tanggal_peminjaman', 'like', '%'.$request->search.'%')
                     ->orWhere('Pesanan.tanggal_pengembalian', 'like', '%'.$request->search.'%')
                     ->orWhere('Mobil.nomor_polisi', 'like', '%'.$request->search.'%')
+                    ->orWhere('Pembayaran.status', '=', $request->search)
                     ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', 'Pesanan.status as status_pesanan')
-                    ->orderBy('Pesanan.id', 'desc')
+                    ->orderBy('Pesanan.tanggal_peminjaman', 'asc')
                     ->get();
 
         // return view pesanan dan data 
@@ -93,6 +94,7 @@ class AuthManager extends Controller
                     ->orWhere('Mobil.nomor_polisi', 'like', '%'.$request->search.'%')
                     ->orWhere('Mobil.transmisi', 'like', '%'.$request->search.'%')
                     ->orWhere('Mobil.bahan_bakar', 'like', '%'.$request->search.'%')
+                    ->orWhere('Mobil.status', '=', $request->search)
                     ->orderByRaw('CASE 
                                     WHEN Mobil.status = "tersedia" THEN 0 
                                     WHEN Mobil.status = "tidak_tersedia" AND Pesanan.id IS NOT NULL THEN 1 
@@ -116,9 +118,15 @@ class AuthManager extends Controller
         $mobilTersedia = Mobil::where('status', 'tersedia')->count();
         $mobilTidakTersedia = Mobil::where('status', 'tidak_tersedia')->count();
         $allBooked = Pesanan::count();
+        $data = DB::table('Pesanan')
+                    ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
+                    ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
+                    ->where('Pembayaran.status', 'belum_lunas')
+                    ->select('Pesanan.*', 'Mobil.*', 'Pembayaran.*')
+                    ->get();
 
         // return view admin dan 'allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'
-        return view('admin', compact('allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked'));
+        return view('admin', compact('allCar', 'mobilTersedia', 'mobilTidakTersedia', 'allBooked', 'data'));
     }
 
     public function editMobil($id){
