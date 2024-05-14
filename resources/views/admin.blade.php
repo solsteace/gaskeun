@@ -67,7 +67,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header text-white" style="background-color: #7868E6;">
+              <div class="card-header text-white" style="background-color: #E6ACFF;">
                 Jumlah Mobil
               </div>
               <div class="card-body">
@@ -79,7 +79,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header text-white" style="background-color: #01A4FF;">
+              <div class="card-header text-white" style="background-color: #B48BFF;">
                 Jumlah Pesanan
               </div>
               <div class="card-body">
@@ -91,7 +91,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header text-white" style="background-color: #FFBA08;">
+              <div class="card-header text-white" style="background-color: #9476FF;">
                 Mobil Tersedia
               </div>
               <div class="card-body">
@@ -103,7 +103,7 @@
 
           <div class="col-sm-6 col-lg-3 col-xl-3">
             <div class="card text-center mt-4 shadow-sm">
-              <div class="card-header text-white" style="background-color: #E85D04;">
+              <div class="card-header text-white" style="background-color: #5E53FF;">
                 Mobil Tidak Tersedia
               </div>
               <div class="card-body">
