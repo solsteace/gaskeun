@@ -7,6 +7,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\MobilFilterController;
+use App\Http\Controllers\AuthManager;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,13 @@ use App\Http\Controllers\MobilFilterController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/register', [AuthManager::class, "registerApi"]);
+Route::post('/login', [AuthManager::class, "loginApi"]);
+Route::post('/logout', [AuthManager::class, "logoutApi"])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::get('/pengguna', [PenggunaController::class, "show"]);
 Route::get('/pengguna/{id}', [PenggunaController::class, "showById"]);
@@ -45,6 +53,4 @@ Route::delete('/pesanan/{id}', [PesananController::class, "destroy"]);
 
 Route::post('/mobilFilter', [MobilFilterController::class, "show"]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
