@@ -158,6 +158,66 @@ class AuthManager extends Controller
         return redirect('/login');
     }
 
+    public function registerApi(Request $request){
+        $validator = Validator::make($request->all(),[
+            'nama' => ["required", "max:255"],
+            'email' => ["required", "email:dns", "unique:Pengguna"],
+            'password' => ["required", "min:8", "max:255", "confirmed"],
+            'password_confirmation' => ['required']
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'message' => 'error',
+                'data' => $validator->errors() 
+            ]);
+        }
+
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $user = Pengguna::create($input);
+
+        $success['token'] = $user->createToken('auth_token')->plainTextToken;
+        $success['name'] = $user->nama;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Register Success',
+            'data' => $success 
+        ]);
+    }
+
+    public function loginApi(Request $request){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $auth = Auth::user();
+            $success['token'] = $auth->createToken('auth_token')->plainTextToken;
+            $success['name'] = $auth->nama;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Login Success',
+                'data' => $success 
+            ]);
+        }else{
+            return response()->json([
+            'success' => false,
+            'message' => 'Cek Email dan Password',
+            'data' => null
+        ]);
+        }
+    }
+
+    public function logoutApi(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Logout Success',
+            'data' => null
+        ]);
+    }
+
     public function authenticate(Request $request){
         // Validasi data dari request
         $credentials = $request->validate([

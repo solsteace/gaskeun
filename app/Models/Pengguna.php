@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use App\Models\Pesanan;
 use App\Models\Mobil;
 use App\Models\Images;
@@ -12,6 +14,7 @@ use App\Models\Images;
 
 class Pengguna extends Authenticatable 
 {
+    use HasApiTokens;
     protected $fillable = [ "id_image", "nama", "email", "password"];
     protected $table = "Pengguna";
     public $timestamps = false;
