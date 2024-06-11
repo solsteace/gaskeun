@@ -169,8 +169,8 @@ class AuthManager extends Controller
         if ($validator->fails()){
             return response()->json([
                 'success' => false,
-                'message' => 'error',
-                'data' => $validator->errors() 
+                'message' => $validator->errors(),
+                'data' => null
             ]);
         }
 
@@ -178,8 +178,10 @@ class AuthManager extends Controller
         $input['password'] = Hash::make($input['password']);
         $user = Pengguna::create($input);
 
-        $success['token'] = $user->createToken('auth_token')->plainTextToken;
+        // $success['token'] = $user->createToken('auth_token')->plainTextToken;
         $success['name'] = $user->nama;
+        $success['email'] = $user->email;
+        $success['id'] = $user->id;
 
         return response()->json([
             'success' => true,
@@ -193,6 +195,8 @@ class AuthManager extends Controller
             $auth = Auth::user();
             $success['token'] = $auth->createToken('auth_token')->plainTextToken;
             $success['name'] = $auth->nama;
+            $success['email'] = $auth->email;
+            $success['id'] = $auth->id;
 
             return response()->json([
                 'success' => true,
