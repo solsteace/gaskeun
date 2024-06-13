@@ -46,6 +46,7 @@ Route::post('/mobil/{id}', [MobilController::class, "edit"]);
 Route::delete('/mobil/{id}', [MobilController::class, "destroy"]);
 
 Route::get('/pesanan', [PesananController::class, "show"]);
+Route::get('/pesanan/byUser/{id}', [PesananController::class, "showByUser"]);
 Route::get('/pesanan/{id}', [PesananController::class, "showById"]);
 Route::post('/pesanan', [PesananController::class, "create"]);
 Route::post('/pesanan/{id}', [PesananController::class, "edit"]);

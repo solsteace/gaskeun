@@ -16,7 +16,7 @@ class PesananController extends Controller
             return Pesanan::all();
         } catch(QueryException $e) {
             return response()->json([
-                "msg" => "Exception raised during creating new `Pesanan`",
+                "msg" => "Exception raised during showing `Pesanan`",
                 "reason" => (env("APP_ENV", "local") == "local"? 
                         $e->getMessage(): "[DISCLOSED]"
                 )
@@ -24,6 +24,25 @@ class PesananController extends Controller
         }
     }
 
+    public function showByUser($id) {
+        try {
+            return DB::table('Pesanan')
+                    ->join('Pengguna','Pengguna.id','=','Pesanan.id_pemesan')
+                    ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
+                    ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
+                    ->join('Images','Images.id','=','Mobil.id_image')
+                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', "Images.path as path")
+                    ->where('Pengguna.id', '=', $id)
+                    ->get();
+        } catch(QueryException $e) {
+            return response()->json([
+                "msg" => "Exception raised during showing `Pesanan`",
+                "reason" => (env("APP_ENV", "local") == "local"? 
+                        $e->getMessage(): "[DISCLOSED]"
+                )
+            ], 500);
+        }
+    }
 
     public function showById($id) { 
         try {
