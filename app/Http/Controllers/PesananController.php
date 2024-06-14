@@ -41,7 +41,7 @@ class PesananController extends Controller
                         "Images.path as path"
                     )
                     ->where('Pengguna.id', '=', $id)
-                    ->orderBy("Pesanan.id", "asc")
+                    ->orderBy("Pesanan.id", "desc")
                     ->get();
         } catch(QueryException $e) {
             return response()->json([
