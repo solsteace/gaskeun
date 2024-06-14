@@ -32,8 +32,16 @@ class PesananController extends Controller
                     ->join('Mobil','Mobil.id','=','Pesanan.id_mobil')
                     ->join('Pembayaran','Pembayaran.id','=','Pesanan.id_pembayaran')
                     ->join('Images','Images.id','=','Mobil.id_image')
-                    ->select('Pesanan.*', 'Pengguna.*', 'Mobil.*', 'Pembayaran.*', 'Pesanan.id as id_pesanan', "Images.path as path")
+                    ->select(
+                        'Pesanan.*', 'Pengguna.*', 
+                        'Mobil.*', 'Pembayaran.*', 
+                        'Pesanan.id as id_pesanan', 
+                        "Pesanan.status as pesanan_status",
+                        "Mobil.status as mobil_status",
+                        "Images.path as path"
+                    )
                     ->where('Pengguna.id', '=', $id)
+                    ->orderBy("Pesanan.id", "asc")
                     ->get();
         } catch(QueryException $e) {
             return response()->json([
