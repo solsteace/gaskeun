@@ -193,10 +193,12 @@ class AuthManager extends Controller
     public function loginApi(Request $request){
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $auth = Auth::user();
-            $success['token'] = $auth->createToken('auth_token')->plainTextToken;
+            $success['id'] = $auth->id;
             $success['name'] = $auth->nama;
             $success['email'] = $auth->email;
-            $success['id'] = $auth->id;
+            $success['role'] = $auth->role;
+            $success['token'] = $auth->createToken('auth_token')->plainTextToken;
+
 
             return response()->json([
                 'success' => true,
